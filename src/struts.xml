@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+  <package name="xxx-global" namespace="/" extends="struts-default">
+  	<!-- 配置拦截器 -->
+    <interceptors>
+    <!-- 定义权限拦截器 -->
+      <interceptor name="permissionInteceptor" class="com.mytest.interceptors.PermissionInterceptor"/>
+      <interceptor name="authorityInteceptor" class="com.mytest.interceptors.AuthorityInterceptors"/>
+      <interceptor-stack name="myStack">
+        <interceptor-ref name="permissionInteceptor"/>
+        <interceptor-ref name="defaultStack"/>
+      </interceptor-stack>
+    </interceptors>
+    
+    <!-- 设置action的默认拦截器，拦截未经登陆验证的请求 -->
+    <default-interceptor-ref name="myStack"/> 
+    
+    <!-- 全局视图 -->
+    <global-results>
+  	  <result name="fail">/WEB-INF/Fail.jsp</result>
+  	  <result name="loginFail">/WEB-INF/Login.jsp</result>
+  	  <result name="LoginSuccess">/WEB-INF/Welcome.jsp</result>
+    </global-results>
+    <!-- 跳转到welcome.jsp界面 -->
+    <action name="toWelcomePage">
+  	  <result>/WEB-INF/Welcome.jsp</result>
+  	</action>
+  	
+  	
+    <!-- 跳转到Login.jsp界面 -->
+  	<action name="toLoginPage">
+  	  <result>/WEB-INF/Login.jsp</result>
+  	</action>
+  	<!-- 判断是否登陆成功，若登陆成功跳转到LogiSuccess视图，否则跳转到fail视图 -->
+  	<action name="login" class="com.mywork.actions.LoginAction">
+  	  <!-- 对于登出和登陆请求不验证是否已经登陆 -->
+  	  <interceptor-ref name="defaultStack"/>
+  	</action>
+  	<!-- 处理退出请求，并跳转到Login.jsp界面 -->
+  	<action name="Logout" class="com.mywork.actions.LogoutAction">
+  	  <result type="chain" name="LogoutSuccess">toLoginPage</result>
+  	  <!-- 对于登出和登陆请求不验证是否已经登陆 -->
+  	  <interceptor-ref name="defaultStack"/>
+  	</action>
+  	
+  	
+  	<!-- 跳转到ChangePassword.jsp界面 -->
+  	<action name="toChangePasswordPage">
+  	  <result>/WEB-INF/ChangePassword.jsp</result>
+  	</action>
+  	<!-- 处理用户更改密码请求，并返回到welcome.jsp界面 -->
+  	<action name="changePassword" class="com.mywork.actions.ChangePasswordAction">
+  	  <result>/WEB-INF/Welcome.jsp</result>
+  	</action>
+  	
+  	
+  	<!-- 跳转到DelivererManage.jsp界面 -->
+  	<action name="toDelivererManagePage">
+  	  <result>/WEB-INF/DelivererManage.jsp</result>
+  	</action>
+  	<!-- 处理送票员删除请求，并返回到DelivererManage.jsp界面 -->
+  	<action name="deleteDeliverer" class="com.mywork.actions.DeleteDelivererAction">
+  	  <result>/WEB-INF/DelivererManage.jsp</result>
+  	</action>
+  	<!-- 处理送票员修改请求,并返回到DelivererManage.jsp -->
+  	<action name="alterDeliverer" class="com.mywork.actions.AlterDelivererAction">
+  	  <result>/WEB-INF/DelivererManage.jsp</result>
+  	</action>
+  	<!-- 处理Deliverer报表输出请求,在当前页面弹出下载 -->
+  	<action name="exportExcelForDeliverer" class="com.mywork.actions.ExportExcelForDelivererlAction">
+  	  <result type="stream">
+  	  	<param name="contentDisposition">attachment;filename=${fileName}</param>
+  	  	<param name="inputName">is</param>
+  	  </result>
+  	</action>
+  	<!-- 跳转到AddDeliverer.jsp -->
+  	<action name="toAddDelivererPage">
+  	  <result>/WEB-INF/AddDeliverer.jsp</result>
+  	</action>
+  	<!-- 跳转到AddDeliverer.jsp -->
+  	<action name="addDeliverer" class="com.mywork.actions.AddDelivererAction">
+  	  <result>/WEB-INF/DelivererManage.jsp</result>
+  	</action>
+	<action name="toDelivererCountPage">
+  	  <result>/WEB-INF/DelivererCount.jsp</result>
+  	</action>
+
+  	<!-- 增加了authorityInteceptor,验证是否有权限跳转到UserManage.jsp界面 -->
+  	<action name="toUserManagePage" >
+  	  <result>/WEB-INF/UserManage.jsp</result>
+  	  <interceptor-ref name="authorityInteceptor"/>
+  	  <interceptor-ref name="myStack"/>
+  	</action>
+  	<!-- 处理管理员删除用户的请求 -->
+	<action name="deleteUser" class="com.mywork.actions.DeleteUserAction">
+	  <result>/WEB-INF/UserManage.jsp</result>
+	</action>
+  	<!-- 跳转到AddUser.jsp界面 -->
+	<action name="toAddUserPage">
+	  <result>/WEB-INF/AddUser.jsp</result>
+	</action>
+  	<!-- 处理管理员添加新用户的请求 -->
+  	<action name="addUser" class="com.mywork.actions.AddUserAction">
+	  <result>/WEB-INF/UserManage.jsp</result>
+	</action>
+  	<!-- 处理管理员对用户的修改操作，将td的内容更新到后台数据库，并返回到UserManage.jsp界面  -->
+  	<action name="alterUser" class="com.mywork.actions.AlterUserAction">
+	  <result>/WEB-INF/UserManage.jsp</result>
+	</action>
+	
+	
+	<!-- 跳转到PassengerManage.jsp界面  -->
+  	<action name="toPassengerManagePage">
+	  <result>/WEB-INF/PassengerManage.jsp</result>
+	</action>
+  	<!-- 处理Passenger报表输出请求,在当前页面弹出下载 -->
+  	<action name="exportExcelForPassenger" class="com.mywork.actions.ExportExcelForPassengerAction">
+  	  <result type="stream">
+  	  	<param name="contentDisposition">attachment;filename=${fileName}</param>
+  	  	<param name="inputName">is</param>
+  	  </result>
+  	</action>
+	<!-- 处理管理员删除乘客的请求,并跳转到PassengerManage.jsp界面  -->
+  	<action name="deletePassenger" class="com.mywork.actions.DeletePassengerAction">
+	  <result>/WEB-INF/PassengerManage.jsp</result>
+	</action>
+	<!-- 处理管理员对乘客的的修改操作，将td的内容更新到后台数据库，并返回到PassengerManage.jsp界面 -->
+  	<action name="alterPassenger" class="com.mywork.actions.AlterPassengerAction">
+	  <result>/WEB-INF/PassengerManage.jsp</result>
+	</action>
+	<!-- 跳转到Passenger.jsp页面  -->
+  	<action name="toAddPassengerPage">
+	  <result>/WEB-INF/AddPassenger.jsp</result>
+	</action>
+	<!-- 处理管理员添加新用户的请求 -->
+  	<action name="addPassenger" class="com.mywork.actions.AddPassengerAction">
+	  <result>/WEB-INF/PassengerManage.jsp</result>
+	</action>
+	
+	<!-- 跳转到FlightManage.jsp界面  -->
+  	<action name="toFlightManagePage">
+	  <result>/WEB-INF/FlightManage.jsp</result>
+	</action>
+	<!-- 处理管理员对航班的的修改操作，将td的内容更新到后台数据库，并返回到FlightManage.jsp界面 -->
+  	<action name="alterFlight" class="com.mywork.actions.AlterFlightAction">
+	  <result>/WEB-INF/FlightManage.jsp</result>
+	</action>
+	<!-- 跳转到AddFlight.jsp界面 -->
+  	<action name="toAddFlightPage">
+	  <result>/WEB-INF/AddFlight.jsp</result>
+	</action>
+	<!-- 处理管理员添加新航班的请求 -->
+  	<action name="addFlight" class="com.mywork.actions.AddFlightAction">
+	  <result>/WEB-INF/FlightManage.jsp</result>
+	</action>
+	<!-- 处理管理员删除航班的请求,并跳转到FlightManage.jsp界面  -->
+  	<action name="deleteFlight" class="com.mywork.actions.DeleteFlightAction">
+	  <result>/WEB-INF/FlightManage.jsp</result>
+	</action>
+	<!-- 处理航班报表输出请求,在当前页面弹出下载 -->
+  	<action name="exportExcelForFlight" class="com.mywork.actions.ExportExcelForFlightAction">
+  	  <result type="stream">
+  	  	<param name="contentDisposition">attachment;filename=${fileName}</param>
+  	  	<param name="inputName">is</param>
+  	  </result>
+  	</action>
+	
+	
+	<!-- 跳转到OrderManage.jsp界面  -->
+  	<action name="toOrderManagePage">
+	  <result>/WEB-INF/OrderManage2.jsp</result>
+	</action>
+	<!-- 处理管理员删除订单的请求,并跳转到OrderManage.jsp界面  -->
+  	<action name="deleteOrder" class="com.mywork.actions.DeleteOrderAction">
+	  <result>/WEB-INF/OrderManage.jsp</result>
+	</action>
+	<!-- 处理管理员对订单的的修改操作，将td的内容更新到后台数据库，并返回到OrderManage.jsp界面 -->
+  	<action name="alterOrder" class="com.mywork.actions.AlterOrderAction">
+	  <result>/WEB-INF/OrderManage.jsp</result>
+	</action>
+	<!-- 跳转到AddOrder.jsp界面 -->
+  	<action name="toAddOrderPage">
+	  <result>/WEB-INF/AddOrder.jsp</result>
+	</action>
+	<!-- 处理管理员添加新订单的请求 -->
+  	<action name="addOrder" class="com.mywork.actions.AddOrderAction">
+	  <result>/WEB-INF/OrderManage.jsp</result>
+	</action>
+  	<action name="toPassengerCountPage">
+	  <result>/WEB-INF/PassengerCount.jsp</result>
+	</action>
+	
+  </package>
+</struts>
