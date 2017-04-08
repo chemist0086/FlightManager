@@ -22,15 +22,17 @@ public class OrderShowDao extends BaseDao{
             while(rs.next()){
                 OrderShow p=new OrderShow();
                 p.setOrder_id(rs.getInt(1));
-                p.setPass_passport(rs.getString(2));
-                p.setPass_name(rs.getString(3));
-                p.setDep_city(rs.getString(4));
-                p.setArr_city(rs.getString(5));
-                p.setDep_time(rs.getString(6));
-                p.setArr_time(rs.getString(7));
-                p.setDeli_id(rs.getInt(8));
-                p.setDeli_name(rs.getString(9));
-                p.setPrice_purc(rs.getDouble(10));
+				p.setPass_id(rs.getInt(2));
+                p.setPass_passport(rs.getString(3));
+                p.setPass_name(rs.getString(4));
+                p.setFlight_id(rs.getInt(5));
+                p.setDep_city(rs.getString(6));
+                p.setArr_city(rs.getString(7));
+                p.setDep_time(rs.getString(8));
+                p.setArr_time(rs.getString(9));
+                p.setDeli_id(rs.getInt(10));
+                p.setDeli_name(rs.getString(11));
+                p.setPrice_purc(rs.getDouble(12));
                 list.add(p);
             }
         } catch (SQLException e) {

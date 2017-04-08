@@ -33,13 +33,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  	 <a href="toPassengerManagePage.action">返回</a>
   	 <%
   	 	String pass_id = request.getParameter("pass_id");
   	 	if(pass_id==null){
+  	 		out.println("<a href='toOrderManagePage.action'>返回</a>");
   	 		pass_id="";
-  	 	}
+  	 	}else out.println("<a href='toPassengerManagePage.action'>返回</a>");
   	 %>
+  	 
 	 <div style="text-align: center">
 	  <form action="addOrder.action" method="post">
 	  	订单ID：<input type="text" id="order_id" name="order_id" onkeyup="check()"/><br>
