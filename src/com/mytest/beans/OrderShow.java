@@ -3,8 +3,10 @@ package com.mytest.beans;
 public class OrderShow {
 	public static int PAGE_SIZE = 10;
 	private int order_id;
+	private int pass_id;
 	private String pass_passport;
 	private String pass_name;
+	private int flight_id;
 	private String dep_city;
 	private String arr_city;
 	private String dep_time;
@@ -19,11 +21,18 @@ public class OrderShow {
 	public void setPass_name(String pass_name) {
 		this.pass_name = pass_name;
 	}
-	public static int getPAGE_SIZE() {
-		return PAGE_SIZE;
+	
+	public int getPass_id() {
+		return pass_id;
 	}
-	public static void setPAGE_SIZE(int pAGE_SIZE) {
-		PAGE_SIZE = pAGE_SIZE;
+	public void setPass_id(int pass_id) {
+		this.pass_id = pass_id;
+	}
+	public int getFlight_id() {
+		return flight_id;
+	}
+	public void setFlight_id(int flight_id) {
+		this.flight_id = flight_id;
 	}
 	public int getOrder_id() {
 		return order_id;
