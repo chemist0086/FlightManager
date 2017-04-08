@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="utf-8">
   <link rel="stylesheet" href="style.css" type="text/css">
   <script src="js/jquery-3.2.0.js"></script>
   <title>Document</title>
+ 
 </head>
 <body>
   <div id="index_main">
@@ -14,7 +16,7 @@
         <div id="title">航班管理系统</div>
       </div>
       <div id="signin-flow">
-        <form method="POST" novalidate="nov">
+        <form method="POST" novalidate="novalidate">
           <div id="group-inputs">
             <div id="username">
               <input id="input-username" type="text" data-role="none" id="username" class="input" aria-label="输入用户名" placeholder="输入用户名">
@@ -24,7 +26,7 @@
             </div>
           </div>
           <div id="button_wrapper">
-            <input type="image" id="login-icon" src="img/login_icon.png" alt="send" onclick="">
+            <input type="image" id="login-icon" src="img/login_icon.png" alt="submit" onclick="onClick()">
           </div>
         </form>
         <div id="more">
@@ -56,7 +58,32 @@
               $(this).css("background", "url(img/hide_button.png) no-repeat top left");
             }
           })
-      })
+      });
+      
+      function onClick() {
+          $.ajax({
+            url: 'validateUser.action',
+            type: 'post',
+            async: false,
+            dataType: 'json',
+            data: {
+              username: $("#input-username").val(),
+              password: $("#input-password").val()
+            },
+            success: function(data, status) {
+              if(data.state=="ok"){
+                alert("验证通过！");
+                 window.location.href="管写啥都跳到当前地址栏上的地址，不解之一，先这样用吧";
+              }
+              if(data.state=="no")
+              alert("验证失败！");
+            },
+            error: function(){
+              alert("登录失败");
+            }
+          });
+          return false;  
+      }
     </script>
   </div>
 </body>
