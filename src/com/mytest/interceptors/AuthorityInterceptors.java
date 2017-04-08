@@ -10,6 +10,7 @@ public class AuthorityInterceptors extends AbstractInterceptor {
 
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
+
 		User user =(User)ServletActionContext.getContext().getSession().get("LoginSuccess");
     	if(user.getAuthority()==1){
     		return "success";

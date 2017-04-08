@@ -3,6 +3,18 @@
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
+  <!-- 向ajax请求的页面传递json参数 -->
+  <package name="json"  namespace="/" extends="struts-default,json-default">
+  	<action name="validateUser" class="com.mywork.actions.LoginAction"
+			method="validateUser">
+			<result type="json" name="success">
+				<param name="noCache">true</param>
+				<param name="contentType">text/html</param>
+				<param name="root">map</param>
+			</result>
+	</action>
+  </package>	
+
   <package name="xxx-global" namespace="/" extends="struts-default">
   	<!-- 配置拦截器 -->
     <interceptors>
@@ -21,29 +33,37 @@
     <!-- 全局视图 -->
     <global-results>
   	  <result name="fail">/WEB-INF/Fail.jsp</result>
-  	  <result name="loginFail">/WEB-INF/Login.jsp</result>
-  	  <result name="LoginSuccess">/WEB-INF/Welcome.jsp</result>
+  	  <!-- <result name="loginFail">/WEB-INF/Login.jsp</result> -->
+  	  <result name="loginFail">/index.html</result>
+  	  <!-- <result name="LoginSuccess">/WEB-INF/Welcome.jsp</result> -->
     </global-results>
     <!-- 跳转到welcome.jsp界面 -->
     <action name="toWelcomePage">
   	  <result>/WEB-INF/Welcome.jsp</result>
   	</action>
   	
+  	<!-- 跳转到index.html界面 -->
+  	<action name="toIndexPage">
+  	  <result>/index.html</result>
+  	</action>
   	
     <!-- 跳转到Login.jsp界面 -->
   	<action name="toLoginPage">
-  	  <result>/WEB-INF/Login.jsp</result>
+  	  <!-- <result>/WEB-INF/Login.jsp</result> -->
+  	  <result>/index.html</result>
+  	  
   	</action>
   	<!-- 判断是否登陆成功，若登陆成功跳转到LogiSuccess视图，否则跳转到fail视图 -->
-  	<action name="login" class="com.mywork.actions.LoginAction">
-  	  <!-- 对于登出和登陆请求不验证是否已经登陆 -->
+  	<!-- <action name="login" class="com.mywork.actions.LoginAction">
+  	  对于登出和登陆请求不验证是否已经登陆
   	  <interceptor-ref name="defaultStack"/>
-  	</action>
-  	<!-- 处理退出请求，并跳转到Login.jsp界面 -->
+  	</action> -->
+  	<!-- 处理退出请求，并跳转到index.html界面 -->
   	<action name="Logout" class="com.mywork.actions.LogoutAction">
-  	  <result type="chain" name="LogoutSuccess">toLoginPage</result>
-  	  <!-- 对于登出和登陆请求不验证是否已经登陆 -->
-  	  <interceptor-ref name="defaultStack"/>
+  	  <result type="redirectAction" name="LogoutSuccess">
+  	  	<param name="actionName">toWelcomePage</param>
+  	  </result>
+  	  <!--  <result type="chain" name="LogoutSuccess">toWelcomePage</result> -->
   	</action>
   	
   	
