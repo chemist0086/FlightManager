@@ -11,18 +11,60 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <title>Document</title>
   <base href="<%=basePath%>">
   <link rel="stylesheet" type="text/css" href="css/index.css">
+  <link rel="stylesheet" type="text/css" href="./css/GridManager.css">
+  <link rel="stylesheet" type="text/css" href="./css/tableArea.css">
   <script src="js/jquery-3.2.0.js"></script>
   <script src="js/settingButton.js"></script>
   <script src="js/navSideBar.js"></script>
+  <script type="text/javascript" src="./js/GridManager.js"></script>
 </head>
 <body>
 <div class="main_body">  
-  <div class="wrap">
-    <div class="logo">
-      <h1><span><img src="images/main_logo.png"></span></h1>
+  <div class="myTableArea" style="display: inline-block; left:200px; position: absolute;">
+    <div class="search-area">
+      <div class="sa-ele">
+        <label class="se-title">客户编号:</label>
+        <input class="se-con" name="name"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">客户姓名:</label>
+        <input class="se-con" name="info"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">年龄:</label>
+        <input class="se-con" name="url"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">性别:</label>
+        <input class="se-con" name="url"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">身份证号:</label>
+        <input class="se-con" name="url"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">护照编号:</label>
+        <input class="se-con" name="url"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">联系方式:</label>
+        <input class="se-con" name="url"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">E-mail:</label>
+        <input class="se-con" name="url"/>
+      </div>
+      <div class="sa-ele">
+        <button class="search-action">搜索</button>
+        <button class="reset-action">重置</button>
+      </div>
     </div>
-    <p>航班管理系统V1.0</p>
+    <br/>
+    <table></table>
   </div>
+  <script src="js/PassengerTable.js"></script>
+<!-- General Page -->
+
   <div class="nav-main">
     <div class="nav-box">
       <div class="nav">
@@ -51,5 +93,3 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <a href="#0" class="cd-close">Close modal</a>
   </div>
 </div>
-</body>
-</html>

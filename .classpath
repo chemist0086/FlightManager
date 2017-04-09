@@ -21,6 +21,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts2-json-plugin-2.3.31.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/json-lib-2.3-jdk15.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Li/Dropbox/数据库课程设计/FlightManager/WebRoot/WEB-INF/lib/json-lib-2.3-jdk15.jar"/>
+	<classpathentry kind="lib" path="/Users/Xuheng/Dropbox/数据库课程设计/FlightManager/WebRoot/WEB-INF/lib/json-lib-2.3-jdk15.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
