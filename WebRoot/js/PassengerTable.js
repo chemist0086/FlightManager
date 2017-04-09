@@ -7,7 +7,8 @@ var table = document.querySelector('table');
       ,height: 'auto'
       ,supportAjaxPage:true
       ,supportSorting: true
-      ,ajax_url: 'http://www.lovejavascript.com/learnLinkManager/getLearnLinkList'
+      /*,ajax_url: 'http://www.lovejavascript.com/learnLinkManager/getLearnLinkList'*/
+      ,ajax_url: 'http://127.0.0.1:8080/myWork-05/generatePassengerData.action'
   //    ,ajax_url: 'http://127.0.0.1:1314/learnLinkManager/getLearnLinkList'
   //      ,ajax_headers: {'header-test': 'baukh'}
       ,ajax_type: 'POST'

@@ -1,7 +1,12 @@
 package com.mywork.actions;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import com.mytest.beans.Passenger;
 import com.mywork.dao.DelivererDao;
 
 public class AddPassengerAction {
@@ -13,7 +18,6 @@ public class AddPassengerAction {
 	private String pass_passport;
 	private String pass_phone;
 	private String pass_email;
-	
 	
 	public int getPass_id() {
 		return pass_id;

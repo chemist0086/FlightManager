@@ -16,9 +16,7 @@ import com.mywork.dao.UserDao;
 public class LoginAction {
 	private User systemUser;
 	private Map<String, String> map;
-	
-	
-	
+
 	public Map<String, String> getMap() {
 		return map;
 	}
