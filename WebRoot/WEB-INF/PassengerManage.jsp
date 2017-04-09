@@ -80,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   <div class="setting_button_warpper">
     <section class="cd-section">
-      <a class="cd-bouncy-nav-trigger" href="#0">显示菜单</a>
+      <a class="cd-bouncy-nav-trigger">显示菜单</a>
     </section> 
   </div>
   <div class="cd-bouncy-nav-modal">
