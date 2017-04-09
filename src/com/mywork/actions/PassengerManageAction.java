@@ -38,7 +38,11 @@ public class PassengerManageAction {
 			    p.setPass_id(rs.getInt("pass_id"));
 			    p.setPass_name(rs.getString("pass_name"));
 			    p.setPass_age(rs.getInt("pass_age"));
-			    p.setPass_sex(rs.getInt("pass_sex"));
+			    if(rs.getInt("pass_sex")==1){
+			    	p.setPass_sex("男");
+			    }else{
+			    	p.setPass_sex("女");
+			    }
 			    p.setPass_idcard(rs.getString("pass_idcard"));
 			    p.setPass_passport(rs.getString("pass_passport"));
 			    p.setPass_phone(rs.getString("pass_phone"));

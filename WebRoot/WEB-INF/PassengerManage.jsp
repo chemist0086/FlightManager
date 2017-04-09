@@ -69,8 +69,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="nav-box">
       <div class="nav">
         <ul class="nav-ul">
-          <li><a href="./index.jsp" class="home"><span>首页</span></a></li>
-          <li><a href="./passenger.jsp" class="passenger"><span>乘机人管理</span></a></li>
+          <li><a href="toWelcomePage.action" class="home"><span>首页</span></a></li>
+          <li><a href="toPassengerManagePage.action" class="passenger"><span>乘机人管理</span></a></li>
           <li><a href="./ticket.jsp" class="ticket"><span>机票管理</span></a></li>
           <li><a href="./deli.jsp" class="deli"><span>业务员管理</span></a></li>
         </ul>
@@ -87,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <nav>
       <ul class="cd-bouncy-nav">
         <li><a href="#">修改密码</a></li>
-        <li><a href="#">退出登录</a></li>
+        <li><a href="Logout.action">退出登录</a></li>
       </ul>
     </nav>
     <a href="#0" class="cd-close">Close modal</a>

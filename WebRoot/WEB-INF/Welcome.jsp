@@ -45,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <nav>
       <ul class="cd-bouncy-nav">
         <li><a href="#">修改密码</a></li>
-        <li><a href="#">退出登录</a></li>
+        <li><a href="Logout.action">退出登录</a></li>
         <%
     		User user =(User)session.getAttribute("LoginSuccess");
     		if(user.getAuthority()==1){

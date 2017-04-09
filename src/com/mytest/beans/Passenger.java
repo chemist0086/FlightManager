@@ -5,7 +5,7 @@ public class Passenger {
 	private int pass_id;
 	private String pass_name;
 	private int pass_age;
-	private int pass_sex;
+	private String pass_sex;
 	private String pass_idcard;
 	private String pass_passport;
 	private String pass_phone;
@@ -28,10 +28,10 @@ public class Passenger {
 	public void setPass_age(int pass_age) {
 		this.pass_age = pass_age;
 	}
-	public int getPass_sex() {
+	public String getPass_sex() {
 		return pass_sex;
 	}
-	public void setPass_sex(int pass_sex) {
+	public void setPass_sex(String pass_sex) {
 		this.pass_sex = pass_sex;
 	}
 	public String getPass_idcard() {
