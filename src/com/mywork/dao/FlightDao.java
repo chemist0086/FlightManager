@@ -11,7 +11,7 @@ public class FlightDao extends BaseDao{
 	public FlightDao() throws IOException {
 		super();
 	}
-	/*public ArrayList<Flight> find(int page){
+	public ArrayList<Flight> find(int page){
         ArrayList<Flight> list = new ArrayList<Flight>();
         this.openDB();
         String sql = "select top "+Flight.PAGE_SIZE+" flight_id,dep_city,arr_city, CONVERT(varchar(10),flight_date,120) as flight_date,CONVERT(varchar(20),dep_time,120) as dep_time,CONVERT(varchar(20),arr_time,120) as arr_time"
@@ -48,7 +48,7 @@ public class FlightDao extends BaseDao{
             e.printStackTrace();
         }
         return count;
-	}*/
+	}
 	//重写BaseDao的数据库更新操作
 	public int executeUpdate(String sql){
         int ret = 0 ;

@@ -78,7 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <%
        	OrderShowDao ordershowdao = new OrderShowDao();
       	ordershowdao.openDB();
-      	int count = ordershowdao.getCount();//得到数据库中记录的总数
+      	 int count = ordershowdao.getCount();//得到数据库中记录的总数
       	if(count%OrderShow.PAGE_SIZE == 0){
       		pageCount = count/OrderShow.PAGE_SIZE;
       	}else {pageCount = count/OrderShow.PAGE_SIZE+1;}

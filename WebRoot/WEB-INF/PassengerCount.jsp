@@ -113,7 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      	Passenger passenger = new Passenger();
 				passenger.setPass_id(rs.getInt("pass_id"));
 				passenger.setPass_name(rs.getString("pass_name"));
-				passenger.setPass_sex(rs.getInt("pass_sex"));
+				//passenger.setPass_sex(rs.getInt("pass_sex"));
 				passenger.setPass_age(rs.getInt("pass_age"));
 				passenger.setPass_idcard(rs.getString("pass_idcard"));
 				passenger.setPass_passport(rs.getString("pass_passport"));
@@ -129,11 +129,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       		out.print("<tr><td>"+(i+(showPage-1)*Passenger.PAGE_SIZE)+"</td>");
       		out.print("<td>"+passenger.getPass_id()+"</td>");
       		out.print("<td>"+passenger.getPass_name()+"</td>");
-      		if(passenger.getPass_sex()==1){
+      		/* if(passenger.getPass_sex()==1){
       			out.print("<td>男</td>");
       		}else{
       			out.print("<td>女</td>");
-      		}
+      		} */
       		out.print("<td>"+passenger.getPass_age()+"</td>");
       		out.print("<td>"+passenger.getPass_phone()+"</td>");
       		out.print("<td>"+map.get(Integer.toString(passenger.getPass_id()))+"</td></tr>");
