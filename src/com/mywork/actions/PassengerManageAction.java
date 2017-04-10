@@ -24,13 +24,23 @@ public class PassengerManageAction {
 	public String GenerateData() throws IOException, SQLException{
 		ArrayList<Passenger> alist = new ArrayList<Passenger>();
 		int count = 0;
-		SubDao passengerdao;
+		SubDao passengerdao,passengerdao2;
 		passengerdao = new SubDao();
+		passengerdao2 = new SubDao();
 		passengerdao.openDB();
+		passengerdao2.openDB();
 		String sql = "select * from t_passenger";
 		ResultSet rs = passengerdao.executeQuery(sql);
 		while(rs.next()){
 			Passenger p=new Passenger();
+			//得到当前乘客的购票数量和购票金额
+			String sql2 = "select count(*) as count,sum(price_purc) as sum from t_order where pass_id="+rs.getInt("pass_id");
+			ResultSet rs2 = passengerdao2.executeQuery(sql2);
+			if(rs2.next()){
+				p.setPass_count(rs2.getInt("count"));
+				p.setPass_amount(rs2.getDouble("sum"));
+			}
+			
 			p.setPass_id(rs.getInt("pass_id"));
 			p.setPass_name(rs.getString("pass_name"));
 			p.setPass_age(rs.getInt("pass_age"));
@@ -47,6 +57,7 @@ public class PassengerManageAction {
 			count++;
 		}
 		passengerdao.closeDB();
+		passengerdao2.closeDB();
 		map.put("status", "success");
 		map.put("totals",count);
 		map.put("data", alist);

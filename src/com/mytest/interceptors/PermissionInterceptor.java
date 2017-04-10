@@ -9,7 +9,6 @@ public class PermissionInterceptor extends AbstractInterceptor {
 
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
-		
 		Object object = ServletActionContext.getContext().getSession().get("LoginSuccess");
 		if(object != null){
 			return invocation.invoke();
