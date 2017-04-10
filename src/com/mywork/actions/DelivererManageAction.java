@@ -25,13 +25,22 @@ public class DelivererManageAction {
 		map = new LinkedHashMap<String, Object>();
 		ArrayList<Deliverer> alist = new ArrayList<Deliverer>();
 		SubDao delivererdao = new SubDao();
+		SubDao delivererdao2 = new SubDao();
 		delivererdao.openDB();
+		delivererdao2.openDB();
 		String sql = "select * from t_deliverer";
 		ResultSet rs = delivererdao.executeQuery(sql);
 		int count = 0;
 		try {
 			while(rs.next()){
 			    Deliverer p=new Deliverer();
+			    //得到当前送票员的购票数量
+			    String sql2 = "select count(*) as count from t_order where deli_id="+rs.getInt("deli_id");
+				ResultSet rs2 = delivererdao2.executeQuery(sql2);
+				if(rs2.next()){
+					p.setDeli_count(rs2.getInt("count"));
+				}
+				
 			    p.setDeli_id(rs.getInt("deli_id"));
                 p.setDeli_name(rs.getString("deli_name"));
                 p.setDeli_age(rs.getInt("deli_age"));
@@ -44,11 +53,12 @@ public class DelivererManageAction {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		delivererdao.closeDB();
+		delivererdao2.closeDB();
 		map.put("status", "success");
 		map.put("totals",count);
 		map.put("data", alist);
 		ServletActionContext.getResponse().setHeader("Access-Control-Allow-Origin", "*");
-		delivererdao.closeDB();
 		return "success";
 	}
 

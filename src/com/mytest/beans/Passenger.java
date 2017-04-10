@@ -10,6 +10,9 @@ public class Passenger {
 	private String pass_passport;
 	private String pass_phone;
 	private String pass_email;
+	private int pass_count;
+	private double pass_amount;
+	
 	public int getPass_id() {
 		return pass_id;
 	}
@@ -57,6 +60,18 @@ public class Passenger {
 	}
 	public void setPass_email(String pass_email) {
 		this.pass_email = pass_email;
+	}
+	public int getPass_count() {
+		return pass_count;
+	}
+	public void setPass_count(int pass_count) {
+		this.pass_count = pass_count;
+	}
+	public double getPass_amount() {
+		return pass_amount;
+	}
+	public void setPass_amount(double pass_amount) {
+		this.pass_amount = pass_amount;
 	}
 	
 }
