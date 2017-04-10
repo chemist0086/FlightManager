@@ -132,7 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <li><a href="Logout.action">退出登录</a></li>
       </ul>
     </nav>
-    <a href="#0" class="cd-close">Close modal</a>
+    <a class="cd-close">Close modal</a>
   </div>
 </div>
 </body>
