@@ -45,6 +45,7 @@ var table = document.querySelector('table');
             remind: 'the action',
             text: '操作',
             template: function(action, rowObject){
+                $(".ipt-id").attr("value", rowObject.pass_id);
                 $(".ipt-name").attr("value", rowObject.pass_name);
                 $(".ipt-age").attr("value", rowObject.pass_age);
                 $(".ipt-sex").attr("value", rowObject.pass_sex);
@@ -52,7 +53,7 @@ var table = document.querySelector('table');
                 $(".ipt-passport").attr("value", rowObject.pass_passport);
                 $(".ipt-phone").attr("value", rowObject.pass_phone);
                 $(".ipt-email").attr("value", rowObject.pass_email);
-                return '<span class="plugin-action edit-action" learnLink-id="'+rowObject.id+'"><a href="javascript:;" class="bounceInDown" >编辑</a></span>'
+                return '<span class="plugin-action edit-action" learnLink-id="'+rowObject.id+'"><a href="javascript:;" class="bounceInDownEdit" >编辑</a></span>'
                         +'<span class="plugin-action del-action" learnLink-id="'+rowObject.id+'">删除</span>';
             }
         }

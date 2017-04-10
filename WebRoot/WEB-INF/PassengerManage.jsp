@@ -14,6 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <link rel="stylesheet" type="text/css" href="./css/GridManager.css">
   <link rel="stylesheet" type="text/css" href="./css/tableArea.css">
   <link rel="stylesheet" type="text/css" href="./css/editPopUp.css">
+  <link rel="stylesheet" type="text/css" href="./css/jquery-ui.css">
   <script src="js/jquery-3.2.0.js"></script>
   <script src="js/settingButton.js"></script>
   <script src="js/navSideBar.js"></script>
@@ -68,13 +69,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <!-- 编辑功能弹窗   -->
   <div class="pop-edit">
-  	<div id="dialogBg"></div>
-    <div id="dialog" class="animated">
+  	<div id="dialogBgEdit"></div>
+    <div id="dialogEdit" class="animated">
       <div class="dialogTop">
         <a href="javascript:;" class="claseDialogBtn">关闭</a>
       </div>
       <form action="" method="post" id="editForm">
         <ul class="editInfos">
+          <li class="text"><label><span>客户编号:</span><input type="text" name="" readonly="value" value="" class="ipt ipt-id" /></label></li>
           <li class="text"><label><span>客户姓名:</span><input type="text" name="" value="" class="ipt ipt-name" /></label></li>
           <li class="text"><label><span>年龄:</span><input type="text" name="" value="" class="ipt ipt-age" /></label></li>
           <li class="text"><label><span>性别:</span><input type="text" name="" value="" class="ipt ipt-sex" /></label></li>
@@ -87,8 +89,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </form>
     </div>
   </div>
-  
-<!-- General Page -->
+
+  <!-- 密码修改弹窗 -->
+  <div id="dialogBgPasswd"></div>
+  <div id="dialogPasswd" class="animated">
+    <img class="dialogIco" width="50" height="50" src="images/ico.png" alt="" />
+    <div class="dialogTop">
+      <a href="javascript:;" class="claseDialogBtn">关闭</a>      
+    </div>
+    <form action="" method="post" id="editForm">
+      <ul class="editInfos">
+        <li class="text"><label><font color="#ff0000">* </font><span>新密码:</span><input type="password" name="" required value="" class="ipt" /></label></li>
+        <li class="text"><label><font color="#ff0000">* </font><span>确认密码:</span><input type="password" name="" required value="" class="ipt" /></label></li>
+        <li class="btn"><input type="submit" value="确认提交" class="submitBtn" /></li>
+      </ul>
+    </form>
+  </div>
+  <!-- General Page -->
 
   <div class="nav-main">
     <div class="nav-box">
@@ -111,7 +128,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="cd-bouncy-nav-modal">
     <nav>
       <ul class="cd-bouncy-nav">
-        <li><a href="#">修改密码</a></li>
+        <li><a href="javascript:;" class="bounceInDownPasswd">修改密码</a></li>
         <li><a href="Logout.action">退出登录</a></li>
       </ul>
     </nav>
