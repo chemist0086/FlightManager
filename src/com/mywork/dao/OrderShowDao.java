@@ -11,7 +11,7 @@ public class OrderShowDao extends BaseDao{
 	public OrderShowDao() throws IOException {
 		super();
 	}
-	/*public ArrayList<OrderShow> find(int page){
+	public ArrayList<OrderShow> find(int page){
         ArrayList<OrderShow> list = new ArrayList<OrderShow>();
         this.openDB();
         String sql = "select top "+OrderShow.PAGE_SIZE+" * "
@@ -54,7 +54,7 @@ public class OrderShowDao extends BaseDao{
             e.printStackTrace();
         }
         return count;
-	}*/
+	}
 	//重写BaseDao的数据库更新操作
 	public int executeUpdate(String sql){
         int ret = 0 ;

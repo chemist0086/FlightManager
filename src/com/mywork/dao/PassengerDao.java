@@ -11,7 +11,7 @@ public class PassengerDao extends BaseDao{
 	public PassengerDao() throws IOException{
 		super();
 	}
-	/*public ArrayList<Passenger> find(int page){
+	public ArrayList<Passenger> find(int page){
         ArrayList<Passenger> list = new ArrayList<Passenger>();
         this.openDB();
         String sql = "select top "+Passenger.PAGE_SIZE+" * from t_passenger where pass_id not in ( select top "
@@ -49,7 +49,7 @@ public class PassengerDao extends BaseDao{
             e.printStackTrace();
         }
         return count;
-	}*/
+	}
 	//重写BaseDao的数据库更新操作
 	public int executeUpdate(String sql){
         int ret = 0 ;

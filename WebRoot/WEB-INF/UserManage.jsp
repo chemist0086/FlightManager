@@ -76,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <%
       	UserDao userdao = new UserDao();
       	userdao.openDB();
-      	int count = userdao.getCount();
+      	 int count = userdao.getCount();
       	if(count%User.PAGE_SIZE == 0){
       		pageCount = count/User.PAGE_SIZE;
       	}else {pageCount = count/User.PAGE_SIZE+1;}

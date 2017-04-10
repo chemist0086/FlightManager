@@ -11,7 +11,7 @@ public class DelivererDao extends BaseDao{
 	public DelivererDao() throws IOException {
 		super();
 	}
-	/*public ArrayList<Deliverer> find(int page){
+	public ArrayList<Deliverer> find(int page){
         ArrayList<Deliverer> list = new ArrayList<Deliverer>();
         this.openDB();
         String sql = "select top "+Deliverer.PAGE_SIZE+" * from t_deliverer where deli_id not in ( select top "
@@ -47,7 +47,7 @@ public class DelivererDao extends BaseDao{
             e.printStackTrace();
         }
         return count;
-	}*/
+	}
 	//重写BaseDao的数据库更新操作
 	public int executeUpdate(String sql){
         int ret = 0 ;

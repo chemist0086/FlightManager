@@ -12,7 +12,7 @@ public class UserDao extends BaseDao{
 	public UserDao() throws IOException {
 		super();
 	}
-	/*public ArrayList<User> find(int page){
+	public ArrayList<User> find(int page){
         ArrayList<User> list = new ArrayList<User>();
        // this.openDB();
         String sql = "select top "+User.PAGE_SIZE+" * from t_user where username not in ( select top "
@@ -45,7 +45,7 @@ public class UserDao extends BaseDao{
             e.printStackTrace();
         }
         return count;
-	}*/
+	}
 	//重写BaseDao的数据库更新操作
 	public int executeUpdate(String sql){
         int ret = 0 ;
