@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      	%>
       </ul>
     </nav>
-    <a href="#0" class="cd-close">Close modal</a>
+    <a class="cd-close">Close modal</a>
   </div>
 </div>
 </body>
