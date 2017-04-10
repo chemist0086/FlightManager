@@ -13,10 +13,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <link rel="stylesheet" type="text/css" href="css/index.css">
   <link rel="stylesheet" type="text/css" href="./css/GridManager.css">
   <link rel="stylesheet" type="text/css" href="./css/tableArea.css">
+  <link rel="stylesheet" type="text/css" href="./css/editPopUp.css">
   <script src="js/jquery-3.2.0.js"></script>
   <script src="js/settingButton.js"></script>
   <script src="js/navSideBar.js"></script>
   <script type="text/javascript" src="./js/GridManager.js"></script>
+  <script type="text/javascript" src="./js/jquery-ui.js"></script>
 </head>
 <body>
 <div class="main_body">  
@@ -63,6 +65,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <table></table>
   </div>
   <script src="js/PassengerTable.js"></script>
+  
+  <!-- 编辑功能弹窗   -->
+  <div class="pop-edit">
+  	<div id="dialogBg"></div>
+    <div id="dialog" class="animated">
+      <div class="dialogTop">
+        <a href="javascript:;" class="claseDialogBtn">关闭</a>
+      </div>
+      <form action="" method="post" id="editForm">
+        <ul class="editInfos">
+          <li class="text"><label><span>客户姓名:</span><input type="text" name="" value="" class="ipt ipt-name" /></label></li>
+          <li class="text"><label><span>年龄:</span><input type="text" name="" value="" class="ipt ipt-age" /></label></li>
+          <li class="text"><label><span>性别:</span><input type="text" name="" value="" class="ipt ipt-sex" /></label></li>
+          <li class="text"><label><span>身份证号:</span><input type="text" name="" value="" class="ipt ipt-idcard" /></label></li>
+          <li class="text"><label><span>护照编号:</span><input type="text" name="" value="" class="ipt ipt-passport" /></label></li>
+          <li class="text"><label><span>联系方式:</span><input type="text" name="" value="" class="ipt ipt-phone" /></label></li>
+          <li class="text"><label><span>E-mail:</span><input type="text" name="" value="" class="ipt ipt-email" /></label></li>
+          <li class="btn"><input type="submit" value="确认提交" class="submitBtn" /></li>
+        </ul>
+      </form>
+    </div>
+  </div>
+  
 <!-- General Page -->
 
   <div class="nav-main">
@@ -80,7 +105,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   <div class="setting_button_warpper">
     <section class="cd-section">
-      <a class="cd-bouncy-nav-trigger">显示菜单</a>
+      <a class="cd-bouncy-nav-trigger" >显示菜单</a>
     </section> 
   </div>
   <div class="cd-bouncy-nav-modal">
@@ -93,3 +118,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <a href="#0" class="cd-close">Close modal</a>
   </div>
 </div>
+</body>
+<script src="js/popUp.js"></script>
+</html>
