@@ -6,21 +6,41 @@
   <!-- 向ajax请求的页面传递json参数 -->
   <package name="json"  namespace="/" extends="json-default">
   	<action name="validateUser" class="com.mywork.actions.LoginAction" method="validateUser">
-	  <result type="json" name="success">
-	    <param name="noCache">true</param>
-		<param name="contentType">text/html</param>
-		<param name="root">map</param>
-	  </result>
+	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
   	<action name="generatePassengerData" class="com.mywork.actions.PassengerManageAction" method="GenerateData">
-	  <result type="json" name="success">
-	    <param name="noCache">true</param>
-		<param name="contentType">text/html</param>
-		<param name="root">map</param>
-	  </result>
+	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
+  	<action name="deletePassenger" class="com.mywork.actions.PassengerManageAction" method="DeletePassenger">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+  	<action name="generateFlightData" class="com.mywork.actions.FlightManageAction" method="GenerateData">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="deleteFlight" class="com.mywork.actions.FlightManageAction" method="DeleteFligt">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="generateOrderData" class="com.mywork.actions.OrderManageAction" method="GenerateData">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="deleteOrder" class="com.mywork.actions.OrderManageAction" method="DeleteOrder">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="generateUserData" class="com.mywork.actions.UserManageAction" method="GenerateData">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="deleteUser" class="com.mywork.actions.UserManageAction" method="DeleteUser">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="generateDelivererData" class="com.mywork.actions.DelivererManageAction" method="GenerateData">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="deleteDeliverer" class="com.mywork.actions.DelivererManageAction" method="DeleteDeliverer">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	
   </package>
-  <package name="xxx-global" namespace="/" extends="struts-default">
+  <package name="global" namespace="/" extends="struts-default">
   	<!-- 配置拦截器 -->
     <interceptors>
     <!-- 定义权限拦截器 -->
@@ -78,7 +98,7 @@
   	  <result>/WEB-INF/DelivererManage.jsp</result>
   	</action>
   	<!-- 处理送票员删除请求，并返回到DelivererManage.jsp界面 -->
-  	<action name="deleteDeliverer" class="com.mywork.actions.DeleteDelivererAction">
+  	<action name="deleteDeliverer2" class="com.mywork.actions.DeleteDelivererAction">
   	  <result>/WEB-INF/DelivererManage.jsp</result>
   	</action>
   	<!-- 处理送票员修改请求,并返回到DelivererManage.jsp -->
@@ -111,7 +131,7 @@
   	  <interceptor-ref name="myStack"/>
   	</action>
   	<!-- 处理管理员删除用户的请求 -->
-	<action name="deleteUser" class="com.mywork.actions.DeleteUserAction">
+	<action name="deleteUser2" class="com.mywork.actions.DeleteUserAction">
 	  <result>/WEB-INF/UserManage.jsp</result>
 	</action>
   	<!-- 跳转到AddUser.jsp界面 -->
@@ -140,7 +160,7 @@
   	  </result>
   	</action>
 	<!-- 处理管理员删除乘客的请求,并跳转到PassengerManage.jsp界面  -->
-  	<action name="deletePassenger" class="com.mywork.actions.DeletePassengerAction">
+  	<action name="deletePassenger2" class="com.mywork.actions.DeletePassengerAction">
 	  <result>/WEB-INF/PassengerManage.jsp</result>
 	</action>
 	<!-- 处理管理员对乘客的的修改操作，将td的内容更新到后台数据库，并返回到PassengerManage.jsp界面 -->
@@ -152,7 +172,7 @@
 	  <result>/WEB-INF/AddPassenger.jsp</result>
 	</action>
 	<!-- 处理管理员添加新用户的请求 -->
-  	<action name="addPassenger" class="com.mywork.actions.AddPassengerAction">
+  	<action name="addPassenger" class="com.mywork.actions.PassengerManageAction" method="AddPassenger">
 	  <result>/WEB-INF/PassengerManage.jsp</result>
 	</action>
 	
@@ -173,7 +193,7 @@
 	  <result>/WEB-INF/FlightManage.jsp</result>
 	</action>
 	<!-- 处理管理员删除航班的请求,并跳转到FlightManage.jsp界面  -->
-  	<action name="deleteFlight" class="com.mywork.actions.DeleteFlightAction">
+  	<action name="deleteFlight2" class="com.mywork.actions.DeleteFlightAction">
 	  <result>/WEB-INF/FlightManage.jsp</result>
 	</action>
 	<!-- 处理航班报表输出请求,在当前页面弹出下载 -->
@@ -190,7 +210,7 @@
 	  <result>/WEB-INF/OrderManage2.jsp</result>
 	</action>
 	<!-- 处理管理员删除订单的请求,并跳转到OrderManage.jsp界面  -->
-  	<action name="deleteOrder" class="com.mywork.actions.DeleteOrderAction">
+  	<action name="deleteOrder2" class="com.mywork.actions.DeleteOrderAction">
 	  <result>/WEB-INF/OrderManage.jsp</result>
 	</action>
 	<!-- 处理管理员对订单的的修改操作，将td的内容更新到后台数据库，并返回到OrderManage.jsp界面 -->

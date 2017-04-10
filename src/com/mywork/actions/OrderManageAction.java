@@ -7,30 +7,27 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.mytest.beans.OrderShow;
-import com.mywork.dao.OrderShowDao;
+import com.mywork.dao.SubDao;
 
 public class OrderManageAction {
-	private Map<String, Object> map;
+	private Map<String, Object> map = new LinkedHashMap<String, Object>();
 
 	public Map<String, Object> getMap() {
 		return map;
 	}
-
-	public void setMap(Map<String, Object> map) {
-		this.map = map;
-	}
-	
 	
 	public String GenerateData() throws IOException{
 		map = new LinkedHashMap<String, Object>();
 		ArrayList<OrderShow> alist = new ArrayList<OrderShow>();
-		OrderShowDao passengerdao = new OrderShowDao();
-		passengerdao.openDB();
+		SubDao ordershowdao = new SubDao();
+		ordershowdao.openDB();
 		String sql = "select * from t_ordershow";
-		ResultSet rs = passengerdao.executeQuery(sql);
+		ResultSet rs = ordershowdao.executeQuery(sql);
 		int count = 0;
 		try {
 			while(rs.next()){
@@ -57,10 +54,26 @@ public class OrderManageAction {
 		map.put("totals",count);
 		map.put("data", alist);
 		ServletActionContext.getResponse().setHeader("Access-Control-Allow-Origin", "*");
-		passengerdao.closeDB();
+		ordershowdao.closeDB();
 		return "success";
 	}
-	public String execute(){
+
+	public String DeleteOrder(){
+		HttpServletRequest request = ServletActionContext.getRequest();
+		String order_id = request.getParameter("order_id");
+		int isDeletedSuccess=0;
+		try {
+			SubDao ordershowdao;
+			ordershowdao = new SubDao();
+			ordershowdao.openDB();
+			String sql = "delete from t_ordershow where order_id="+order_id;
+			isDeletedSuccess = ordershowdao.executeUpdate(sql);
+			ordershowdao.closeDB();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ServletActionContext.getResponse().setHeader("Access-Control-Allow-Origin", "*");
+		map.put("isDeletedSuccess", isDeletedSuccess);
 		return "success";
 	}
 }

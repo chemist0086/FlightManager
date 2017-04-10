@@ -7,30 +7,26 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.mytest.beans.Flight;
-import com.mywork.dao.FlightDao;
+import com.mywork.dao.SubDao;
 
 public class FlightManageAction {
-	private Map<String, Object> map;
+	private Map<String, Object> map = new LinkedHashMap<String, Object>();
 
 	public Map<String, Object> getMap() {
 		return map;
 	}
-
-	public void setMap(Map<String, Object> map) {
-		this.map = map;
-	}
-	
 	
 	public String GenerateData() throws IOException{
-		map = new LinkedHashMap<String, Object>();
 		ArrayList<Flight> alist = new ArrayList<Flight>();
-		FlightDao passengerdao = new FlightDao();
-		passengerdao.openDB();
+		SubDao flightdao = new SubDao();
+		flightdao.openDB();
 		String sql = "select * from t_flight";
-		ResultSet rs = passengerdao.executeQuery(sql);
+		ResultSet rs = flightdao.executeQuery(sql);
 		int count = 0;
 		try {
 			while(rs.next()){
@@ -51,10 +47,26 @@ public class FlightManageAction {
 		map.put("totals",count);
 		map.put("data", alist);
 		ServletActionContext.getResponse().setHeader("Access-Control-Allow-Origin", "*");
-		passengerdao.closeDB();
+		flightdao.closeDB();
 		return "success";
 	}
-	public String execute(){
+
+	public String DeleteFlight(){
+		HttpServletRequest request = ServletActionContext.getRequest();
+		String flight_id = request.getParameter("flight_id");
+		int isDeletedSuccess=0;
+		try {
+			SubDao flightdao;
+			flightdao = new SubDao();
+			flightdao.openDB();
+			String sql = "delete from t_flight where flight_id="+flight_id;
+			isDeletedSuccess = flightdao.executeUpdate(sql);
+			flightdao.closeDB();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ServletActionContext.getResponse().setHeader("Access-Control-Allow-Origin", "*");
+		map.put("isDeletedSuccess", isDeletedSuccess);
 		return "success";
 	}
 }

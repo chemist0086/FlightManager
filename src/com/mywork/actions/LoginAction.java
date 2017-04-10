@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -21,7 +22,7 @@ public class LoginAction {
 		return map;
 	}
 
-	public void setMap(Map<String, String> map) {
+	/*public void setMap(Map<String, String> map) {
 		this.map = map;
 	}
 
@@ -31,9 +32,9 @@ public class LoginAction {
 
 	public void setSystemUser(User systemUser) {
 		this.systemUser = systemUser;
-	}
+	}*/
 
-	public String execute() throws IOException, SQLException{
+	/*public String execute() throws IOException, SQLException{
 		boolean loginSuccess = false;
 		UserDao dbsql = new UserDao();
 		dbsql.openDB();
@@ -52,7 +53,7 @@ public class LoginAction {
 		}else{
 			return "fail";
 		}
-	}
+	}*/
 	
 	public String validateUser() throws SQLException, IOException {
 		HttpServletRequest request = ServletActionContext.getRequest();
@@ -78,6 +79,10 @@ public class LoginAction {
 			rslt = "ok";
 			ServletActionContext.getRequest().getSession().setAttribute("LoginSuccess",systemUser);
 		}
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*"); 
+/*		response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE"); 
+		response.setHeader("Access-Control-Max-Age", "3600"); */
 		map = new HashMap<String, String>();
 		map.put("state", rslt);
 		return "success";

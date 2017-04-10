@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.mytest.beans.Deliverer;
+import com.mytest.beans.User;
 import com.mywork.dao.SubDao;
 
-public class DelivererManageAction {
+public class UserManageAction {
 	private Map<String, Object> map;
 
 	public Map<String, Object> getMap() {
@@ -23,21 +23,18 @@ public class DelivererManageAction {
 	
 	public String GenerateData() throws IOException{
 		map = new LinkedHashMap<String, Object>();
-		ArrayList<Deliverer> alist = new ArrayList<Deliverer>();
-		SubDao delivererdao = new SubDao();
-		delivererdao.openDB();
-		String sql = "select * from t_deliverer";
-		ResultSet rs = delivererdao.executeQuery(sql);
+		ArrayList<User> alist = new ArrayList<User>();
+		SubDao userdao = new SubDao();
+		userdao.openDB();
+		String sql = "select * from t_user";
+		ResultSet rs = userdao.executeQuery(sql);
 		int count = 0;
 		try {
 			while(rs.next()){
-			    Deliverer p=new Deliverer();
-			    p.setDeli_id(rs.getInt("deli_id"));
-                p.setDeli_name(rs.getString("deli_name"));
-                p.setDeli_age(rs.getInt("deli_age"));
-                p.setDeli_sex(rs.getInt("deli_sex"));
-                p.setDeli_phone(rs.getString("deli_phone"));
-                p.setDeli_email(rs.getString("deli_email"));
+			    User p=new User();
+			    p.setUsername(rs.getString("username"));
+                p.setPassword(rs.getString("password"));
+                p.setAuthority(rs.getInt("authority"));
 			    alist.add(p);
 			    count++;
 			}
@@ -48,21 +45,21 @@ public class DelivererManageAction {
 		map.put("totals",count);
 		map.put("data", alist);
 		ServletActionContext.getResponse().setHeader("Access-Control-Allow-Origin", "*");
-		delivererdao.closeDB();
+		userdao.closeDB();
 		return "success";
 	}
 
-	public String DeleteDeliverer(){
+	public String DeleteUser(){
 		HttpServletRequest request = ServletActionContext.getRequest();
-		String deli_id = request.getParameter("deli_id");
+		String username = request.getParameter("username");
 		int isDeletedSuccess=0;
 		try {
-			SubDao flightdao;
-			flightdao = new SubDao();
-			flightdao.openDB();
-			String sql = "delete from t_flight where flight_id="+deli_id;
-			isDeletedSuccess = flightdao.executeUpdate(sql);
-			flightdao.closeDB();
+			SubDao userdao;
+			userdao = new SubDao();
+			userdao.openDB();
+			String sql = "delete from t_user where username="+username;
+			isDeletedSuccess = userdao.executeUpdate(sql);
+			userdao.closeDB();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
