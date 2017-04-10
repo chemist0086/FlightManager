@@ -8,30 +8,35 @@
   	<action name="validateUser" class="com.mywork.actions.LoginAction" method="validateUser">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
+	<!-- passerger -->
   	<action name="generatePassengerData" class="com.mywork.actions.PassengerManageAction" method="GenerateData">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
   	<action name="deletePassenger" class="com.mywork.actions.PassengerManageAction" method="DeletePassenger">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
+	<!-- flight -->
   	<action name="generateFlightData" class="com.mywork.actions.FlightManageAction" method="GenerateData">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
 	<action name="deleteFlight" class="com.mywork.actions.FlightManageAction" method="DeleteFligt">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
+	<!-- order -->
 	<action name="generateOrderData" class="com.mywork.actions.OrderManageAction" method="GenerateData">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
 	<action name="deleteOrder" class="com.mywork.actions.OrderManageAction" method="DeleteOrder">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
+	<!-- user -->
 	<action name="generateUserData" class="com.mywork.actions.UserManageAction" method="GenerateData">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
 	<action name="deleteUser" class="com.mywork.actions.UserManageAction" method="DeleteUser">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
+	<!-- deliverer -->
 	<action name="generateDelivererData" class="com.mywork.actions.DelivererManageAction" method="GenerateData">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
