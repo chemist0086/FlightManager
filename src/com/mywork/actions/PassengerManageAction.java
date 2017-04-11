@@ -95,20 +95,23 @@ public class PassengerManageAction {
 		return map;
 	}
 	
-	boolean flag_first = true;
+	boolean isFirstCaseForSearch = true;
 	//为sql语句添加where和and
 	private String AddConstraints(String sql) {
-		if(flag_first){
+		if(isFirstCaseForSearch){
 			sql+=" where ";
-			flag_first=false;
+			isFirstCaseForSearch = false;
 		}else{
 			sql+=" and ";
 		}
 		return sql;
 	}
 	
+	
 	//产生PassengerManage.jsp页面数据
 	public String GenerateData() throws IOException, SQLException{
+		
+		HttpServletRequest request = ServletActionContext.getRequest();
 		
 		ArrayList<Passenger> alist = new ArrayList<Passenger>();
 		int count = 0;
@@ -118,7 +121,7 @@ public class PassengerManageAction {
 		passengerdao.openDB();
 		passengerdao2.openDB();
 		String sql = "select * from t_passenger";;
-		//添加可能的限定条件
+		//添加可能的搜索限定条件
 		if(getPass_id()!=0){
 			sql = AddConstraints(sql);
 			sql+="pass_id like '%"+getPass_id()+"%'";
@@ -153,6 +156,12 @@ public class PassengerManageAction {
 			sql+="pass_email like '%"+getPass_email()+"%'";
 		}
 		
+		//添加可能的排序条件
+		String sort_pass_id = request.getParameter("sort_pass_id");
+		
+		if(sort_pass_id!=null){
+			sql+=" order by pass_id "+sort_pass_id;
+		}
 		ResultSet rs = passengerdao.executeQuery(sql);
 		while(rs.next()){
 			Passenger p=new Passenger();
@@ -192,6 +201,7 @@ public class PassengerManageAction {
 	public String DeletePassenger(){
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String pass_id = request.getParameter("pass_id");
+		
 		int isDeletedSuccess=0;
 		try {
 			SubDao passengerDao;
