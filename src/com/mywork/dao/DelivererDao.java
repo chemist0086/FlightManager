@@ -23,7 +23,7 @@ public class DelivererDao extends BaseDao{
                 p.setDeli_id(rs.getInt("deli_id"));
                 p.setDeli_name(rs.getString("deli_name"));
                 p.setDeli_age(rs.getInt("deli_age"));
-                p.setDeli_sex(rs.getInt("deli_sex"));
+                p.setDeli_sex(rs.getString("deli_sex"));
                 p.setDeli_phone(rs.getString("deli_phone"));
                 p.setDeli_email(rs.getString("deli_email"));
                 list.add(p);
