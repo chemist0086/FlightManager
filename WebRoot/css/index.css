@@ -22,7 +22,7 @@ a:hover { cursor: pointer; }
 /*------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
-body{ font-size: 14px; font-family: "微软雅黑", "黑体-简", "黑体", Arial, Gotham, "Helvetica Neue", Helvetica, sans-serif; width: 100%; margin: 0 auto; background-color: #f7fafc; overflow-x: hidden; }
+body{ font-size: 14px; font-family: "微软雅黑", "黑体-简", "黑体", Arial, Gotham, "Helvetica Neue", Helvetica, sans-serif; width: 100%; margin: 0 auto; background-color: #f7fafc; overflow-x: scroll; }
 
 html, body {
 	height: 100%;

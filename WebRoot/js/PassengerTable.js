@@ -1,6 +1,7 @@
 var table = document.querySelector('table');
     table.GM({
-      supportRemind: false
+    	supportDrag: false
+      ,supportRemind: false
       ,gridManagerName: 'test'
   //      ,disableCache:true
       ,isCombSorting: true
@@ -41,22 +42,20 @@ var table = document.querySelector('table');
         }, {
           key: 'pass_email',
           text: 'E-mail'
-        },{
-            key: 'action',
-            remind: 'the action',
-            text: '操作',
-            template: function(action, rowObject){
-                $(".ipt-id").attr("value", rowObject.pass_id);
-                $(".ipt-name").attr("value", rowObject.pass_name);
-                $(".ipt-age").attr("value", rowObject.pass_age);
-                $(".ipt-sex").attr("value", rowObject.pass_sex);
-                $(".ipt-idcard").attr("value", rowObject.pass_idcard);
-                $(".ipt-passport").attr("value", rowObject.pass_passport);
-                $(".ipt-phone").attr("value", rowObject.pass_phone);
-                $(".ipt-email").attr("value", rowObject.pass_email);
-                return '<span class="plugin-action edit-action" learnLink-id="'+rowObject.id+'"><a href="javascript:;" class="bounceInDownEdit" >编辑</a></span>'
+        }, {
+          key: 'pass_count',
+          text: '购票数量'
+        }, {
+          key: 'pass_amount',
+          text: '购票金额'
+        }, {
+          key: 'action',
+          remind: 'the action',
+          text: '操作',
+          template: function(action, rowObject){
+              return '<span class="plugin-action edit-action" learnLink-id="'+rowObject.id+'"><a href="javascript:;" class="bounceInDownEdit editTable">编辑</a></span>'
                         +'<span class="plugin-action del-action" learnLink-id="'+rowObject.id+'">删除</span>';
-            }
+          }
         }
       ]
       // 分页前事件
@@ -122,7 +121,14 @@ var table = document.querySelector('table');
       var _query = {
         pass_id: document.querySelector('[name="pass_id"]').value,
         pass_name: document.querySelector('[name="pass_name"]').value,
-        pass_age: document.querySelector('[name="pass_age"]').value
+        pass_age: document.querySelector('[name="pass_age"]').value,
+        pass_sex: document.querySelector('[name="pass_sex"]').value,
+        pass_idcard: document.querySelector('[name="pass_idcard"]').value,
+        pass_passport: document.querySelector('[name="pass_passport"]').value,
+        pass_phone: document.querySelector('[name="pass_phone"]').value,
+        pass_email: document.querySelector('[name="pass_email"]').value,
+        pass_count: document.querySelector('[name="pass_count"]').value,
+        pass_amount: document.querySelector('[name="pass_amount"]').value
       };
       table.GM('setQuery', _query).GM('refreshGrid', function () {
         console.log('搜索成功...');
@@ -131,7 +137,26 @@ var table = document.querySelector('table');
 
     // 绑定重置
     document.querySelector('.reset-action').addEventListener('click', function () {
-      document.querySelector('[name="name"]').value = '';
-      document.querySelector('[name="info"]').value = '';
-      document.querySelector('[name="url"]').value = '';
+      document.querySelector('[name="pass_id"]').value = '';
+      document.querySelector('[name="pass_name"]').value = '';
+      document.querySelector('[name="pass_age"]').value = '';
+      document.querySelector('[name="pass_sex"]').value = '';
+      document.querySelector('[name="pass_idcard"]').value = '';
+      document.querySelector('[name="pass_passport"]').value = '';
+      document.querySelector('[name="pass_phone"]').value = '';
+      document.querySelector('[name="pass_email"]').value = '';
+      document.querySelector('[name="pass_count"]').value = '';
+      document.querySelector('[name="pass_amount"]').value = '';
+    });
+    
+    $("table").delegate('.editTable', 'click', function(){
+    	var selectCount = 0;
+		var inputCount = ":eq("+selectCount+")";
+		var valueCount = ":eq("+(selectCount + 2)+")";
+    	while (selectCount < 10){
+    		inputCount = ":eq("+selectCount+")";
+    		valueCount = ":eq("+(selectCount + 2)+")";
+    		$(".editInfos").children(inputCount).find("input").attr("value", $(this).parents("tr").children(valueCount).text());
+    		selectCount++;
+    	}
     });
