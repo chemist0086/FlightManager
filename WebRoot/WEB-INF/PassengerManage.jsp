@@ -79,13 +79,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <form action="" method="post" id="editForm">
         <ul class="editInfos">
           <li class="text"><label><span>客户编号:</span><input type="text" name="" readonly="value" value="" class="ipt ipt-id" /></label></li>
-          <li class="text"><label><span>客户姓名:</span><input type="text" name="" value="" class="ipt ipt-name" /></label></li>
-          <li class="text"><label><span>年龄:</span><input type="text" name="" value="" class="ipt ipt-age" /></label></li>
-          <li class="text"><label><span>性别:</span><input type="text" name="" value="" class="ipt ipt-sex" /></label></li>
-          <li class="text"><label><span>身份证号:</span><input type="text" name="" value="" class="ipt ipt-idcard" /></label></li>
-          <li class="text"><label><span>护照编号:</span><input type="text" name="" value="" class="ipt ipt-passport" /></label></li>
-          <li class="text"><label><span>联系方式:</span><input type="text" name="" value="" class="ipt ipt-phone" /></label></li>
-          <li class="text"><label><span>E-mail:</span><input type="text" name="" value="" class="ipt ipt-email" /></label></li>
+          <li class="text"><label><span>客户姓名:</span><input type="text" name="" value="" required class="ipt ipt-name" /></label></li>
+          <li class="text"><label><span>年龄:</span><input type="text" name="" value="" required class="ipt ipt-age" /></label></li>
+          <li class="text"><label><span>性别:</span><input type="text" name="" value="" required class="ipt ipt-sex" /></label></li>
+          <li class="text"><label><span>身份证号:</span><input type="text" name="" value="" required class="ipt ipt-idcard" /></label></li>
+          <li class="text"><label><span>护照编号:</span><input type="text" name="" value="" required class="ipt ipt-passport" /></label></li>
+          <li class="text"><label><span>联系方式:</span><input type="text" name="" value="" required class="ipt ipt-phone" /></label></li>
+          <li class="text"><label><span>E-mail:</span><input type="text" name="" value="" required class="ipt ipt-email" /></label></li>
            <li class="text"><label><span>购票数量:</span><input type="text" name="" value="" class="ipt ipt-count" readonly="value"/></label></li>
             <li class="text"><label><span>购票金额:</span><input type="text" name="" value="" class="ipt ipt-amount" readonly="value"/></label></li>
           <li class="btn"><input type="submit" value="确认提交" class="submitBtn" onclick="submitEdit()"/></li>
