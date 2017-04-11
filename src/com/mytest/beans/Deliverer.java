@@ -5,7 +5,7 @@ public class Deliverer {
 	private int deli_id;
 	private String deli_name;
 	private int deli_age;
-	private int deli_sex;
+	private String deli_sex;
 	private String deli_phone;
 	private String deli_email;
 	private int deli_count;
@@ -34,11 +34,11 @@ public class Deliverer {
 		this.deli_age = deli_age;
 	}
 
-	public int getDeli_sex() {
+	public String getDeli_sex() {
 		return deli_sex;
 	}
 
-	public void setDeli_sex(int deli_sex) {
+	public void setDeli_sex(String deli_sex) {
 		this.deli_sex = deli_sex;
 	}
 

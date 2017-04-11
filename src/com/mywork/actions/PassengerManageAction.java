@@ -27,7 +27,7 @@ public class PassengerManageAction {
 	private String pass_phone;
 	private String pass_email;
 	
-	public int getPass_id() {
+	public int pass_id() {
 		return pass_id;
 	}
 
@@ -35,7 +35,7 @@ public class PassengerManageAction {
 		this.pass_id = pass_id;
 	}
 
-	public String getPass_name() {
+	public String pass_name() {
 		return pass_name;
 	}
 
@@ -43,7 +43,7 @@ public class PassengerManageAction {
 		this.pass_name = pass_name;
 	}
 
-	public String getPass_sex() {
+	public String pass_sex() {
 		return pass_sex;
 	}
 
@@ -51,7 +51,7 @@ public class PassengerManageAction {
 		this.pass_sex = pass_sex;
 	}
 
-	public int getPass_age() {
+	public int pass_age() {
 		return pass_age;
 	}
 
@@ -59,7 +59,7 @@ public class PassengerManageAction {
 		this.pass_age = pass_age;
 	}
 
-	public String getPass_idcard() {
+	public String pass_idcard() {
 		return pass_idcard;
 	}
 
@@ -67,7 +67,7 @@ public class PassengerManageAction {
 		this.pass_idcard = pass_idcard;
 	}
 
-	public String getPass_passport() {
+	public String pass_passport() {
 		return pass_passport;
 	}
 
@@ -75,7 +75,7 @@ public class PassengerManageAction {
 		this.pass_passport = pass_passport;
 	}
 
-	public String getPass_phone() {
+	public String pass_phone() {
 		return pass_phone;
 	}
 
@@ -83,7 +83,7 @@ public class PassengerManageAction {
 		this.pass_phone = pass_phone;
 	}
 
-	public String getPass_email() {
+	public String pass_email() {
 		return pass_email;
 	}
 
@@ -131,54 +131,54 @@ public class PassengerManageAction {
 		//添加可能的搜索限定条件1
 		String limit = "";
 		String limit2 = "";//控制首部以and开头
-		if(getPass_id()!=0){
+		if(pass_id!=0){
 			limit = AddConstraints(limit);
-			limit+="pass_id like '%"+getPass_id()+"%'";
+			limit+="pass_id like '%"+pass_id+"%'";
 			limit2+=" and ";
-			limit2+="pass_id like '%"+getPass_id()+"%'";
+			limit2+="pass_id like '%"+pass_id+"%'";
 		}
-		if(getPass_age()!=0){
+		if(pass_age!=0){
 			limit = AddConstraints(limit);
-			limit+="pass_age like '%"+getPass_age()+"%'";
+			limit+="pass_age like '%"+pass_age+"%'";
 			limit2+=" and ";
-			limit2+="pass_age like '%"+getPass_age()+"%'";
+			limit2+="pass_age like '%"+pass_age+"%'";
 		}
-		if(getPass_name()!=null&&!(getPass_name().equals(""))){
+		if(pass_name!=null&&!(pass_name.equals(""))){
 			limit = AddConstraints(limit);
-			limit+="pass_name like '%"+getPass_name()+"%'";
+			limit+="pass_name like '%"+pass_name+"%'";
 			limit2+=" and ";
-			limit2+="pass_name like '%"+getPass_name()+"%'";
+			limit2+="pass_name like '%"+pass_name+"%'";
 		}
-		if(getPass_sex()!=null&&!(getPass_sex().equals(""))){
+		if(pass_sex!=null&&!(pass_sex.equals(""))){
 			limit = AddConstraints(limit);
-			int int_sex = getPass_sex().equals("男")?1:0;
+			int int_sex = pass_sex.equals("男")?1:0;
 			limit+="pass_sex like '%"+int_sex+"%'";
 			limit2+=" and ";
 			limit2+="pass_sex like '%"+int_sex+"%'";
 		}
-		if(getPass_idcard()!=null&&!(getPass_idcard().equals(""))){
+		if(pass_idcard!=null&&!(pass_idcard.equals(""))){
 			limit = AddConstraints(limit);
-			limit+="pass_idcard like '%"+getPass_idcard()+"%'";
+			limit+="pass_idcard like '%"+pass_idcard+"%'";
 			limit2+=" and ";
-			limit2+="pass_idcard like '%"+getPass_idcard()+"%'";
+			limit2+="pass_idcard like '%"+pass_idcard+"%'";
 		}
-		if(getPass_passport()!=null&&!(getPass_passport().equals(""))){
+		if(pass_passport!=null&&!(pass_passport.equals(""))){
 			limit = AddConstraints(limit);
-			limit+="pass_passport like '%"+getPass_passport()+"%'";
+			limit+="pass_passport like '%"+pass_passport+"%'";
 			limit2+=" and ";
-			limit2+="pass_passport like '%"+getPass_passport()+"%'";
+			limit2+="pass_passport like '%"+pass_passport+"%'";
 		}
-		if(getPass_phone()!=null&&!(getPass_phone().equals(""))){
+		if(pass_phone!=null&&!(pass_phone.equals(""))){
 			limit = AddConstraints(limit);
-			limit+="pass_phone like '%"+getPass_phone()+"%'";
+			limit+="pass_phone like '%"+pass_phone+"%'";
 			limit2+=" and ";
-			limit2+="pass_phone like '%"+getPass_phone()+"%'";
+			limit2+="pass_phone like '%"+pass_phone+"%'";
 		}
-		if(getPass_email()!=null&&!(getPass_email().equals(""))){
+		if(pass_email!=null&&!(pass_email.equals(""))){
 			limit = AddConstraints(limit);
-			limit+="pass_email like '%"+getPass_email()+"%'";
+			limit+="pass_email like '%"+pass_email+"%'";
 			limit2+=" and ";
-			limit2+="pass_email like '%"+getPass_email()+"%'";
+			limit2+="pass_email like '%"+pass_email+"%'";
 		}
 		sql+=limit;
 		sql+=" order by pass_id "+sort_pass_id+")";
@@ -228,34 +228,47 @@ public class PassengerManageAction {
 	}
 	
 	//执行删除操作，并产生删除状态
-	public String DeletePassenger(){
+	public String DeletePassenger() throws IOException{
+		SubDao passengerDao;
+		passengerDao = new SubDao();
+		passengerDao.openDB();
 		HttpServletRequest request = ServletActionContext.getRequest();
-		String pass_id = request.getParameter("pass_id");
-		
-		int isDeletedSuccess=0;
-		try {
-			SubDao passengerDao;
-			passengerDao = new SubDao();
-			passengerDao.openDB();
-			String sql = "delete from t_passenger where pass_id="+pass_id;
+		String[] items = request.getParameterValues("items[]");
+		String[]status = new String[items.length];
+		for (int i=0;i<items.length;i++) {
+			int isDeletedSuccess=0;
+			String sql = "delete from t_passenger where pass_id="+items[0];
 			isDeletedSuccess = passengerDao.executeUpdate(sql);
-			passengerDao.closeDB();
-		} catch (IOException e) {
-			e.printStackTrace();
+			status[i]=items[0]+":"+isDeletedSuccess;
 		}
+		passengerDao.closeDB();
 		ServletActionContext.getResponse().setHeader("Access-Control-Allow-Origin", "*");
-		map.put("isDeletedSuccess", isDeletedSuccess);
+		map.put("status", status);
 		return "success";
 	}
 	
 	public String AddPassenger() throws IOException{
-		SubDao delivererDao = new SubDao();
-		delivererDao.openDB();
+		SubDao passengerdao = new SubDao();
+		passengerdao.openDB();
 		pass_sex = pass_sex.equals("男")?"1":"0";
 		String sql="insert into t_passenger values('"+pass_id+"','"+pass_name+"','"+
 		pass_age+"','"+pass_sex+"','"+pass_idcard+"','"+pass_passport+"','"+pass_phone+"','"+pass_email+"')";
-		delivererDao.executeUpdate(sql);
-		delivererDao.closeDB();
+		int count = passengerdao.executeUpdate(sql);
+		passengerdao.closeDB();
+		map.put("status", count);
+		return "success";
+	}
+	public String EditPassenger() throws IOException{
+		SubDao passengerdao = new SubDao();
+		passengerdao.openDB();
+		pass_sex = pass_sex.equals("男")?"1":"0";
+		String sql="update t_passenger set  pass_name='"+pass_name+"',pass_age='"+pass_age+
+				"',pass_sex='"+pass_sex+"',pass_idcard='"+pass_idcard+"',pass_passport='"+pass_passport+
+				"',pass_phone='"+pass_phone+"',pass_email='"+pass_email+
+				"' where pass_id='"+pass_id+"'";
+		int count = passengerdao.executeUpdate(sql);
+		passengerdao.closeDB();
+		map.put("status", count);
 		return "success";
 	}
 }
