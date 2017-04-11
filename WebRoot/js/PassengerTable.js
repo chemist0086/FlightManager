@@ -12,6 +12,7 @@ var table = document.querySelector('table');
   //    ,ajax_url: 'http://127.0.0.1:1314/learnLinkManager/getLearnLinkList'
   //      ,ajax_headers: {'header-test': 'baukh'}
       ,ajax_type: 'POST'
+      ,ajax_headers: {"Content-Type":"application/x-www-form-urlencoded" }
       ,query: {pluginId: 1}
       ,pageSize:20
       ,columnData: [{
