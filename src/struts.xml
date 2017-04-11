@@ -6,6 +6,7 @@
   <!-- 向ajax请求的页面传递json参数 -->
   <package name="json"  namespace="/" extends="json-default">
   	<action name="validateUser" class="com.mywork.actions.LoginAction" method="validateUser">
+  	<interceptor-ref name="defaultStack"></interceptor-ref>
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
 	<!-- passerger -->
@@ -45,6 +46,7 @@
 	</action>
 	
   </package>
+  
   <package name="global" namespace="/" extends="struts-default">
   	<!-- 配置拦截器 -->
     <interceptors>
@@ -235,4 +237,5 @@
 	</action>
 	
   </package>
+  
 </struts>

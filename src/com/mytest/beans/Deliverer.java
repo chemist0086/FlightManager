@@ -8,6 +8,7 @@ public class Deliverer {
 	private int deli_sex;
 	private String deli_phone;
 	private String deli_email;
+	private int deli_count;
 	
 	public int getDeli_id() {
 		return deli_id;
@@ -55,6 +56,15 @@ public class Deliverer {
 
 	public void setDeli_email(String deli_email) {
 		this.deli_email = deli_email;
+	}
+	
+	
+	public int getDeli_count() {
+		return deli_count;
+	}
+
+	public void setDeli_count(int deli_count) {
+		this.deli_count = deli_count;
 	}
 
 	@Override
