@@ -15,20 +15,24 @@ var table = document.querySelector('table');
       ,ajax_type: 'POST'
       ,ajax_headers: {"Content-Type":"application/x-www-form-urlencoded" }
       ,query: {pluginId: 1}
-      ,pageSize:20
+      ,pageSize:5
+      ,sizeData: [5, 10, 15, 20]
       ,columnData: [{
           key: 'pass_id',
-          width: '100px',
+          width: '80px',
           text: '客户编号',
           sorting: ''
         },{
           key: 'pass_name',
+          width: '80px',
           text: '客户姓名'
         },{
           key: 'pass_age',
+          width: "60px",
           text: '年龄'
         },{
           key: 'pass_sex',
+          width: "60px",
           text: '性别',
         },{
           key: 'pass_idcard',
@@ -44,17 +48,18 @@ var table = document.querySelector('table');
           text: 'E-mail'
         }, {
           key: 'pass_count',
+          width: "60px",
           text: '购票数量'
         }, {
           key: 'pass_amount',
+          width: "80px",
           text: '购票金额'
         }, {
           key: 'action',
-          remind: 'the action',
+          width: "80px",
           text: '操作',
           template: function(action, rowObject){
-              return '<span class="plugin-action edit-action" learnLink-id="'+rowObject.id+'"><a href="javascript:;" class="bounceInDownEdit editTable">编辑</a></span>'
-                        +'<span class="plugin-action del-action" learnLink-id="'+rowObject.id+'">删除</span>';
+              return '<span class="plugin-action edit-action" learnLink-id="'+rowObject.id+'"><a href="javascript:;" class="bounceInDownEdit editTable">编辑</a></span>';
           }
         }
       ]
@@ -127,8 +132,6 @@ var table = document.querySelector('table');
         pass_passport: document.querySelector('[name="pass_passport"]').value,
         pass_phone: document.querySelector('[name="pass_phone"]').value,
         pass_email: document.querySelector('[name="pass_email"]').value,
-        pass_count: document.querySelector('[name="pass_count"]').value,
-        pass_amount: document.querySelector('[name="pass_amount"]').value
       };
       table.GM('setQuery', _query).GM('refreshGrid', function () {
         console.log('搜索成功...');
@@ -145,11 +148,10 @@ var table = document.querySelector('table');
       document.querySelector('[name="pass_passport"]').value = '';
       document.querySelector('[name="pass_phone"]').value = '';
       document.querySelector('[name="pass_email"]').value = '';
-      document.querySelector('[name="pass_count"]').value = '';
-      document.querySelector('[name="pass_amount"]').value = '';
     });
     
     $("table").delegate('.editTable', 'click', function(){
+    	//预填充表格
     	var selectCount = 0;
 		var inputCount = ":eq("+selectCount+")";
 		var valueCount = ":eq("+(selectCount + 2)+")";
@@ -158,5 +160,34 @@ var table = document.querySelector('table');
     		valueCount = ":eq("+(selectCount + 2)+")";
     		$(".editInfos").children(inputCount).find("input").attr("value", $(this).parents("tr").children(valueCount).text());
     		selectCount++;
-    	}
+    	}   
     });
+    
+    function submitEdit() {
+        $.ajax({
+            url: 'editPassenger.action',
+            type: 'post',
+            async: false,
+            dataType: 'json',
+            data: {
+              pass_id: $(".editInfos").children(":eq(0)").find("input").attr("value"),
+              pass_name: $(".editInfos").children(":eq(1)").find("input").attr("value"),
+              pass_age: $(".editInfos").children(":eq(2)").find("input").attr("value"),
+              pass_sex: $(".editInfos").children(":eq(3)").find("input").attr("value"),
+              pass_idcard: $(".editInfos").children(":eq(4)").find("input").attr("value"),
+              pass_passport: $(".editInfos").children(":eq(5)").find("input").attr("value"),
+              pass_phone: $(".editInfos").children(":eq(6)").find("input").attr("value"),
+              pass_email: $(".editInfos").children(":eq(7)").find("input").attr("value")         
+            },
+            success: function(data, status) {
+              if(data.state=="1"){
+                alert("修改成功！");
+              }
+              if(data.state=="2")
+              alert("修改失败！");
+            },
+            error: function(){
+              alert("网络故障");
+            }
+          });
+    } 
