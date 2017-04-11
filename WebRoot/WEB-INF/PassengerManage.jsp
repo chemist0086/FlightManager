@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,com.mytest.beans.Deliverer,com.mywork.dao.DelivererDao" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,com.mytest.beans.Deliverer,com.mywork.dao.DelivererDao,com.mytest.beans.User" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -140,6 +140,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <ul class="cd-bouncy-nav">
         <li><a href="javascript:;" class="bounceInDownPasswd">修改密码</a></li>
         <li><a href="Logout.action">退出登录</a></li>
+        <%
+    		User user =(User)session.getAttribute("LoginSuccess");
+    		if(user.getAuthority()==1){
+    			out.print("<li><a href='toUserManagePage.action'>账户管理</a><li>");
+    		}
+     	%>
       </ul>
     </nav>
     <a class="cd-close">Close modal</a>

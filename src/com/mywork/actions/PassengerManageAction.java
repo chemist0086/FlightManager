@@ -95,64 +95,98 @@ public class PassengerManageAction {
 		return map;
 	}
 	
-	boolean flag_first = true;
+	boolean isFirstCaseForSearch = true;
 	//为sql语句添加where和and
 	private String AddConstraints(String sql) {
-		if(flag_first){
+		if(isFirstCaseForSearch){
 			sql+=" where ";
-			flag_first=false;
+			isFirstCaseForSearch = false;
 		}else{
 			sql+=" and ";
 		}
 		return sql;
 	}
 	
+	
 	//产生PassengerManage.jsp页面数据
 	public String GenerateData() throws IOException, SQLException{
 		
+		HttpServletRequest request = ServletActionContext.getRequest();
+		int cPage = Integer.parseInt(request.getParameter("cPage"));
+		int pSize = Integer.parseInt(request.getParameter("pSize"));
+		String sort_pass_id = request.getParameter("sort_pass_id");
+		if(sort_pass_id==null){
+			sort_pass_id = "";
+		}
+		
 		ArrayList<Passenger> alist = new ArrayList<Passenger>();
-		int count = 0;
 		SubDao passengerdao,passengerdao2;
 		passengerdao = new SubDao();
 		passengerdao2 = new SubDao();//得到购票数量和购票金额
 		passengerdao.openDB();
 		passengerdao2.openDB();
-		String sql = "select * from t_passenger";;
-		//添加可能的限定条件
+		
+		String sql = "select top "+pSize+" * from t_passenger where pass_id not in ( select top "
+	        		+(cPage-1)*pSize+" pass_id from t_passenger";
+		//添加可能的搜索限定条件1
+		String limit = "";
+		String limit2 = "";//控制首部以and开头
 		if(getPass_id()!=0){
-			sql = AddConstraints(sql);
-			sql+="pass_id like '%"+getPass_id()+"%'";
+			limit = AddConstraints(limit);
+			limit+="pass_id like '%"+getPass_id()+"%'";
+			limit2+=" and ";
+			limit2+="pass_id like '%"+getPass_id()+"%'";
 		}
 		if(getPass_age()!=0){
-			sql = AddConstraints(sql);
-			sql+="pass_age like '%"+getPass_age()+"%'";
+			limit = AddConstraints(limit);
+			limit+="pass_age like '%"+getPass_age()+"%'";
+			limit2+=" and ";
+			limit2+="pass_age like '%"+getPass_age()+"%'";
 		}
 		if(getPass_name()!=null&&!(getPass_name().equals(""))){
-			sql = AddConstraints(sql);
-			sql+="pass_name like '%"+getPass_name()+"%'";
+			limit = AddConstraints(limit);
+			limit+="pass_name like '%"+getPass_name()+"%'";
+			limit2+=" and ";
+			limit2+="pass_name like '%"+getPass_name()+"%'";
 		}
 		if(getPass_sex()!=null&&!(getPass_sex().equals(""))){
-			sql = AddConstraints(sql);
+			limit = AddConstraints(limit);
 			int int_sex = getPass_sex().equals("男")?1:0;
-			sql+="pass_sex like '%"+int_sex+"%'";
+			limit+="pass_sex like '%"+int_sex+"%'";
+			limit2+=" and ";
+			limit2+="pass_sex like '%"+int_sex+"%'";
 		}
 		if(getPass_idcard()!=null&&!(getPass_idcard().equals(""))){
-			sql = AddConstraints(sql);
-			sql+="pass_idcard like '%"+getPass_idcard()+"%'";
+			limit = AddConstraints(limit);
+			limit+="pass_idcard like '%"+getPass_idcard()+"%'";
+			limit2+=" and ";
+			limit2+="pass_idcard like '%"+getPass_idcard()+"%'";
 		}
 		if(getPass_passport()!=null&&!(getPass_passport().equals(""))){
-			sql = AddConstraints(sql);
-			sql+="pass_passport like '%"+getPass_passport()+"%'";
+			limit = AddConstraints(limit);
+			limit+="pass_passport like '%"+getPass_passport()+"%'";
+			limit2+=" and ";
+			limit2+="pass_passport like '%"+getPass_passport()+"%'";
 		}
 		if(getPass_phone()!=null&&!(getPass_phone().equals(""))){
-			sql = AddConstraints(sql);
-			sql+="pass_phone like '%"+getPass_phone()+"%'";
+			limit = AddConstraints(limit);
+			limit+="pass_phone like '%"+getPass_phone()+"%'";
+			limit2+=" and ";
+			limit2+="pass_phone like '%"+getPass_phone()+"%'";
 		}
 		if(getPass_email()!=null&&!(getPass_email().equals(""))){
-			sql = AddConstraints(sql);
-			sql+="pass_email like '%"+getPass_email()+"%'";
+			limit = AddConstraints(limit);
+			limit+="pass_email like '%"+getPass_email()+"%'";
+			limit2+=" and ";
+			limit2+="pass_email like '%"+getPass_email()+"%'";
 		}
-		
+		sql+=limit;
+		sql+=" order by pass_id "+sort_pass_id+")";
+		sql+=limit2;//添加可能的搜索限定条件2
+		sql+= " order by pass_id "+sort_pass_id;
+		if(limit.equals("")){//若limit为空，则搜索栏为空，从第一页开始抓数据
+			cPage=1;
+		}
 		ResultSet rs = passengerdao.executeQuery(sql);
 		while(rs.next()){
 			Passenger p=new Passenger();
@@ -177,7 +211,12 @@ public class PassengerManageAction {
 			p.setPass_phone(rs.getString("pass_phone"));
 			p.setPass_email(rs.getString("pass_email"));
 			alist.add(p);
-			count++;
+		}
+		int count;
+		if(!isFirstCaseForSearch){//isFirstCaseForSearch为false时说明开启了搜索条件，此时返回实际数据数量
+			count = passengerdao.getCount("t_passenger", "pass_id",limit);
+		}else{
+			count = passengerdao.getCount("t_passenger", "pass_id","");//得到记录总数
 		}
 		passengerdao.closeDB();
 		passengerdao2.closeDB();
@@ -192,6 +231,7 @@ public class PassengerManageAction {
 	public String DeletePassenger(){
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String pass_id = request.getParameter("pass_id");
+		
 		int isDeletedSuccess=0;
 		try {
 			SubDao passengerDao;
