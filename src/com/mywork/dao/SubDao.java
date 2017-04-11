@@ -1,6 +1,7 @@
 package com.mywork.dao;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SubDao extends BaseDao{
@@ -18,4 +19,20 @@ public class SubDao extends BaseDao{
         }
         return ret;
     }
+	//查询table表中有多少项记录
+	public int getCount(String table,String column,String limit){
+		int count = 0;
+		this.openDB();
+		String sql = "select count(distinct "+column+") as count from "+table+limit;
+        try {
+            ResultSet rs = this.executeQuery(sql);
+            if(rs.next()){
+            	count = rs.getInt("count");
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+	}
 }
