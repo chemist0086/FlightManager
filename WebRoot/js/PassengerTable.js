@@ -180,10 +180,10 @@ var table = document.querySelector('table');
               pass_email: $(".editInfos").children(":eq(7)").find("input").attr("value")         
             },
             success: function(data, status) {
-              if(data.state=="1"){
+              if(data.status=="1"){
                 alert("修改成功！");
               }
-              if(data.state=="2")
+              if(data.status=="0")
               alert("修改失败！");
             },
             error: function(){
