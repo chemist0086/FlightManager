@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <li class="text"><label><span>E-mail:</span><input type="text" name="" value="" required class="ipt ipt-email" /></label></li>
            <li class="text"><label><span>购票数量:</span><input type="text" name="" value="" class="ipt ipt-count" readonly="value"/></label></li>
             <li class="text"><label><span>购票金额:</span><input type="text" name="" value="" class="ipt ipt-amount" readonly="value"/></label></li>
-          <li class="btn"><input type="submit" value="确认提交" class="submitBtn" onclick="submitEdit()"/></li>
+          <li class="btn"><input type="button" value="确认提交" class="submitBtn" onclick="submitEdit()"/></li>
         </ul>
       </form>
     </div>
