@@ -58,12 +58,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <input class="se-con" name="pass_email"/>
       </div>
       <div class="sa-ele">
+        <label class="se-title">购票数量:</label>
+        <input class="se-con" name="pass_count"/>
+      </div>
+            <div class="sa-ele">
+        <label class="se-title">购票金额:</label>
+        <input class="se-con" name="pass_amount"/>
+      </div>
+      <div class="sa-ele">
         <button class="search-action">搜索</button>
         <button class="reset-action">重置</button>
       </div>
     </div>
     <br/>
-    <table></table>
+    <table style="overflow: scroll"></table>
   </div>
   <script src="js/PassengerTable.js"></script>
   
@@ -84,6 +92,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <li class="text"><label><span>护照编号:</span><input type="text" name="" value="" class="ipt ipt-passport" /></label></li>
           <li class="text"><label><span>联系方式:</span><input type="text" name="" value="" class="ipt ipt-phone" /></label></li>
           <li class="text"><label><span>E-mail:</span><input type="text" name="" value="" class="ipt ipt-email" /></label></li>
+           <li class="text"><label><span>购票数量:</span><input type="text" name="" value="" class="ipt ipt-count" readonly="value"/></label></li>
+            <li class="text"><label><span>购票金额:</span><input type="text" name="" value="" class="ipt ipt-amount" readonly="value"/></label></li>
           <li class="btn"><input type="submit" value="确认提交" class="submitBtn" /></li>
         </ul>
       </form>
