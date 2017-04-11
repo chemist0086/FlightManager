@@ -27,35 +27,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="search-area">
       <div class="sa-ele">
         <label class="se-title">客户编号:</label>
-        <input class="se-con" name="name"/>
+        <input class="se-con" name="pass_id"/>
       </div>
       <div class="sa-ele">
         <label class="se-title">客户姓名:</label>
-        <input class="se-con" name="info"/>
+        <input class="se-con" name="pass_name"/>
       </div>
       <div class="sa-ele">
         <label class="se-title">年龄:</label>
-        <input class="se-con" name="url"/>
+        <input class="se-con" name="pass_age"/>
       </div>
       <div class="sa-ele">
         <label class="se-title">性别:</label>
-        <input class="se-con" name="url"/>
+        <input class="se-con" name="pass_sex"/>
       </div>
       <div class="sa-ele">
         <label class="se-title">身份证号:</label>
-        <input class="se-con" name="url"/>
+        <input class="se-con" name="pass_idcard"/>
       </div>
       <div class="sa-ele">
         <label class="se-title">护照编号:</label>
-        <input class="se-con" name="url"/>
+        <input class="se-con" name="pass_passport"/>
       </div>
       <div class="sa-ele">
         <label class="se-title">联系方式:</label>
-        <input class="se-con" name="url"/>
+        <input class="se-con" name="pass_phone"/>
       </div>
       <div class="sa-ele">
         <label class="se-title">E-mail:</label>
-        <input class="se-con" name="url"/>
+        <input class="se-con" name="pass_email"/>
       </div>
       <div class="sa-ele">
         <button class="search-action">搜索</button>

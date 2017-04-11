@@ -119,9 +119,9 @@ var table = document.querySelector('table');
     // 绑定搜索事件
     document.querySelector('.search-action').addEventListener('click', function () {
       var _query = {
-        name: document.querySelector('[name="name"]').value,
-        info: document.querySelector('[name="info"]').value,
-        url: document.querySelector('[name="url"]').value
+        pass_id: document.querySelector('[name="pass_id"]').value,
+        pass_name: document.querySelector('[name="pass_name"]').value,
+        pass_age: document.querySelector('[name="pass_age"]').value
       };
       table.GM('setQuery', _query).GM('refreshGrid', function () {
         console.log('搜索成功...');
