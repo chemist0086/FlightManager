@@ -184,6 +184,9 @@ public class PassengerManageAction {
 		sql+=" order by pass_id "+sort_pass_id+")";
 		sql+=limit2;//添加可能的搜索限定条件2
 		sql+= " order by pass_id "+sort_pass_id;
+		if(limit.equals("")){//若limit为空，则搜索栏为空，从第一页开始抓数据
+			cPage=1;
+		}
 		ResultSet rs = passengerdao.executeQuery(sql);
 		while(rs.next()){
 			Passenger p=new Passenger();
