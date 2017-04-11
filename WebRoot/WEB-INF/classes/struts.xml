@@ -16,6 +16,12 @@
   	<action name="deletePassenger" class="com.mywork.actions.PassengerManageAction" method="DeletePassenger">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
+	<action name="editPassenger" class="com.mywork.actions.PassengerManageAction" method="EditPassenger">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="addPassenger" class="com.mywork.actions.PassengerManageAction" method="AddPassenger">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
 	<!-- flight -->
   	<action name="generateFlightData" class="com.mywork.actions.FlightManageAction" method="GenerateData">
 	  <result type="json" name="success"><param name="root">map</param></result>
@@ -179,7 +185,7 @@
 	  <result>/WEB-INF/AddPassenger.jsp</result>
 	</action>
 	<!-- 处理管理员添加新用户的请求 -->
-  	<action name="addPassenger" class="com.mywork.actions.PassengerManageAction" method="AddPassenger">
+  	<action name="addPassenger2" class="com.mywork.actions.PassengerManageAction" method="AddPassenger">
 	  <result>/WEB-INF/PassengerManage.jsp</result>
 	</action>
 	
