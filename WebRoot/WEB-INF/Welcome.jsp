@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-  <title>Document</title>
+  <title>航空管理系统</title>
   <base href="<%=basePath%>">
   <link rel="stylesheet" type="text/css" href="css/index.css">
   <script src="js/jquery-3.2.0.js"></script>
@@ -29,8 +29,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <ul class="nav-ul">
           <li><a href="toWelcomePage.action" class="home"><span>首页</span></a></li>
           <li><a href="toPassengerManagePage.action" class="passenger"><span>乘机人管理</span></a></li>
-          <li><a href="" class="ticket"><span>机票管理</span></a></li>
+          <li><a href="./order.jsp" class="order"><span>订单管理</span></a></li>
           <li><a href="./deli.jsp" class="deli"><span>业务员管理</span></a></li>
+          <li><a href="./flight.jsp" class="flight"><span>航班管理</span></a></li>
         </ul>
       </div>
     </div>
@@ -44,14 +45,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="cd-bouncy-nav-modal">
     <nav>
       <ul class="cd-bouncy-nav">
-        <li><a href="#">修改密码</a></li>
-        <li><a href="Logout.action">退出登录</a></li>
+        <li><a href="#">修改密码</a></li>        
         <%
     		User user =(User)session.getAttribute("LoginSuccess");
     		if(user.getAuthority()==1){
-    			out.print("<li><a href='toUserManagePage.action'>账户管理</a><li>");
+    			out.print("<li class='accountMgr'><a href='toUserManagePage.action' >账户管理</a><li>");
     		}
      	%>
+     	<li class='logOut'><a href="Logout.action" class="logOut">退出登录</a></li>
       </ul>
     </nav>
     <a class="cd-close">Close modal</a>
