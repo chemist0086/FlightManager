@@ -126,8 +126,7 @@ public class PassengerManageAction {
 		passengerdao.openDB();
 		passengerdao2.openDB();
 		
-		String sql = "select top "+pSize+" * from t_passenger where pass_id not in ( select top "
-	        		+(cPage-1)*pSize+" pass_id from t_passenger";
+		
 		//添加可能的搜索限定条件1
 		String limit = "";
 		String limit2 = "";//控制首部以and开头
@@ -180,13 +179,16 @@ public class PassengerManageAction {
 			limit2+=" and ";
 			limit2+="pass_email like '%"+pass_email+"%'";
 		}
+		String cPageEmpty = request.getParameter("cPageEmpty");
+		if(cPageEmpty!=null){//不为null说明点击了搜索
+			cPage=1;
+		}
+		String sql = "select top "+pSize+" * from t_passenger where pass_id not in ( select top "
+        		+(cPage-1)*pSize+" pass_id from t_passenger";
 		sql+=limit;
 		sql+=" order by pass_id "+sort_pass_id+")";
 		sql+=limit2;//添加可能的搜索限定条件2
 		sql+= " order by pass_id "+sort_pass_id;
-		if(limit.equals("")){//若limit为空，则搜索栏为空，从第一页开始抓数据
-			cPage=1;
-		}
 		ResultSet rs = passengerdao.executeQuery(sql);
 		while(rs.next()){
 			Passenger p=new Passenger();
@@ -275,7 +277,6 @@ public class PassengerManageAction {
 				"',pass_sex='"+pass_sex+"',pass_idcard='"+pass_idcard+"',pass_passport='"+pass_passport+
 				"',pass_phone='"+pass_phone+"',pass_email='"+pass_email+
 				"' where pass_id='"+pass_id+"'";
-		System.out.println(sql);
 		int count = passengerdao.executeUpdate(sql);
 		passengerdao.closeDB();
 		map.put("status", count);
