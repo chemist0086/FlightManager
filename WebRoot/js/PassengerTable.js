@@ -73,6 +73,19 @@ var table = document.querySelector('table');
       }
       // 排序前事件
       ,sortingBefore: function (data) {
+    	  	var _query = {
+    	  			pass_id: document.querySelector('[name="pass_id"]').value,
+    	  			pass_name: document.querySelector('[name="pass_name"]').value,
+    	  			pass_age: document.querySelector('[name="pass_age"]').value,
+    	  			pass_sex: document.querySelector('[name="pass_sex"]').value,
+    	  			pass_idcard: document.querySelector('[name="pass_idcard"]').value,
+    	  			pass_passport: document.querySelector('[name="pass_passport"]').value,
+    	  			pass_phone: document.querySelector('[name="pass_phone"]').value,
+    	  			pass_email: document.querySelector('[name="pass_email"]').value,
+        	      };
+    	  	table.GM('setQuery', _query).GM('refreshGrid', function () {
+    	  		console.log('搜索成功...');
+        });
         console.log('sortBefore', data);
       }
       // 排序后事件
@@ -150,38 +163,52 @@ var table = document.querySelector('table');
       document.querySelector('[name="pass_email"]').value = '';
     });
     
-    $("table").delegate('.editTable', 'click', function(){
-    	//预填充表格
-    	var selectCount = 0;
-		var inputCount = ":eq("+selectCount+")";
-		var valueCount = ":eq("+(selectCount + 2)+")";
-    	while (selectCount < 10){
-    		inputCount = ":eq("+selectCount+")";
-    		valueCount = ":eq("+(selectCount + 2)+")";
-    		$(".editInfos").children(inputCount).find("input").attr("value", $(this).parents("tr").children(valueCount).text());
-    		selectCount++;
-    	}   
+    $(function() {
+        $("table").delegate('.editTable', 'click', function(){
+        	//预填充表格
+        	var selectCount = 0;
+    		var inputCount = ":eq("+selectCount+")";
+    		var valueCount = ":eq("+(selectCount + 2)+")";
+        	while (selectCount < 10){
+        		inputCount = ":eq("+selectCount+")";
+        		valueCount = ":eq("+(selectCount + 2)+")";
+        		$(".editInfos").children(inputCount).find("input").val($(this).parents("tr").children(valueCount).text());
+        		selectCount++;
+        	}
+        	var sex = $(this).parents("tr").children(":eq(5)").text();
+        	if (sex == "男" || sex == "女") {
+        		$(".editInfos").children(":eq(3)").find("select").val(sex);
+        	} else {
+        		$(".editInfos").children(":eq(3)").find("select").val("/");
+        	}       		        	
+        });
     });
     
     function submitEdit() {
+    	var pass_sex = $(".editInfos").children(":eq(3)").find("input").val();
+    	if (pass_sex == "/"){
+    		pass_sex = "";
+    	}
+    	console.log(pass_sex);
         $.ajax({
             url: 'editPassenger.action',
             type: 'post',
             async: false,
             dataType: 'json',
             data: {
-              pass_id: $(".editInfos").children(":eq(0)").find("input").attr("value"),
-              pass_name: $(".editInfos").children(":eq(1)").find("input").attr("value"),
-              pass_age: $(".editInfos").children(":eq(2)").find("input").attr("value"),
-              pass_sex: $(".editInfos").children(":eq(3)").find("input").attr("value"),
-              pass_idcard: $(".editInfos").children(":eq(4)").find("input").attr("value"),
-              pass_passport: $(".editInfos").children(":eq(5)").find("input").attr("value"),
-              pass_phone: $(".editInfos").children(":eq(6)").find("input").attr("value"),
-              pass_email: $(".editInfos").children(":eq(7)").find("input").attr("value")         
+              pass_id: $(".editInfos").children(":eq(0)").find("input").val(),
+              pass_name: $(".editInfos").children(":eq(1)").find("input").val(),
+              pass_age: $(".editInfos").children(":eq(2)").find("input").val(),
+              pass_sex: pass_sex,
+              pass_idcard: $(".editInfos").children(":eq(4)").find("input").val(),
+              pass_passport: $(".editInfos").children(":eq(5)").find("input").val(),
+              pass_phone: $(".editInfos").children(":eq(6)").find("input").val(),
+              pass_email: $(".editInfos").children(":eq(7)").find("input").val()         
             },
             success: function(data, status) {
               if(data.status=="1"){
                 alert("修改成功！");
+                window.location.reload();
               }
               if(data.status=="0")
               alert("修改失败！");
