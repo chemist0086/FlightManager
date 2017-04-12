@@ -250,13 +250,16 @@ public class PassengerManageAction {
 		ServletActionContext.getResponse().setHeader("Access-Control-Allow-Origin", "*");
 		return "success";
 	}
-	
+	//添加数据
 	public String AddPassenger() throws IOException{
 		SubDao passengerdao = new SubDao();
 		passengerdao.openDB();
 		pass_sex = pass_sex.equals("男")?"1":"0";
+		pass_idcard = pass_idcard==null?"":pass_idcard;
+		pass_passport = pass_passport==null?"":pass_passport;
 		String sql="insert into t_passenger values('"+pass_id+"','"+pass_name+"','"+
 		pass_age+"','"+pass_sex+"','"+pass_idcard+"','"+pass_passport+"','"+pass_phone+"','"+pass_email+"')";
+		System.out.println(sql);
 		int count = passengerdao.executeUpdate(sql);
 		passengerdao.closeDB();
 		map.put("status", count);
