@@ -9,13 +9,13 @@ var table = document.querySelector('table');
       ,supportAjaxPage:true
       ,supportSorting: true
       /*,ajax_url: 'http://www.lovejavascript.com/learnLinkManager/getLearnLinkList'*/
-      ,ajax_url: 'http://127.0.0.1:8080/myWork-05/generatePassengerData.action'
+      ,ajax_url: 'http://127.0.0.1:8080/myWork-05/generateOrderData.action'
   //    ,ajax_url: 'http://127.0.0.1:1314/learnLinkManager/getLearnLinkList'
   //      ,ajax_headers: {'header-test': 'baukh'}
       ,ajax_type: 'POST'
       ,ajax_headers: {"Content-Type":"application/x-www-form-urlencoded" }
       ,query: {pluginId: 1}
-      ,pageSize:5
+      ,pageSize: 20
       ,sizeData: [5, 10, 15, 20]
       ,columnData: [{
           key: 'order_id',
@@ -23,24 +23,42 @@ var table = document.querySelector('table');
           text: '订单编号',
           sorting: ''
         },{
-          key: 'flight_id',
-          width: '80px',
-          text: '航班编号'
-        },{
           key: 'pass_id',
-          width: "60px",
+          width: '80px',
           text: '乘客编号'
         },{
-          key: 'deli_id',
+          key: 'pass_passport',
           width: "60px",
-          text: '送票员编号',
+          text: '乘客护照'
         },{
-          key: 'price_orig',
-          text: '原价',
+          key: 'pass_name',
+          width: "60px",
+          text: '乘客姓名',
         },{
-          key: 'price_purc',
-          text: '实付款',
-        }, {
+          key: 'flight_id',
+          text: '航班编号',
+        },{
+          key: 'dep_city',
+          text: '出发城市',
+        },{
+          key: 'arr_city',
+          text: '到达城市',
+        },{
+          key: 'dep_time',
+          text: '出发时间',
+        },{
+          key: 'arr_time',
+          text: '到达时间',
+        },{
+            key: 'deli_id',
+            text: '送票员编号',
+        },{
+            key: 'deli_name',
+            text: '送票员姓名',
+        },{
+            key: 'price_purc',
+            text: '实付款',
+        },{
           key: 'action',
           width: "80px",
           text: '操作',
