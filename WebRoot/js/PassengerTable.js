@@ -231,20 +231,22 @@ var table = document.querySelector('table');
         	var count = 0;
         	var dataArray = new Array();
         	while (count < checkedData.length){
-        		dataArray[count] = checkedData.eq(count).children().eq(2).text();
+        		dataArray[count] =checkedData.eq(count).children().eq(2).text();
+        		dataArray.pu
         		count++;
         	}
+        	var params = dataArray.join();
             $.ajax({
-                url: 'editPassenger.action',
+                url: 'deletePassenger.action',
                 type: 'post',
                 async: false,
                 dataType: 'json',
                 data: {
-                	data: dataArray
+                	data: params
                 },
                 success: function(data, status) {
-                  if(data.status=="1"){
-                    alert("修改成功！");
+                  if(data["5005"]=="0"){
+                    alert("交互成功！");
                     window.location.reload();
                   }
                   if(data.status=="0")

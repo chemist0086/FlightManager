@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -235,17 +236,18 @@ public class PassengerManageAction {
 		passengerDao = new SubDao();
 		passengerDao.openDB();
 		HttpServletRequest request = ServletActionContext.getRequest();
-		String[] items = request.getParameterValues("items[]");
-		String[]status = new String[items.length];
-		for (int i=0;i<items.length;i++) {
+		String parameter = request.getParameter("data");
+		System.out.println(parameter);
+		String[] data = parameter.split(",");
+		for (int i=0;i<data.length;i++) {
 			int isDeletedSuccess=0;
-			String sql = "delete from t_passenger where pass_id="+items[0];
+			String sql = "delete from t_passenger where pass_id="+data[i];
 			isDeletedSuccess = passengerDao.executeUpdate(sql);
-			status[i]=items[0]+":"+isDeletedSuccess;
+			map.put(data[i], isDeletedSuccess);
 		}
+		System.out.println(map);
 		passengerDao.closeDB();
 		ServletActionContext.getResponse().setHeader("Access-Control-Allow-Origin", "*");
-		map.put("status", status);
 		return "success";
 	}
 	
