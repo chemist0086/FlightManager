@@ -114,8 +114,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      		Deliverer deliverer = new Deliverer();
 				deliverer.setDeli_id(rs.getInt("deli_id"));
 				deliverer.setDeli_name(rs.getString("deli_name"));
-				deliverer.setDeli_sex(rs.getInt("deli_sex"));
-				deliverer.setDeli_age(rs.getInt("deli_age"));
+				//deliverer.setDeli_sex(rs.getInt("deli_sex"));
+				//deliverer.setDeli_age(rs.getInt("deli_age"));
 				deliverer.setDeli_phone(rs.getString("deli_phone"));
 				deliverer.setDeli_email(rs.getString("deli_email"));
       			arraylist.add(deliverer);
@@ -128,11 +128,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       		out.print("<tr><td>"+(i+(showPage-1)*Deliverer.PAGE_SIZE)+"</td>");
       		out.print("<td>"+deliverer.getDeli_id()+"</td>");
       		out.print("<td>"+deliverer.getDeli_name()+"</td>");
-      		if(deliverer.getDeli_sex()==1){
+      		/* if(deliverer.getDeli_sex()==1){
       			out.print("<td>男</td>");
       		}else{
       			out.print("<td>女</td>");
-      		}
+      		} */
       		out.print("<td>"+deliverer.getDeli_age()+"</td>");
       		out.print("<td>"+deliverer.getDeli_phone()+"</td>");
       		out.print("<td>"+map.get(Integer.toString(deliverer.getDeli_id()))+"</td></tr>");
