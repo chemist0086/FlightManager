@@ -18,45 +18,35 @@ var table = document.querySelector('table');
       ,pageSize: 20
       ,sizeData: [5, 10, 15, 20]
       ,columnData: [{
-          key: 'pass_id',
-          width: '80px',
-          text: '客户编号',
+          key: 'deli_id',
+          width: '100px',
+          text: '员工编号',
           sorting: ''
         },{
-          key: 'pass_name',
-          width: '80px',
-          text: '客户姓名'
+          key: 'deli_name',
+          width: '120px',
+          text: '员工姓名'
         },{
-          key: 'pass_age',
-          width: "60px",
+          key: 'deli_age',
+          width: "100px",
           text: '年龄'
         },{
-          key: 'pass_sex',
-          width: "60px",
+          key: 'deli_sex',
+          width: "100px",
           text: '性别',
         },{
-          key: 'pass_idcard',
-          text: '身份证号',
-        },{
-          key: 'pass_passport',
-          text: '护照编号',
-        }, {
-          key: 'pass_phone',
+          key: 'deli_phone',
           text: '联系方式',
         }, {
-          key: 'pass_email',
+          key: 'deli_email',
           text: 'E-mail'
         }, {
-          key: 'pass_count',
-          width: "60px",
-          text: '购票数量'
-        }, {
-          key: 'pass_amount',
-          width: "80px",
-          text: '购票金额'
+          key: 'deli_count',
+          width: "120px",
+          text: '送票业绩'
         }, {
           key: 'action',
-          width: "80px",
+          width: "120px",
           text: '操作',
           template: function(action, rowObject){
               return '<span class="plugin-action edit-action" learnLink-id="'+rowObject.id+'"><a href="javascript:;" class="bounceInDownEdit editTable">编辑</a></span>';
@@ -74,12 +64,10 @@ var table = document.querySelector('table');
       // 排序前事件
       ,sortingBefore: function (data) {
     	  	var _query = {
-    	  			pass_id: document.querySelector('[name="pass_id"]').value,
-    	  			pass_name: document.querySelector('[name="pass_name"]').value,
-    	  			pass_age: document.querySelector('[name="pass_age"]').value,
-    	  			pass_sex: document.querySelector('[name="pass_sex"]').value,
-    	  			pass_idcard: document.querySelector('[name="pass_idcard"]').value,
-    	  			pass_passport: document.querySelector('[name="pass_passport"]').value,
+    	  			deli_id: document.querySelector('[name="deli_id"]').value,
+    	  			deli_name: document.querySelector('[name="deli_name"]').value,
+    	  			deli_age: document.querySelector('[name="deli_age"]').value,
+    	  			deli_sex: document.querySelector('[name="deli_sex"]').value,
     	  			pass_phone: document.querySelector('[name="pass_phone"]').value,
     	  			pass_email: document.querySelector('[name="pass_email"]').value,
     	  			cPageEmpty: 1
@@ -137,35 +125,31 @@ var table = document.querySelector('table');
 
     // 绑定搜索事件
     document.querySelector('.search-action').addEventListener('click', function () {
-      var _query = {
-        pass_id: document.querySelector('[name="pass_id"]').value,
-        pass_name: document.querySelector('[name="pass_name"]').value,
-        pass_age: document.querySelector('[name="pass_age"]').value,
-        pass_sex: document.querySelector('[name="pass_sex"]').value,
-        pass_idcard: document.querySelector('[name="pass_idcard"]').value,
-        pass_passport: document.querySelector('[name="pass_passport"]').value,
-        pass_phone: document.querySelector('[name="pass_phone"]').value,
-        pass_email: document.querySelector('[name="pass_email"]').value,
-        cPageEmpty: 1
-      };
-      table.GM('setQuery', _query).GM('refreshGrid', function () {
-        console.log('搜索成功...');
-      });
+	  	var _query = {
+	  			deli_id: document.querySelector('[name="deli_id"]').value,
+	  			deli_name: document.querySelector('[name="deli_name"]').value,
+	  			deli_age: document.querySelector('[name="deli_age"]').value,
+	  			deli_sex: document.querySelector('[name="deli_sex"]').value,
+	  			pass_phone: document.querySelector('[name="pass_phone"]').value,
+	  			pass_email: document.querySelector('[name="pass_email"]').value,
+	  			cPageEmpty: 1
+    	      };
+	  	table.GM('setQuery', _query).GM('refreshGrid', function () {
+	  		console.log('搜索成功...');
+	  	});
     });
 
     // 绑定重置
     document.querySelector('.reset-action').addEventListener('click', function () {
-      document.querySelector('[name="pass_id"]').value = '';
-      document.querySelector('[name="pass_name"]').value = '';
-      document.querySelector('[name="pass_age"]').value = '';
-      document.querySelector('[name="pass_sex"]').value = '';
-      document.querySelector('[name="pass_idcard"]').value = '';
-      document.querySelector('[name="pass_passport"]').value = '';
+      document.querySelector('[name="deli_id"]').value = '';
+      document.querySelector('[name="deli_name"]').value = '';
+      document.querySelector('[name="deli_age"]').value = '';
+      document.querySelector('[name="deli_sex"]').value = '';
       document.querySelector('[name="pass_phone"]').value = '';
       document.querySelector('[name="pass_email"]').value = '';
     });
             
-    //删除/添加/编辑乘机人
+    //删除/添加/编辑送票员
     $(function() {
     	/*========================================删除==========================================*/
         $(".search-area .sa-ele .delete-action").click(function() {
@@ -204,7 +188,7 @@ var table = document.querySelector('table');
         $(".search-area .sa-ele .add-action").click(function() {        	
         	var selectCount = 0;
     		var inputCount = ":eq("+selectCount+")";
-    		var COLUM = 10;
+    		var COLUM = 6;
         	while (selectCount < COLUM){
         		inputCount = ":eq("+selectCount+")";
         		$("#dialogAdd .editInfos").children(inputCount).find("input").val();
@@ -221,19 +205,17 @@ var table = document.querySelector('table');
         		alert("请填写必须要填写的选项！");
         	} else {
                 $.ajax({
-                    url: 'editPassenger.action',
+                    url: 'addPassenger.action',
                     type: 'post',
                     async: false,
                     dataType: 'json',
                     data: {
-                      pass_id: $("#dialogAdd .editInfos").children(":eq(0)").find("input").val(),
-                      pass_name: $("#dialogAdd .editInfos").children(":eq(1)").find("input").val(),
-                      pass_age: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),
+                      deli_id: $("#dialogAdd .editInfos").children(":eq(0)").find("input").val(),
+                      deli_name: $("#dialogAdd .editInfos").children(":eq(1)").find("input").val(),
+                      deli_age: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),
                       pass_sex: pass_sex,
-                      pass_idcard: $("#dialogAdd .editInfos").children(":eq(4)").find("input").val(),
-                      pass_passport: $("#dialogAdd .editInfos").children(":eq(5)").find("input").val(),
-                      pass_phone: $("#dialogAdd .editInfos ").children(":eq(6)").find("input").val(),
-                      pass_email: $("#dialogAdd .editInfos").children(":eq(7)").find("input").val()         
+                      pass_phone: $("#dialogAdd .editInfos ").children(":eq(4)").find("input").val(),
+                      pass_email: $("#dialogAdd .editInfos").children(":eq(5)").find("input").val()         
                     },
                     success: function(data, status) {
                       if(data.status=="1"){
@@ -242,7 +224,7 @@ var table = document.querySelector('table');
                         $(".search-area .sa-ele .add-action").click(function() {        	
                         	var selectCount = 0;
                     		var inputCount = ":eq("+selectCount+")";
-                        	while (selectCount < 10){
+                        	while (selectCount < 6){
                         		inputCount = ":eq("+selectCount+")";
                         		$("#dialogAdd .editInfos").children(inputCount).find("input").val();
                         		selectCount++;
@@ -266,7 +248,7 @@ var table = document.querySelector('table');
         	var selectCount = 0;
     		var inputCount = ":eq("+selectCount+")";
     		var valueCount = ":eq("+(selectCount + 2)+")";
-    		var COLUM = 10;
+    		var COLUM = 6;
         	while (selectCount < COLUM){
         		inputCount = ":eq("+selectCount+")";
         		valueCount = ":eq("+(selectCount + 2)+")";
@@ -296,14 +278,12 @@ var table = document.querySelector('table');
                     async: false,
                     dataType: 'json',
                     data: {
-                      pass_id: $("#dialogEdit .editInfos").children(":eq(0)").find("input").val(),
-                      pass_name: $("#dialogEdit .editInfos").children(":eq(1)").find("input").val(),
-                      pass_age: $("#dialogEdit .editInfos").children(":eq(2)").find("input").val(),
-                      pass_sex: pass_sex,
-                      pass_idcard: $("#dialogEdit .editInfos").children(":eq(4)").find("input").val(),
-                      pass_passport: $("#dialogEdit .editInfos").children(":eq(5)").find("input").val(),
-                      pass_phone: $("#dialogEdit .editInfos ").children(":eq(6)").find("input").val(),
-                      pass_email: $("#dialogEdit .editInfos").children(":eq(7)").find("input").val()         
+                        deli_id: $("#dialogAdd .editInfos").children(":eq(0)").find("input").val(),
+                        deli_name: $("#dialogAdd .editInfos").children(":eq(1)").find("input").val(),
+                        deli_age: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),
+                        pass_sex: pass_sex,
+                        pass_phone: $("#dialogAdd .editInfos ").children(":eq(4)").find("input").val(),
+                        pass_email: $("#dialogAdd .editInfos").children(":eq(5)").find("input").val()        
                     },
                     success: function(data, status) {
                       if(data.status=="1"){
