@@ -163,3 +163,14 @@ a.claseDialogBtn:hover {
 .ipt[readonly] {
   color: grey;
 }
+
+span.editWarning {
+	display: inline-block;
+	margin-left: 1em; 
+	color: red;
+}
+
+select.ipt-sex {
+	height:2.5em;
+	width: 21em;
+}

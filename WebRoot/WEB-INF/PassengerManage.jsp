@@ -74,20 +74,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<div id="dialogBgEdit"></div>
     <div id="dialogEdit" class="animated">
       <div class="dialogTop">
-        <a href="javascript:;" class="claseDialogBtn">关闭</a>
+        <a href="javascript:;" class="claseDialogBtn" onclick="refreshWarning()">关闭</a>
       </div>
       <form action="" method="post" id="editForm">
         <ul class="editInfos">
-          <li class="text"><label><span>客户编号:</span><input type="text" name="" readonly="value" value="" class="ipt ipt-id" /></label></li>
-          <li class="text"><label><span>客户姓名:</span><input type="text" name="" value="" required class="ipt ipt-name" /></label></li>
-          <li class="text"><label><span>年龄:</span><input type="text" name="" value="" required class="ipt ipt-age" /></label></li>
-          <li class="text"><label><span>性别:</span><input type="text" name="" value="" required class="ipt ipt-sex" /></label></li>
-          <li class="text"><label><span>身份证号:</span><input type="text" name="" value="" required class="ipt ipt-idcard" /></label></li>
-          <li class="text"><label><span>护照编号:</span><input type="text" name="" value="" required class="ipt ipt-passport" /></label></li>
-          <li class="text"><label><span>联系方式:</span><input type="text" name="" value="" required class="ipt ipt-phone" /></label></li>
-          <li class="text"><label><span>E-mail:</span><input type="text" name="" value="" required class="ipt ipt-email" /></label></li>
-           <li class="text"><label><span>购票数量:</span><input type="text" name="" value="" class="ipt ipt-count" readonly="value"/></label></li>
-            <li class="text"><label><span>购票金额:</span><input type="text" name="" value="" class="ipt ipt-amount" readonly="value"/></label></li>
+          <li class="text"><label><span>客户编号:</span><input type="text" name="pass_id" readonly="value" value="" class="ipt ipt-id" /></label></li>
+          <li class="text"><label><span>客户姓名:</span><input type="text" name="pass_name" value=""  class="ipt ipt-name" /></label></li>
+          <li class="text"><label><span>年龄:</span><input type="text" name="pass_age" value=""  class="ipt ipt-age" /></label></li>
+          <li class="text"><label><span>性别:</span><select  name="pass_sex" value=""  class="ipt ipt-sex"><option value ="男">男</option><option value ="女">女</option><option value ="/">/</option></select><!-- <input type="text" name="pass_sex" value=""  class="ipt ipt-sex" /> --></label></li>
+          <li class="text"><label><span>身份证号:</span><input type="text" name="pass_idcard" value=""  class="ipt ipt-idcard" /></label></li>
+          <li class="text"><label><span>护照编号:</span><input type="text" name="pass_passport" value=""  class="ipt ipt-passport" /></label></li>
+          <li class="text"><label><span>联系方式:</span><input type="text" name="pass_phone" value=""  class="ipt ipt-phone" /></label></li>
+          <li class="text"><label><span>E-mail:</span><input type="text" name="pass_email" value=""  class="ipt ipt-email" /></label></li>
+          <li class="text"><label><span>购票数量:</span><input type="text" name="pass_count" value="" class="ipt ipt-count" readonly="value" /></label></li>
+          <li class="text"><label><span>购票金额:</span><input type="text" name="pass_amount" value="" class="ipt ipt-amount" readonly="value" /></label></li>
           <li class="btn"><input type="button" value="确认提交" class="submitBtn" onclick="submitEdit()"/></li>
         </ul>
       </form>
@@ -147,4 +147,60 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 </body>
 <script src="js/popUp.js"></script>
+<script>
+//表单内容判断
+$("input.ipt-name").blur(function() {
+    	if ($(this).val() == ""){
+    		if ($("span.editWarningName").length == 0){
+    			$("#dialogEdit").css("width", "40em");
+    			$(this).after('<span class="editWarning editWarningName" >请输入姓名</span>');
+    		}
+    	} else {
+    		if ($("span.editWarning").length == 0){
+    			$("#dialogEdit").css("width: 35em");
+    		}
+    		$("span.editWarningName").remove();
+    	}
+});
+
+$("input.ipt-idcard").blur(function() {
+    	if ($(this).val() == ""){
+    		if ($("span.editWarningIdcard").length == 0){
+    			$("#dialogEdit").css("width", "45em");
+    			$(this).after('<span class="editWarning editWarningIdcard" style="width: 10em;">请输入身份证或护照号</span>');
+    		}
+    	} else {
+    	    if ($("span.editWarning").length == 0){
+    			$("#dialogEdit").css("width: 35em");
+    		} else if ($("span.editWarningName").length != 0 && $("span.editWarningPassport").length == 0){
+    			$("#dialogEdit").css("width", "40em");
+    		}
+    		$("span.editWarningIdcard").remove();
+    	}
+});
+
+$("input.ipt-passport").blur(function() {
+    	if ($(this).val() == ""){
+    		if ($("span.editWarningPassport").length == 0){
+    			$("#dialogEdit").css("width", "45em");
+    			$(this).after('<span class="editWarning editWarningPassport" style="width: 10em;">请输入身份证或护照号</span>');
+    		}
+    	} else {
+    	   	if ($("span.editWarning").length == 0){
+    			$("#dialogEdit").css("width: 35em");
+    		} else if ($("span.editWarningName").length != 0 && $("span.editWarningIdcard").length == 0){
+    			$("#dialogEdit").css("width", "40em");
+    		}
+    		$("span.editWarningPassport").remove();
+    	}
+});
+
+//点击关闭按钮刷新提示
+function refreshWarning(){
+	while ($("span.editWarning").length != 0){
+		$("span.editWarning").remove();
+		$("#dialogEdit").css("width: 35em");
+    }
+}
+</script>
 </html>
