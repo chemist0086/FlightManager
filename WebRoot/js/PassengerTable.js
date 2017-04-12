@@ -167,14 +167,13 @@ var table = document.querySelector('table');
             
     //删除/添加/编辑乘机人
     $(function() {
-    	//删除
+    	/*========================================删除==========================================*/
         $(".search-area .sa-ele .delete-action").click(function() {
         	var checkedData = $("tr[checked=true]");
         	var count = 0;
         	var dataArray = new Array();
         	while (count < checkedData.length){
         		dataArray[count] =checkedData.eq(count).children().eq(2).text();
-        		dataArray.pu
         		count++;
         	}
         	var params = dataArray.join();
@@ -200,18 +199,19 @@ var table = document.querySelector('table');
               });    
         }) ;
         
-        //添加
-        //清空表格
+        /*========================================添加==========================================*/
+        //清空表单
         $(".search-area .sa-ele .add-action").click(function() {        	
         	var selectCount = 0;
     		var inputCount = ":eq("+selectCount+")";
-        	while (selectCount < 10){
+    		var COLUM = 10;
+        	while (selectCount < COLUM){
         		inputCount = ":eq("+selectCount+")";
         		$("#dialogAdd .editInfos").children(inputCount).find("input").val();
         		selectCount++;
         	}       	       	
         });
-      //提交修改
+      //提交添加
         $("#dialogAdd .editInfos .btn .submitBtn").click(function(){
         	var pass_sex = $("#dialogAdd .editInfos").children(":eq(3)").find("select").val();
         	if (pass_sex == "/"){
@@ -238,6 +238,16 @@ var table = document.querySelector('table');
                     success: function(data, status) {
                       if(data.status=="1"){
                         alert("添加成功！");
+                        //清空表格
+                        $(".search-area .sa-ele .add-action").click(function() {        	
+                        	var selectCount = 0;
+                    		var inputCount = ":eq("+selectCount+")";
+                        	while (selectCount < 10){
+                        		inputCount = ":eq("+selectCount+")";
+                        		$("#dialogAdd .editInfos").children(inputCount).find("input").val();
+                        		selectCount++;
+                        	}       	       	
+                        });
                         window.location.reload();
                       }
                       if(data.status=="0")
@@ -250,13 +260,14 @@ var table = document.querySelector('table');
         	}   	
         });
         
-        //编辑
+        /*========================================编辑==========================================*/
         //预填充表格
         $("table").delegate('.editTable', 'click', function(){        	
         	var selectCount = 0;
     		var inputCount = ":eq("+selectCount+")";
     		var valueCount = ":eq("+(selectCount + 2)+")";
-        	while (selectCount < 10){
+    		var COLUM = 10;
+        	while (selectCount < COLUM){
         		inputCount = ":eq("+selectCount+")";
         		valueCount = ":eq("+(selectCount + 2)+")";
         		$("#dialogEdit .editInfos").children(inputCount).find("input").val($(this).parents("tr").children(valueCount).text());

@@ -37,22 +37,55 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <input class="se-con" name="order_id"/>
       </div>
       <div class="sa-ele">
-        <label class="se-title">航班编号:</label>
-        <input class="se-con" name="flight_id"/>
-      </div>
-      <div class="sa-ele">
         <label class="se-title">乘客编号:</label>
         <input class="se-con" name="pass_id"/>
+      </div>      
+      <div class="sa-ele">
+        <label class="se-title">乘客姓名:</label>
+        <input class="se-con" name="pass_name"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">乘客身份证</label>
+        <input class="se-con" name="pass_idcard"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">乘客护照:</label>
+        <input class="se-con" name="order_passport"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">航班编号:</label>
+        <input class="se-con" name="flight_id"/>
+      </div>      
+      <div class="sa-ele">
+        <label class="se-title">出发城市:</label>
+        <input class="se-con" name="dep_city"/>
+      </div>      
+      <div class="sa-ele">
+        <label class="se-title">到达城市:</label>
+        <input class="se-con" name="arr_city"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">出发时间:</label>
+        <input class="se-con" name="dep_time"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">到达时间:</label>
+        <input class="se-con" name="arr_time"/>
       </div>
       <div class="sa-ele">
         <label class="se-title">送票员编号:</label>
         <input class="se-con" name="deli_id"/>
       </div>
       <div class="sa-ele">
+        <label class="se-title">送票员姓名:</label>
+        <input class="se-con" name="deli_name"/>
+      </div>            
+      <div class="sa-ele">
         <button class="search-action">搜索</button>
         <button class="reset-action">重置</button>
         <span style="display: inline-block; font-size: 20px; color: grey; user-select: none; margin-right: 15px">||</span>
         <button class="delete-action">删除</button>
+        <button class="add-action bounceInDownAdd">添加订单</button>
       </div>
     </div>
     <br/>
@@ -71,8 +104,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <ul class="editInfos">
           <li class="text"><label><span>订单编号:</span><input type="text" name="pass_id" readonly="value" value="" class="ipt ipt-orderId" /></label></li>
           <li class="text"><label><span>乘客编号:</span><input type="text" name="pass_name" value=""  class="ipt ipt-passId" /></label></li>
-          <li class="text"><label><span>乘客护照:</span><input type="text" name="pass_name" value=""  class="ipt ipt-passPassport" /></label></li>
           <li class="text"><label><span>乘客姓名:</span><input type="text" name="pass_age" value=""  class="ipt ipt-passName" /></label></li>
+          <li class="text"><label><span>乘客身份证:</span><input type="text" name="pass_age" value=""  class="ipt ipt-passName" /></label></li>
+          <li class="text"><label><span>乘客护照:</span><input type="text" name="pass_name" value=""  class="ipt ipt-passPassport" /></label></li>          
           <li class="text"><label><span>航班编号:</span><input type="text" name="pass_age" value=""  class="ipt ipt-flightId" /></label></li>
           <li class="text"><label><span>出发城市:</span><input type="text" name="pass_age" value=""  class="ipt ipt-depCity" /></label></li>
           <li class="text"><label><span>到达城市:</span><input type="text" name="pass_age" value=""  class="ipt ipt-arrCity" /></label></li>
@@ -96,12 +130,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <form action="" method="post" id="editForm">
       <ul class="editInfos">
-        <li class="text"><label><font color="#ff0000">* </font><span>新密码:</span><input type="password" name="" required value="" class="ipt" /></label></li>
-        <li class="text"><label><font color="#ff0000">* </font><span>确认密码:</span><input type="password" name="" required value="" class="ipt" /></label></li>
+        <li class="text"><label><font color="#ff0000">* </font><span>新密码:</span><input type="password" name="" required value="" class="ipt ipt-new" /></label></li>
+        <li class="text"><label><font color="#ff0000">* </font><span>确认密码:</span><input type="password" name="" required value="" class="ipt ipt-confirm" /></label></li>
         <li class="btn"><input type="submit" value="确认提交" class="submitBtn" /></li>
       </ul>
     </form>
   </div>
+    <!-- 添加订单弹窗   -->
+  <div class="pop-edit">
+  	<div id="dialogBgAdd"></div>
+    <div id="dialogAdd" class="animated">
+      <div class="dialogTop">
+        <a href="javascript:;" class="claseDialogBtn" onclick="refreshWarning()">关闭</a>
+      </div>
+      <form action="" method="post" id="editForm">
+        <ul class="editInfos">
+          <li class="text"><label><span>订单编号:</span><input type="text" name="pass_id" readonly="value" value="" class="ipt ipt-orderId" /></label></li>
+          <li class="text"><label><span>乘客编号:</span><input type="text" name="pass_name" value=""  class="ipt ipt-passId" /></label></li>
+          <li class="text"><label><span>乘客姓名:</span><input type="text" name="pass_age" value=""  class="ipt ipt-passName" /></label></li>
+          <li class="text"><label><span>乘客身份证:</span><input type="text" name="pass_age" value=""  class="ipt ipt-passName" /></label></li>
+          <li class="text"><label><span>乘客护照:</span><input type="text" name="pass_name" value=""  class="ipt ipt-passPassport" /></label></li>          
+          <li class="text"><label><span>航班编号:</span><input type="text" name="pass_age" value=""  class="ipt ipt-flightId" /></label></li>
+          <li class="text"><label><span>出发城市:</span><input type="text" name="pass_age" value=""  class="ipt ipt-depCity" /></label></li>
+          <li class="text"><label><span>到达城市:</span><input type="text" name="pass_age" value=""  class="ipt ipt-arrCity" /></label></li>
+          <li class="text"><label><span>出发时间:</span><input type="text" name="pass_age" value=""  class="ipt ipt-depTime" /></label></li>
+          <li class="text"><label><span>到达时间:</span><input type="text" name="pass_age" value=""  class="ipt ipt-arrTime" /></label></li>
+          <li class="text"><label><span>送票员姓名:</span><input type="text" name="pass_age" value=""  class="ipt ipt-deliName" /></label></li>
+          <li class="text"><label><span>送票员编号:</span><input type="text" name="pass_sex" value=""  class="ipt ipt-deliId" /></label></li>
+          <li class="text"><label><span>实付款:</span><input type="text" name="pass_passport" value=""  class="ipt ipt-purc" /></label></li>
+          <li class="btn"><input type="button" value="确认提交" class="submitBtn"/></li>
+        </ul>
+      </form>
+    </div>
+  </div>
+  
   <!-- General Page -->
 
   <div class="nav-main">
@@ -110,7 +172,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <ul class="nav-ul">
           <li><a href="toWelcomePage.action" class="home"><span>首页</span></a></li>
           <li><a href="toPassengerManagePage.action" class="passenger"><span>乘机人管理</span></a></li>
-          <li><a href="toOrderManagePage.action" class="ticket"><span>机票管理</span></a></li>
+          <li><a href="toOrderManagePage.action" class="ticket"><span>订单管理</span></a></li>
           <li><a href="toDelivererManagePage.action" class="deli"><span>业务员管理</span></a></li>
           <li><a href="toFlightManagePage.action" class="flight"><span>航班管理</span></a></li>
         </ul>
@@ -141,6 +203,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 </body>
 <script src="js/popUp.js"></script>
-<script src="js/formWarning.js"></script>
+<script src="js/orderFormWarning.js"></script>
 </body>
 </html>

@@ -27,21 +27,28 @@ var table = document.querySelector('table');
           width: '80px',
           text: '乘客编号'
         },{
-          key: 'pass_passport',
-          width: "60px",
-          text: '乘客护照'
+            key: 'pass_name',
+            width: "60px",
+            text: '乘客姓名',
         },{
-          key: 'pass_name',
-          width: "60px",
-          text: '乘客姓名',
+          key: 'pass_idcard',
+          width: "120px",
+          text: '乘客身份证'
+        },{
+          key: 'pass_passport',
+          width: "120px",
+          text: '乘客护照',
         },{
           key: 'flight_id',
+          width: '80px',
           text: '航班编号',
         },{
           key: 'dep_city',
+          width: '80px',
           text: '出发城市',
         },{
           key: 'arr_city',
+          width: '80px',
           text: '到达城市',
         },{
           key: 'dep_time',
@@ -51,9 +58,11 @@ var table = document.querySelector('table');
           text: '到达时间',
         },{
             key: 'deli_id',
+            width: '80px',
             text: '送票员编号',
         },{
             key: 'deli_name',
+            width: '80px',
             text: '送票员姓名',
         },{
             key: 'price_purc',
@@ -77,16 +86,23 @@ var table = document.querySelector('table');
       }
       // 排序前事件
       ,sortingBefore: function (data) {
-    	  	var _query = {
-    	  			order_id: document.querySelector('[name="order_id"]').value,
-    	  			flight_id: document.querySelector('[name="flight_id"]').value,
-    	  			pass_id: document.querySelector('[name="pass_id"]').value,
-    	  			deli_id: document.querySelector('[name="deli_id"]').value,
-    	  			cPageEmpty: 1
-        	      };
-    	  	table.GM('setQuery', _query).GM('refreshGrid', function () {
-    	  		console.log('搜索成功...');
-        });
+  	  	var _query = {
+	  			order_id: document.querySelector('[name="order_id"]').value,
+	  			flight_id: document.querySelector('[name="flight_id"]').value,
+	  			pass_id: document.querySelector('[name="pass_id"]').value,
+	  			deli_id: document.querySelector('[name="deli_id"]').value,
+	  			pass_passport: document.querySelector('[name="pass_passport"]').value,
+	  			arr_city: document.querySelector('[name="arr_city"]').value,
+	  			dep_city: document.querySelector('[name="dep_city"]').value,
+	  			arr_time: document.querySelector('[name="arr_time"]').value,
+	  			dep_time: document.querySelector('[name="dep_time"]').value,
+	  			deli_name: document.querySelector('[name="deli_name"]').value,
+	  			pass_idcard: document.querySelector('[name="pass_idcard"]').value,
+	  			cPageEmpty: 1
+    	      };
+	  	table.GM('setQuery', _query).GM('refreshGrid', function () {
+	  		console.log('搜索成功...');
+	  	});
         console.log('sortBefore', data);
       }
       // 排序后事件
@@ -141,7 +157,15 @@ var table = document.querySelector('table');
 	  			order_id: document.querySelector('[name="order_id"]').value,
 	  			flight_id: document.querySelector('[name="flight_id"]').value,
 	  			pass_id: document.querySelector('[name="pass_id"]').value,
+	  			pass_name: document.querySelector('[name="pass_name"]').value,
 	  			deli_id: document.querySelector('[name="deli_id"]').value,
+	  			pass_passport: document.querySelector('[name="pass_passport"]').value,
+	  			arr_city: document.querySelector('[name="arr_city"]').value,
+	  			dep_city: document.querySelector('[name="dep_city"]').value,
+	  			arr_time: document.querySelector('[name="arr_time"]').value,
+	  			dep_time: document.querySelector('[name="dep_time"]').value,
+	  			deli_name: document.querySelector('[name="deli_name"]').value,
+	  			pass_idcard: document.querySelector('[name="pass_idcard"]').value,
 	  			cPageEmpty: 1
     	      };
 	  	table.GM('setQuery', _query).GM('refreshGrid', function () {
@@ -155,88 +179,39 @@ var table = document.querySelector('table');
       document.querySelector('[name="flight_id"]').value = '';
       document.querySelector('[name="pass_id"]').value = '';
       document.querySelector('[name="deli_id"]').value = '';
+      document.querySelector('[name="pass_passport"]').value = '';
+      document.querySelector('[name="arr_city"]').value = '';
+      document.querySelector('[name="dep_city"]').value = '';
+      document.querySelector('[name="arr_time"]').value = '';
+      document.querySelector('[name="dep_time"]').value = '';
+      document.querySelector('[name="deli_name"]').value = '';
+      document.querySelector('[name="pass_idcard"]').value = '';
+      document.querySelector('[name="pass_name"]').value = '';
     });
     
+  //删除/添加/编辑订单
     $(function() {
-        $("table").delegate('.editTable', 'click', function(){
-        	//预填充表格
-        	var selectCount = 0;
-    		var inputCount = ":eq("+selectCount+")";
-    		var valueCount = ":eq("+(selectCount + 2)+")";
-        	while (selectCount < 10){
-        		inputCount = ":eq("+selectCount+")";
-        		valueCount = ":eq("+(selectCount + 2)+")";
-        		$(".editInfos").children(inputCount).find("input").val($(this).parents("tr").children(valueCount).text());
-        		selectCount++;
-        	}
-        	var sex = $(this).parents("tr").children(":eq(5)").text();
-        	if (sex == "男" || sex == "女") {
-        		$(".editInfos").children(":eq(3)").find("select").val(sex);
-        	} else {
-        		$(".editInfos").children(":eq(3)").find("select").val("/");
-        	}       		        	
-        });
-    });
-    
-    function submitEdit() {
-    	var pass_sex = $(".editInfos").children(":eq(3)").find("select").val();
-    	if (pass_sex == "/"){
-    		pass_sex = "";
-    	}
-    	   	
-    	if ($("span.editWarning").length != 0){
-    		alert("请填写必须要填写的选项！");
-    	} else {
-            $.ajax({
-                url: 'editPassenger.action',
-                type: 'post',
-                async: false,
-                dataType: 'json',
-                data: {
-                  pass_id: $(".editInfos").children(":eq(0)").find("input").val(),
-                  pass_name: $(".editInfos").children(":eq(1)").find("input").val(),
-                  pass_age: $(".editInfos").children(":eq(2)").find("input").val(),
-                  pass_sex: pass_sex,
-                  pass_idcard: $(".editInfos").children(":eq(4)").find("input").val(),
-                  pass_passport: $(".editInfos").children(":eq(5)").find("input").val(),
-                  pass_phone: $(".editInfos").children(":eq(6)").find("input").val(),
-                  pass_email: $(".editInfos").children(":eq(7)").find("input").val()         
-                },
-                success: function(data, status) {
-                  if(data.status=="1"){
-                    alert("修改成功！");
-                    window.location.reload();
-                  }
-                  if(data.status=="0")
-                  alert("修改失败！");
-                },
-                error: function(){
-                  alert("网络故障");
-                }
-              });
-    	}   	
-    } 
-    
-    $(function() {
-        $(".delete-action").click(function() {
+    	//删除
+        $(".search-area .sa-ele .delete-action").click(function() {
         	var checkedData = $("tr[checked=true]");
         	var count = 0;
         	var dataArray = new Array();
         	while (count < checkedData.length){
-        		dataArray[count] = checkedData.eq(count).children().eq(2).text();
+        		dataArray[count] =checkedData.eq(count).children().eq(2).text();
         		count++;
         	}
+        	var params = dataArray.join();
             $.ajax({
-                url: 'editPassenger.action',
+                url: 'deletePassenger.action',
                 type: 'post',
                 async: false,
                 dataType: 'json',
                 data: {
-                	data: dataArray
+                	data: params
                 },
                 success: function(data, status) {
-                  if(data.status=="1"){
-                    alert("修改成功！");
+                  if(data["5005"]=="0"){
+                    alert("交互成功！");
                     window.location.reload();
                   }
                   if(data.status=="0")
@@ -246,5 +221,123 @@ var table = document.querySelector('table');
                   alert("网络故障");
                 }
               });    
-        }) 
+        }) ;
+        
+        //添加
+        //清空表单
+        $(".search-area .sa-ele .add-action").click(function() {        	
+        	var selectCount = 0;
+    		var inputCount = ":eq("+selectCount+")";
+    		var COLUM = 13;
+        	while (selectCount < COLUM){
+        		inputCount = ":eq("+selectCount+")";
+        		$("#dialogAdd .editInfos").children(inputCount).find("input").val();
+        		selectCount++;
+        	}       	       	
+        });
+        //提交添加
+        $("#dialogAdd .editInfos .btn .submitBtn").click(function(){   	   	
+        	if ($("span.editWarning").length != 0){
+        		alert("请填写必须要填写的选项！");
+        	} else {
+                $.ajax({
+                    url: 'editPassenger.action',
+                    type: 'post',
+                    async: false,
+                    dataType: 'json',
+                    data: {
+                        order_id: $("#dialogEdit .editInfos").children(":eq(0)").find("input").val(),
+                        pass_id: $("#dialogEdit .editInfos").children(":eq(1)").find("input").val(),
+                        pass_name: $("#dialogEdit .editInfos").children(":eq(2)").find("input").val(),
+                        pass_idcard: $("#dialogEdit .editInfos").children(":eq(2)").find("input").val(),
+                        pass_passport: $("#dialogEdit .editInfos").children(":eq(4)").find("input").val(),
+                        flight_id: $("#dialogEdit .editInfos").children(":eq(5)").find("input").val(),
+                        dep_city: $("#dialogEdit .editInfos ").children(":eq(6)").find("input").val(),
+                        arr_city: $("#dialogEdit .editInfos").children(":eq(7)").find("input").val(),
+                        dep_time: $("#dialogEdit .editInfos").children(":eq(8)").find("input").val(),
+                        arr_time: $("#dialogEdit .editInfos").children(":eq(9)").find("input").val(),
+                        deli_id: $("#dialogEdit .editInfos").children(":eq(10)").find("input").val(),
+                        deli_name: $("#dialogEdit .editInfos").children(":eq(11)").find("input").val(),
+                        price_purc: $("#dialogEdit .editInfos").children(":eq(12)").find("input").val(),       
+                    },
+                    success: function(data, status) {
+                      if(data.status=="1"){
+                        alert("添加成功！");
+                        //清空表单
+                        $(".search-area .sa-ele .add-action").click(function() {        	
+                        	var selectCount = 0;
+                    		var inputCount = ":eq("+selectCount+")";
+                    		var COLUM = 13
+                        	while (selectCount < 13){
+                        		inputCount = ":eq("+selectCount+")";
+                        		$("#dialogAdd .editInfos").children(inputCount).find("input").val();
+                        		selectCount++;
+                        	}       	       	
+                        });
+                        window.location.reload();
+                      }
+                      if(data.status=="0")
+                      alert("添加失败！");
+                    },
+                    error: function(){
+                      alert("网络故障");
+                    }
+                  });
+        	}   	
+        });
+        
+        //编辑
+        //预填充表单
+        $("table").delegate('.editTable', 'click', function(){        	
+        	var selectCount = 0;
+    		var inputCount = ":eq("+selectCount+")";
+    		var valueCount = ":eq("+(selectCount + 2)+")";
+    		var COLUM = 13;
+        	while (selectCount < COLUM){
+        		inputCount = ":eq("+selectCount+")";
+        		valueCount = ":eq("+(selectCount + 2)+")";
+        		$("#dialogEdit .editInfos").children(inputCount).find("input").val($(this).parents("tr").children(valueCount).text());
+        		selectCount++;
+        	}  		        	
+        }); 
+        
+        //提交修改
+        $("#dialogEdit .editInfos .btn .submitBtn").click(function(){     	   	
+        	if ($("span.editWarning").length != 0){
+        		alert("请填写必须要填写的选项！");
+        	} else {
+                $.ajax({
+                    url: 'editPassenger.action',
+                    type: 'post',
+                    async: false,
+                    dataType: 'json',
+                    data: {
+                      order_id: $("#dialogEdit .editInfos").children(":eq(0)").find("input").val(),
+                      pass_id: $("#dialogEdit .editInfos").children(":eq(1)").find("input").val(),
+                      pass_name: $("#dialogEdit .editInfos").children(":eq(2)").find("input").val(),
+                      pass_idcard: $("#dialogEdit .editInfos").children(":eq(2)").find("input").val(),
+                      pass_passport: $("#dialogEdit .editInfos").children(":eq(4)").find("input").val(),
+                      flight_id: $("#dialogEdit .editInfos").children(":eq(5)").find("input").val(),
+                      dep_city: $("#dialogEdit .editInfos ").children(":eq(6)").find("input").val(),
+                      arr_city: $("#dialogEdit .editInfos").children(":eq(7)").find("input").val(),
+                      dep_time: $("#dialogEdit .editInfos").children(":eq(8)").find("input").val(),
+                      arr_time: $("#dialogEdit .editInfos").children(":eq(9)").find("input").val(),
+                      deli_id: $("#dialogEdit .editInfos").children(":eq(10)").find("input").val(),
+                      deli_name: $("#dialogEdit .editInfos").children(":eq(11)").find("input").val(),
+                      price_purc: $("#dialogEdit .editInfos").children(":eq(12)").find("input").val(),
+                    },
+                    success: function(data, status) {
+                      if(data.status=="1"){
+                        alert("修改成功！");
+                        window.location.reload();
+                      }
+                      if(data.status=="0")
+                      alert("修改失败！");
+                    },
+                    error: function(){
+                      alert("网络故障");
+                    }
+                  });
+        	}   	
+        });
     });
