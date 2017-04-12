@@ -261,11 +261,21 @@ public class PassengerManageAction {
 	public String EditPassenger() throws IOException{
 		SubDao passengerdao = new SubDao();
 		passengerdao.openDB();
+		String strAge;
+		if(pass_age==0){
+			strAge="";
+		}else{
+			strAge=Integer.toString(pass_age);
+		}
+		pass_passport = pass_passport==null?"":pass_passport;
+		pass_phone = pass_phone==null?"":pass_phone;
+		pass_email = pass_email==null?"":pass_email;
 		pass_sex = pass_sex.equals("男")?"1":"0";
-		String sql="update t_passenger set  pass_name='"+pass_name+"',pass_age='"+pass_age+
+		String sql="update t_passenger set  pass_name='"+pass_name+"',pass_age='"+strAge+
 				"',pass_sex='"+pass_sex+"',pass_idcard='"+pass_idcard+"',pass_passport='"+pass_passport+
 				"',pass_phone='"+pass_phone+"',pass_email='"+pass_email+
 				"' where pass_id='"+pass_id+"'";
+		System.out.println(sql);
 		int count = passengerdao.executeUpdate(sql);
 		passengerdao.closeDB();
 		map.put("status", count);
