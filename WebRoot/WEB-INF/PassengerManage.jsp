@@ -112,8 +112,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <li class="text"><label><span>护照编号:</span><input type="text" name="pass_passport" value=""  class="ipt ipt-passport" /></label></li>
           <li class="text"><label><span>联系方式:</span><input type="text" name="pass_phone" value=""  class="ipt ipt-phone" /></label></li>
           <li class="text"><label><span>E-mail:</span><input type="text" name="pass_email" value=""  class="ipt ipt-email" /></label></li>
-          <li class="text"><label><span>购票数量:</span><input type="text" name="pass_count" value="" class="ipt ipt-count" /></label></li>
-          <li class="text"><label><span>购票金额:</span><input type="text" name="pass_amount" value="" class="ipt ipt-amount" /></label></li>
           <li class="btn"><input type="button" value="确认提交" class="submitBtn"/></li>
         </ul>
       </form>
