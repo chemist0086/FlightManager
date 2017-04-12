@@ -221,7 +221,7 @@ var table = document.querySelector('table');
         		alert("请填写必须要填写的选项！");
         	} else {
                 $.ajax({
-                    url: 'addPassenger.action',
+                    url: 'editPassenger.action',
                     type: 'post',
                     async: false,
                     dataType: 'json',
