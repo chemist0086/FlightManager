@@ -82,6 +82,7 @@ var table = document.querySelector('table');
     	  			pass_passport: document.querySelector('[name="pass_passport"]').value,
     	  			pass_phone: document.querySelector('[name="pass_phone"]').value,
     	  			pass_email: document.querySelector('[name="pass_email"]').value,
+    	  			cPageEmpty: 1
         	      };
     	  	table.GM('setQuery', _query).GM('refreshGrid', function () {
     	  		console.log('搜索成功...');
@@ -145,6 +146,7 @@ var table = document.querySelector('table');
         pass_passport: document.querySelector('[name="pass_passport"]').value,
         pass_phone: document.querySelector('[name="pass_phone"]').value,
         pass_email: document.querySelector('[name="pass_email"]').value,
+        cPageEmpty: 1
       };
       table.GM('setQuery', _query).GM('refreshGrid', function () {
         console.log('搜索成功...');
@@ -185,36 +187,72 @@ var table = document.querySelector('table');
     });
     
     function submitEdit() {
-    	var pass_sex = $(".editInfos").children(":eq(3)").find("input").val();
+    	var pass_sex = $(".editInfos").children(":eq(3)").find("select").val();
     	if (pass_sex == "/"){
     		pass_sex = "";
     	}
-    	console.log(pass_sex);
-        $.ajax({
-            url: 'editPassenger.action',
-            type: 'post',
-            async: false,
-            dataType: 'json',
-            data: {
-              pass_id: $(".editInfos").children(":eq(0)").find("input").val(),
-              pass_name: $(".editInfos").children(":eq(1)").find("input").val(),
-              pass_age: $(".editInfos").children(":eq(2)").find("input").val(),
-              pass_sex: pass_sex,
-              pass_idcard: $(".editInfos").children(":eq(4)").find("input").val(),
-              pass_passport: $(".editInfos").children(":eq(5)").find("input").val(),
-              pass_phone: $(".editInfos").children(":eq(6)").find("input").val(),
-              pass_email: $(".editInfos").children(":eq(7)").find("input").val()         
-            },
-            success: function(data, status) {
-              if(data.status=="1"){
-                alert("修改成功！");
-                window.location.reload();
-              }
-              if(data.status=="0")
-              alert("修改失败！");
-            },
-            error: function(){
-              alert("网络故障");
-            }
-          });
+    	   	
+    	if ($("span.editWarning").length != 0){
+    		alert("请填写必须要填写的选项！");
+    	} else {
+            $.ajax({
+                url: 'editPassenger.action',
+                type: 'post',
+                async: false,
+                dataType: 'json',
+                data: {
+                  pass_id: $(".editInfos").children(":eq(0)").find("input").val(),
+                  pass_name: $(".editInfos").children(":eq(1)").find("input").val(),
+                  pass_age: $(".editInfos").children(":eq(2)").find("input").val(),
+                  pass_sex: pass_sex,
+                  pass_idcard: $(".editInfos").children(":eq(4)").find("input").val(),
+                  pass_passport: $(".editInfos").children(":eq(5)").find("input").val(),
+                  pass_phone: $(".editInfos").children(":eq(6)").find("input").val(),
+                  pass_email: $(".editInfos").children(":eq(7)").find("input").val()         
+                },
+                success: function(data, status) {
+                  if(data.status=="1"){
+                    alert("修改成功！");
+                    window.location.reload();
+                  }
+                  if(data.status=="0")
+                  alert("修改失败！");
+                },
+                error: function(){
+                  alert("网络故障");
+                }
+              });
+    	}   	
     } 
+    
+    $(function() {
+        $(".delete-action").click(function() {
+        	var checkedData = $("tr[checked=true]");
+        	var count = 0;
+        	var dataArray = new Array();
+        	while (count < checkedData.length){
+        		dataArray[count] = checkedData.eq(count).children().eq(2).text();
+        		count++;
+        	}
+            $.ajax({
+                url: 'editPassenger.action',
+                type: 'post',
+                async: false,
+                dataType: 'json',
+                data: {
+                	data: dataArray
+                },
+                success: function(data, status) {
+                  if(data.status=="1"){
+                    alert("修改成功！");
+                    window.location.reload();
+                  }
+                  if(data.status=="0")
+                  alert("修改失败！");
+                },
+                error: function(){
+                  alert("网络故障");
+                }
+              });    
+        }) 
+    });
