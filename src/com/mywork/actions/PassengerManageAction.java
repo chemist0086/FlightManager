@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -237,7 +236,6 @@ public class PassengerManageAction {
 		passengerDao.openDB();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String parameter = request.getParameter("data");
-		System.out.println(parameter);
 		String[] data = parameter.split(",");
 		for (int i=0;i<data.length;i++) {
 			int isDeletedSuccess=0;
@@ -245,7 +243,6 @@ public class PassengerManageAction {
 			isDeletedSuccess = passengerDao.executeUpdate(sql);
 			map.put(data[i], isDeletedSuccess);
 		}
-		System.out.println(map);
 		passengerDao.closeDB();
 		ServletActionContext.getResponse().setHeader("Access-Control-Allow-Origin", "*");
 		return "success";
@@ -254,12 +251,19 @@ public class PassengerManageAction {
 	public String AddPassenger() throws IOException{
 		SubDao passengerdao = new SubDao();
 		passengerdao.openDB();
-		pass_sex = pass_sex.equals("男")?"1":"0";
+		String strAge;
+		if(pass_age==0){
+			strAge="";
+		}else{
+			strAge=Integer.toString(pass_age);
+		}
 		pass_idcard = pass_idcard==null?"":pass_idcard;
 		pass_passport = pass_passport==null?"":pass_passport;
+		pass_phone = pass_phone==null?"":pass_phone;
+		pass_email = pass_email==null?"":pass_email;
+		pass_sex = pass_sex.equals("男")?"1":"0";
 		String sql="insert into t_passenger values('"+pass_id+"','"+pass_name+"','"+
-		pass_age+"','"+pass_sex+"','"+pass_idcard+"','"+pass_passport+"','"+pass_phone+"','"+pass_email+"')";
-		System.out.println(sql);
+		strAge+"','"+pass_sex+"','"+pass_idcard+"','"+pass_passport+"','"+pass_phone+"','"+pass_email+"')";
 		int count = passengerdao.executeUpdate(sql);
 		passengerdao.closeDB();
 		map.put("status", count);
@@ -274,6 +278,7 @@ public class PassengerManageAction {
 		}else{
 			strAge=Integer.toString(pass_age);
 		}
+		pass_idcard = pass_idcard==null?"":pass_idcard;
 		pass_passport = pass_passport==null?"":pass_passport;
 		pass_phone = pass_phone==null?"":pass_phone;
 		pass_email = pass_email==null?"":pass_email;
