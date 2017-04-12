@@ -1,9 +1,7 @@
-<%@ page language="java" import="java.util.*,com.mytest.beans.Order,com.mywork.dao.OrderDao,
-java.sql.ResultSet,java.sql.ResultSetMetaData,java.sql.SQLException" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,com.mytest.beans.Deliverer,com.mywork.dao.DelivererDao,com.mytest.beans.User" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -11,143 +9,132 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'MyJsp.jsp' starting page</title>
-    <script type="text/javascript">
-      function check(){//通过检查content值的状态来控制flag_find的值，从而决定是否显示所有内容
-      	var content=document.getElementById("content").value;
-      	var flag_find;
-      	if(content != ""){
-      	  flag_find="true";
-      	  var modify = document.getElementById("modify").value;
-      	  window.location.href="toOrderManagePage.action?flag_find="+flag_find+"&modify="+modify+"&content="+content;
-      	}else{
-      	  flag_find="false";
-      	  window.location.href="toOrderManagePage.action?flag_find="+flag_find;
-      	}
-	  }
-      function deleteConfirm(order_id,showPage){//删除前进行确认
-        var r = window.confirm("确定删除吗？");
-        if(r==true){
-          window.location.href="deleteOrder.action?order_id="+order_id+"&showPage="+showPage;
-        }
-      }
-      function alterConfirm(i){
-	  	var r = window.confirm("确定更改吗？");
-        if(r==true){
-          var oi = document.getElementById(i+"_oi").innerHTML;
-          var fi = document.getElementById(i+"_fi").innerHTML;
-          var pi = document.getElementById(i+"_pi").innerHTML;
-          var di = document.getElementById(i+"_di").innerHTML;
-          var po = document.getElementById(i+"_po").innerHTML;
-          var pp = document.getElementById(i+"_pp").innerHTML;
-          
-          window.location.href="alterOrder.action?order_id="+oi+"&flight_id="+fi+"&pass_id="+pi+"&deli_id="+di+"&price_orig="+po+"&price_purc="+pp;
-        }
-	  }
-    </script>
+    <title>订单管理</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+  	<link rel="stylesheet" type="text/css" href="css/index.css">
+  	<link rel="stylesheet" type="text/css" href="./css/GridManager.css">
+  	<link rel="stylesheet" type="text/css" href="./css/tableArea.css">
+  	<link rel="stylesheet" type="text/css" href="./css/editPopUp.css">
+  	<link rel="stylesheet" type="text/css" href="./css/jquery-ui.css">
+  	<script src="js/jquery-3.2.0.js"></script>
+  	<script src="js/settingButton.js"></script>
+  	<script src="js/navSideBar.js"></script>
+  	<script type="text/javascript" src="./js/GridManager.js"></script>
+  	<script type="text/javascript" src="./js/jquery-ui.js"></script>
   </head>
   
   <body>
-  	<%!int showPage;int pageCount;%>
-  	
-  	<a href="toWelcomePage.action">返回</a>
-  	<a href="exportExcelForOrder.action" style="float:right">导出</a><br>
-    <h1 style="text-align: center">订单管理</h1>
-    <div align="center">
-      <form action="" method="post">
-		<select name="modify" id="modify">
-		  <option value="order_id" selected>订单ID</option>
-		  <option value="flight_id">航班编号</option>
-		  <option value="pass_id">乘机人编号</option>
-		  <option value="deli_id">送票员编号</option>
-		  <option value="price_orig">机票原价</option>
-		  <option value="price_purc">结算金额</option>
-		</select>
-		<input type="text" name="content" id="content" value="" />
-		<input type="button" id="submit" value="查找" onclick="check()"/>
-		<input type=button value="添加" onclick="window.location.href='toAddOrderPage.action'" />
-		<input type="hidden" id="flag_find" name="flag_find"/> 
-	  </form>
+   <div class="main_body">  
+  <div class="myTableArea" style="display: inline-block; left:200px; position: absolute;">
+    <div class="search-area">
+      <div class="sa-ele">
+        <label class="se-title">订单编号:</label>
+        <input class="se-con" name="order_id"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">航班编号:</label>
+        <input class="se-con" name="flight_id"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">乘客编号:</label>
+        <input class="se-con" name="pass_id"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">送票员编号:</label>
+        <input class="se-con" name="deli_id"/>
+      </div>
+      <div class="sa-ele">
+        <button class="search-action">搜索</button>
+        <button class="reset-action">重置</button>
+        <span style="display: inline-block; font-size: 20px; color: grey; user-select: none; margin-right: 15px">||</span>
+        <button class="delete-action">删除</button>
+      </div>
     </div>
-    <table border="1" width="45%" align="center">
-      
-      <tr><th>编号</th><th>订单ID</th><th>航班编号</th><th>乘机人编号</th><th>送票员编号</th><th>机票原价</th><th>结算金额</th><th>管理</th></tr>
-      <%
-       	OrderDao orderdao = new OrderDao();
-      	orderdao.openDB();
-      	int count = orderdao.getCount();//得到数据库中记录的总数
-      	if(count%Order.PAGE_SIZE == 0){
-      		pageCount = count/Order.PAGE_SIZE;
-      	}else {pageCount = count/Order.PAGE_SIZE+1;}
-      	//通过showPage参数来确定要显示的页码数
-      	String strShowPage = request.getParameter("showPage");
-      	if(strShowPage == null){
-      		strShowPage = "1";
-      	}
-      	 try{
-      	 	showPage=Integer.parseInt(strShowPage);
-	  	}catch(NumberFormatException e){
-	   		showPage=1;
-	  	}
-	  	if(showPage<=1){
-	   		showPage=1;
-	  	}
-	  	if(showPage>=pageCount){
-	   		showPage=pageCount;
-	  	}
-	  	/* 得到flag_find的值，若为false，则正常输出表单，若为false则输出特定查找对象 */
-	  	String flag_find = request.getParameter("flag_find");
-	  	ArrayList<Order> arraylist;
-        if(flag_find==null||flag_find.equals("false")){
-	      	arraylist = orderdao.find(showPage);//进行分页查询，得到第showPage页的记录
-	    }else{
-	    
-	    	String modify = request.getParameter("modify");
-        	String content = request.getParameter("content");
-	      	String sql = "select * from t_order where "+modify+"='"+content+"'";
-	      	ResultSet rs = orderdao.executeQuery(sql);
-	      	arraylist = new ArrayList<Order>();
-      		while(rs.next()){
-	      		Order p = new Order();
-				p.setOrder_id(rs.getInt(1));
-                p.setFlight_id(rs.getInt(2));
-                p.setPass_id(rs.getInt(3));
-                p.setDeli_id(rs.getInt(4));
-                p.setPrice_orig(rs.getDouble(5));
-                p.setPrice_purc(rs.getDouble(6));
-      			arraylist.add(p);
-			}
-			
-	    }
-      	session.setAttribute("orderList", arraylist);
-      	for(int i=1;i<=arraylist.size();i++){
-      		Order order = arraylist.get(i-1);
-      		out.print("<tr><td>"+(i+(showPage-1)*Order.PAGE_SIZE)+"</td>");
-      		out.print("<td id='"+i+"_oi"+"'>"+order.getOrder_id()+"</td>");
-      		out.print("<td id='"+i+"_fi"+"'>"+order.getFlight_id()+"</td>");
-      		out.print("<td id='"+i+"_pi"+"'>"+order.getPass_id()+"</td>");
-      		out.print("<td id='"+i+"_di"+"'>"+order.getDeli_id()+"</td>");
-      		out.print("<td  contentEditable='true'  id='"+i+"_po"+"'>"+order.getPrice_orig()+"</td>");
-      		out.print("<td  contentEditable='true'  id='"+i+"_pp"+"'>"+order.getPrice_purc()+"</td>");
-      		out.print("<td style='text-align:center'>"+
-      		"<a href='javascript:void(0)' onclick='deleteConfirm("+order.getOrder_id()+","+showPage+")'>删除</a>&nbsp&nbsp&nbsp"+
-      		"<a href='javascript:void(0)' onclick='alterConfirm("+i+")'>修改</a>"+
-      		"</td></tr>");
-       }
-       orderdao.closeDB();
-       %>
-    </table>
-    <div align="center">
-      <a href="toOrderManagePage.action?showPage=1">首页</a>
- 	  <a href="toOrderManagePage.action?showPage=<%=showPage-1%>">上一页</a>
- 	  <a href="toOrderManagePage.action?showPage=<%=showPage+1%>">下一页</a>
-      <a href="toOrderManagePage.action?showPage=<%=pageCount%>">末页</a>
- 	  <!-- 通过表单提交用户想要显示的页数 -->
- 	   <form action="" method="get">
-  		第<input type="text" name="showPage" size="2" value=<%= showPage %>>页
-  	    <input type="submit" name="submit" value="转到">
-  	    （共<%=pageCount %>页）
- 	  </form> 
+    <br/>
+    <table style="overflow: scroll"></table>
+  </div>
+  <script src="js/OrderTable.js"></script>
+  
+  <!-- 编辑功能弹窗   -->
+  <div class="pop-edit">
+  	<div id="dialogBgEdit"></div>
+    <div id="dialogEdit" class="animated">
+      <div class="dialogTop">
+        <a href="javascript:;" class="claseDialogBtn" onclick="refreshWarning()">关闭</a>
+      </div>
+      <form action="" method="post" id="editForm">
+        <ul class="editInfos">
+          <li class="text"><label><span>订单编号:</span><input type="text" name="pass_id" readonly="value" value="" class="ipt ipt-id" /></label></li>
+          <li class="text"><label><span>航班编号:</span><input type="text" name="pass_name" value=""  class="ipt ipt-flight" /></label></li>
+          <li class="text"><label><span>乘客编号:</span><input type="text" name="pass_age" value=""  class="ipt ipt-pass" /></label></li>
+          <li class="text"><label><span>送票员编号:</span><input type="text" name="pass_sex" value=""  class="ipt ipt-deli" /></label></li>
+          <li class="text"><label><span>原价:</span><input type="text" name="pass_idcard" value=""  class="ipt ipt-orig" /></label></li>
+          <li class="text"><label><span>实付款:</span><input type="text" name="pass_passport" value=""  class="ipt ipt-purc" /></label></li>
+          <li class="btn"><input type="button" value="确认提交" class="submitBtn" onclick="submitEdit()"/></li>
+        </ul>
+      </form>
     </div>
-  </body>
+  </div>
+
+  <!-- 密码修改弹窗 -->
+  <div id="dialogBgPasswd"></div>
+  <div id="dialogPasswd" class="animated">
+    <img class="dialogIco" width="50" height="50" src="images/ico.png" alt="" />
+    <div class="dialogTop">
+      <a href="javascript:;" class="claseDialogBtn">关闭</a>      
+    </div>
+    <form action="" method="post" id="editForm">
+      <ul class="editInfos">
+        <li class="text"><label><font color="#ff0000">* </font><span>新密码:</span><input type="password" name="" required value="" class="ipt" /></label></li>
+        <li class="text"><label><font color="#ff0000">* </font><span>确认密码:</span><input type="password" name="" required value="" class="ipt" /></label></li>
+        <li class="btn"><input type="submit" value="确认提交" class="submitBtn" /></li>
+      </ul>
+    </form>
+  </div>
+  <!-- General Page -->
+
+  <div class="nav-main">
+    <div class="nav-box">
+      <div class="nav">
+        <ul class="nav-ul">
+          <li><a href="toWelcomePage.action" class="home"><span>首页</span></a></li>
+          <li><a href="toPassengerManagePage.action" class="passenger"><span>乘机人管理</span></a></li>
+          <li><a href="toOrderManagePage.action" class="ticket"><span>机票管理</span></a></li>
+          <li><a href="toDelivererManagePage.action" class="deli"><span>业务员管理</span></a></li>
+          <li><a href="toFlightManagePage.action" class="flight"><span>航班管理</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="setting_button_warpper">
+    <section class="cd-section">
+      <a class="cd-bouncy-nav-trigger" >显示菜单</a>
+    </section> 
+  </div>
+  <div class="cd-bouncy-nav-modal">
+    <nav>
+      <ul class="cd-bouncy-nav">
+        <li><a href="javascript:;" class="bounceInDownPasswd">修改密码</a></li>       
+        <%
+    		User user =(User)session.getAttribute("LoginSuccess");
+    		if(user.getAuthority()==1){
+    			out.print("<li class='accountMgr'><a href='toUserManagePage.action'>账户管理</a><li>");
+    		}
+     	%>
+     	<li class="logOut"><a href="Logout.action">退出登录</a></li>
+      </ul>
+    </nav>
+    <a class="cd-close">Close modal</a>
+  </div>
+</div>
+</body>
+<script src="js/popUp.js"></script>
+<script src="js/formWarning.js"></script>
+</body>
 </html>
