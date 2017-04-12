@@ -15,7 +15,7 @@ var table = document.querySelector('table');
       ,ajax_type: 'POST'
       ,ajax_headers: {"Content-Type":"application/x-www-form-urlencoded" }
       ,query: {pluginId: 1}
-      ,pageSize:5
+      ,pageSize: 20
       ,sizeData: [5, 10, 15, 20]
       ,columnData: [{
           key: 'pass_id',
@@ -164,69 +164,11 @@ var table = document.querySelector('table');
       document.querySelector('[name="pass_phone"]').value = '';
       document.querySelector('[name="pass_email"]').value = '';
     });
-    
+            
+    //删除/添加/编辑乘机人
     $(function() {
-        $("table").delegate('.editTable', 'click', function(){
-        	//预填充表格
-        	var selectCount = 0;
-    		var inputCount = ":eq("+selectCount+")";
-    		var valueCount = ":eq("+(selectCount + 2)+")";
-        	while (selectCount < 10){
-        		inputCount = ":eq("+selectCount+")";
-        		valueCount = ":eq("+(selectCount + 2)+")";
-        		$(".editInfos").children(inputCount).find("input").val($(this).parents("tr").children(valueCount).text());
-        		selectCount++;
-        	}
-        	var sex = $(this).parents("tr").children(":eq(5)").text();
-        	if (sex == "男" || sex == "女") {
-        		$(".editInfos").children(":eq(3)").find("select").val(sex);
-        	} else {
-        		$(".editInfos").children(":eq(3)").find("select").val("/");
-        	}       		        	
-        });
-    });
-    
-    function submitEdit() {
-    	var pass_sex = $(".editInfos").children(":eq(3)").find("select").val();
-    	if (pass_sex == "/"){
-    		pass_sex = "";
-    	}
-    	   	
-    	if ($("span.editWarning").length != 0){
-    		alert("请填写必须要填写的选项！");
-    	} else {
-            $.ajax({
-                url: 'editPassenger.action',
-                type: 'post',
-                async: false,
-                dataType: 'json',
-                data: {
-                  pass_id: $(".editInfos").children(":eq(0)").find("input").val(),
-                  pass_name: $(".editInfos").children(":eq(1)").find("input").val(),
-                  pass_age: $(".editInfos").children(":eq(2)").find("input").val(),
-                  pass_sex: pass_sex,
-                  pass_idcard: $(".editInfos").children(":eq(4)").find("input").val(),
-                  pass_passport: $(".editInfos").children(":eq(5)").find("input").val(),
-                  pass_phone: $(".editInfos").children(":eq(6)").find("input").val(),
-                  pass_email: $(".editInfos").children(":eq(7)").find("input").val()         
-                },
-                success: function(data, status) {
-                  if(data.status=="1"){
-                    alert("修改成功！");
-                    window.location.reload();
-                  }
-                  if(data.status=="0")
-                  alert("修改失败！");
-                },
-                error: function(){
-                  alert("网络故障");
-                }
-              });
-    	}   	
-    } 
-    
-    $(function() {
-        $(".delete-action").click(function() {
+    	//删除
+        $(".search-area .sa-ele .delete-action").click(function() {
         	var checkedData = $("tr[checked=true]");
         	var count = 0;
         	var dataArray = new Array();
@@ -256,5 +198,114 @@ var table = document.querySelector('table');
                   alert("网络故障");
                 }
               });    
-        }) 
+        }) ;
+        
+        //添加
+        //清空表格
+        $(".search-area .sa-ele .add-action").click(function() {        	
+        	var selectCount = 0;
+    		var inputCount = ":eq("+selectCount+")";
+        	while (selectCount < 10){
+        		inputCount = ":eq("+selectCount+")";
+        		$("#dialogAdd .editInfos").children(inputCount).find("input").val();
+        		selectCount++;
+        	}       	       	
+        });
+      //提交修改
+        $("#dialogAdd .editInfos .btn .submitBtn").click(function(){
+        	var pass_sex = $("#dialogAdd .editInfos").children(":eq(3)").find("select").val();
+        	if (pass_sex == "/"){
+        		pass_sex = "";
+        	}       	   	
+        	if ($("span.editWarning").length != 0){
+        		alert("请填写必须要填写的选项！");
+        	} else {
+                $.ajax({
+                    url: 'editPassenger.action',
+                    type: 'post',
+                    async: false,
+                    dataType: 'json',
+                    data: {
+                      pass_id: $("#dialogAdd .editInfos").children(":eq(0)").find("input").val(),
+                      pass_name: $("#dialogAdd .editInfos").children(":eq(1)").find("input").val(),
+                      pass_age: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),
+                      pass_sex: pass_sex,
+                      pass_idcard: $("#dialogAdd .editInfos").children(":eq(4)").find("input").val(),
+                      pass_passport: $("#dialogAdd .editInfos").children(":eq(5)").find("input").val(),
+                      pass_phone: $("#dialogAdd .editInfos ").children(":eq(6)").find("input").val(),
+                      pass_email: $("#dialogAdd .editInfos").children(":eq(7)").find("input").val()         
+                    },
+                    success: function(data, status) {
+                      if(data.status=="1"){
+                        alert("添加成功！");
+                        window.location.reload();
+                      }
+                      if(data.status=="0")
+                      alert("添加失败！");
+                    },
+                    error: function(){
+                      alert("网络故障");
+                    }
+                  });
+        	}   	
+        });
+        
+        //编辑
+        //预填充表格
+        $("table").delegate('.editTable', 'click', function(){        	
+        	var selectCount = 0;
+    		var inputCount = ":eq("+selectCount+")";
+    		var valueCount = ":eq("+(selectCount + 2)+")";
+        	while (selectCount < 10){
+        		inputCount = ":eq("+selectCount+")";
+        		valueCount = ":eq("+(selectCount + 2)+")";
+        		$("#dialogEdit .editInfos").children(inputCount).find("input").val($(this).parents("tr").children(valueCount).text());
+        		selectCount++;
+        	}
+        	var sex = $(this).parents("tr").children(":eq(5)").text();
+        	if (sex == "男" || sex == "女") {
+        		$("#dialogEdit .editInfos").children(":eq(3)").find("select").val(sex);
+        	} else {
+        		$("#dialogEdit .editInfos").children(":eq(3)").find("select").val("/");
+        	}       		        	
+        }); 
+        
+        //提交修改
+        $("#dialogEdit .editInfos .btn .submitBtn").click(function(){
+        	var pass_sex = $("#dialogEdit .editInfos").children(":eq(3)").find("select").val();
+        	if (pass_sex == "/"){
+        		pass_sex = "";
+        	}       	   	
+        	if ($("span.editWarning").length != 0){
+        		alert("请填写必须要填写的选项！");
+        	} else {
+                $.ajax({
+                    url: 'editPassenger.action',
+                    type: 'post',
+                    async: false,
+                    dataType: 'json',
+                    data: {
+                      pass_id: $("#dialogEdit .editInfos").children(":eq(0)").find("input").val(),
+                      pass_name: $("#dialogEdit .editInfos").children(":eq(1)").find("input").val(),
+                      pass_age: $("#dialogEdit .editInfos").children(":eq(2)").find("input").val(),
+                      pass_sex: pass_sex,
+                      pass_idcard: $("#dialogEdit .editInfos").children(":eq(4)").find("input").val(),
+                      pass_passport: $("#dialogEdit .editInfos").children(":eq(5)").find("input").val(),
+                      pass_phone: $("#dialogEdit .editInfos ").children(":eq(6)").find("input").val(),
+                      pass_email: $("#dialogEdit .editInfos").children(":eq(7)").find("input").val()         
+                    },
+                    success: function(data, status) {
+                      if(data.status=="1"){
+                        alert("修改成功！");
+                        window.location.reload();
+                      }
+                      if(data.status=="0")
+                      alert("修改失败！");
+                    },
+                    error: function(){
+                      alert("网络故障");
+                    }
+                  });
+        	}   	
+        });
     });

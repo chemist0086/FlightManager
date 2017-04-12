@@ -39,7 +39,8 @@
       padding: 0px 4px;
       line-height: 24px;
     }
-    .search-area .sa-ele .search-action, .search-area .sa-ele .reset-action, .delete-action {
+    .search-area .sa-ele .search-action, .search-area .sa-ele .reset-action,
+     .search-area .sa-ele .delete-action, .search-area .sa-ele .add-action {
       display: inline-block;
       width:80px;
       height: 26px;
@@ -51,7 +52,8 @@
       cursor: pointer;
       margin-right: 10px;
     }
-    .search-area .sa-ele .search-action:hover, .search-area .sa-ele .reset-action:hover{
+    .search-area .sa-ele .search-action:hover, .search-area .sa-ele .reset-action:hover, 
+    .search-area .sa-ele .add-action:hover, .search-area .sa-ele .delete-action:hover{
       opacity: 0.7;
     }
     .main_body:before {
