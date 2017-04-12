@@ -8,7 +8,7 @@ $("input.ipt-id").blur(function() {
     			$(this).after('<span class="editWarning editWarningId" >请输入编号</span>');
     		}   		
     	} else {
-    		$("span.editWarningName").remove();
+    		$("span.editWarningId").remove();
     		if ($("span.editWarning").length == 0){
     			$("#dialogEdit, #dialogAdd").css("width", "35em");
     		}    		
