@@ -37,12 +37,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <input class="se-con" name="order_id"/>
       </div>
       <div class="sa-ele">
-        <label class="se-title">航班编号:</label>
-        <input class="se-con" name="flight_id"/>
-      </div>
-      <div class="sa-ele">
         <label class="se-title">乘客编号:</label>
         <input class="se-con" name="pass_id"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">乘客姓名:</label>
+        <input class="se-con" name="pass_name"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">乘客身份证:</label>
+        <input class="se-con" name="pass_idcard"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">乘客护照:</label>
+        <input class="se-con" name="pass_passport"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">航班编号:</label>
+        <input class="se-con" name="flight_id"/>
+      </div>      
+      <div class="sa-ele">
+        <label class="se-title">出发城市:</label>
+        <input class="se-con" name="dep"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">到达城市:</label>
+        <input class="se-con" name="pass_id"/>
+      </div>
+            <div class="sa-ele">
+        <label class="se-title">乘客编号:</label>
+        <input class="se-con" name="pass_id"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">航班编号:</label>
+        <input class="se-con" name="flight_id"/>
       </div>
       <div class="sa-ele">
         <label class="se-title">送票员编号:</label>

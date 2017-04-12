@@ -173,5 +173,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 </body>
 <script src="js/popUp.js"></script>
-<script src="js/formWarning.js"></script>
+<script src="js/passengerFormWarning.js"></script>
 </html>
