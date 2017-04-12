@@ -103,7 +103,7 @@ html, body {
 	display: block;
 }
 
-/*一级导航*/
+/*===========================一级导航==============================================*/
 .nav-main{
 	position: fixed;
 	top: 0;
@@ -219,7 +219,7 @@ html, body {
 }
 
 
-/*setting icon*/
+/*=============================================setting icon=================================*/
 #settingIcon {
 	width: 40px;
 	height: 40px;
@@ -411,8 +411,11 @@ html, body {
   background-position: -320px 0;
 }
 
-.cd-bouncy-nav li:nth-of-type(2) a::before {
+.cd-bouncy-nav li.logOut a::before {
   background-position: -400px 0;
+}
+.cd-bouncy-nav li.accountMgr a::before {
+  background-position: -240px 0;
 }
 
 @media only screen and (min-width: 768px) {
