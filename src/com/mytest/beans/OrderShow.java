@@ -4,6 +4,7 @@ public class OrderShow {
 	public static int PAGE_SIZE = 10;
 	private int order_id;
 	private int pass_id;
+	private String pass_idcard;
 	private String pass_passport;
 	private String pass_name;
 	private int flight_id;
@@ -27,6 +28,13 @@ public class OrderShow {
 	}
 	public void setPass_id(int pass_id) {
 		this.pass_id = pass_id;
+	}
+	
+	public String getPass_idcard() {
+		return pass_idcard;
+	}
+	public void setPass_idcard(String pass_idcard) {
+		this.pass_idcard = pass_idcard;
 	}
 	public int getFlight_id() {
 		return flight_id;
