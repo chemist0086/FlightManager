@@ -63,6 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <button class="reset-action">重置</button>
         <span style="display: inline-block; font-size: 20px; color: grey; user-select: none; margin-right: 15px">||</span>
         <button class="delete-action">删除</button>
+        <button class="add-action bounceInDownAdd">添加乘机人</button>
       </div>
     </div>
     <br/>
@@ -75,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<div id="dialogBgEdit"></div>
     <div id="dialogEdit" class="animated">
       <div class="dialogTop">
-        <a href="javascript:;" class="claseDialogBtn" onclick="refreshWarning()">关闭</a>
+        <a href="javascript:;" class="claseDialogBtn">关闭</a>
       </div>
       <form action="" method="post" id="editForm">
         <ul class="editInfos">
@@ -89,12 +90,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <li class="text"><label><span>E-mail:</span><input type="text" name="pass_email" value=""  class="ipt ipt-email" /></label></li>
           <li class="text"><label><span>购票数量:</span><input type="text" name="pass_count" value="" class="ipt ipt-count" readonly="value" /></label></li>
           <li class="text"><label><span>购票金额:</span><input type="text" name="pass_amount" value="" class="ipt ipt-amount" readonly="value" /></label></li>
-          <li class="btn"><input type="button" value="确认提交" class="submitBtn" onclick="submitEdit()"/></li>
+          <li class="btn"><input type="button" value="确认提交" class="submitBtn"/></li>
         </ul>
       </form>
     </div>
   </div>
-
+  <!-- 添加乘客弹窗   -->
+  <div class="pop-edit">
+  	<div id="dialogBgAdd"></div>
+    <div id="dialogAdd" class="animated">
+      <div class="dialogTop">
+        <a href="javascript:;" class="claseDialogBtn" onclick="refreshWarning()">关闭</a>
+      </div>
+      <form action="" method="post" id="editForm">
+        <ul class="editInfos">
+          <li class="text"><label><span>客户编号:</span><input type="text" name="pass_id" value="" class="ipt ipt-id" /></label></li>
+          <li class="text"><label><span>客户姓名:</span><input type="text" name="pass_name" value=""  class="ipt ipt-name" /></label></li>
+          <li class="text"><label><span>年龄:</span><input type="text" name="pass_age" value=""  class="ipt ipt-age" /></label></li>
+          <li class="text"><label><span>性别:</span><select  name="pass_sex" value=""  class="ipt ipt-sex"><option value ="男">男</option><option value ="女">女</option></select><!-- <input type="text" name="pass_sex" value=""  class="ipt ipt-sex" /> --></label></li>
+          <li class="text"><label><span>身份证号:</span><input type="text" name="pass_idcard" value=""  class="ipt ipt-idcard" /></label></li>
+          <li class="text"><label><span>护照编号:</span><input type="text" name="pass_passport" value=""  class="ipt ipt-passport" /></label></li>
+          <li class="text"><label><span>联系方式:</span><input type="text" name="pass_phone" value=""  class="ipt ipt-phone" /></label></li>
+          <li class="text"><label><span>E-mail:</span><input type="text" name="pass_email" value=""  class="ipt ipt-email" /></label></li>
+          <li class="text"><label><span>购票数量:</span><input type="text" name="pass_count" value="" class="ipt ipt-count" /></label></li>
+          <li class="text"><label><span>购票金额:</span><input type="text" name="pass_amount" value="" class="ipt ipt-amount" /></label></li>
+          <li class="btn"><input type="button" value="确认提交" class="submitBtn"/></li>
+        </ul>
+      </form>
+    </div>
+  </div>
   <!-- 密码修改弹窗 -->
   <div id="dialogBgPasswd"></div>
   <div id="dialogPasswd" class="animated">
@@ -104,8 +128,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <form action="" method="post" id="editForm">
       <ul class="editInfos">
-        <li class="text"><label><font color="#ff0000">* </font><span>新密码:</span><input type="password" name="" required value="" class="ipt" /></label></li>
-        <li class="text"><label><font color="#ff0000">* </font><span>确认密码:</span><input type="password" name="" required value="" class="ipt" /></label></li>
+        <li class="text"><label><font color="#ff0000">* </font><span>新密码:</span><input type="password" name="" required value="" class="ipt ipt-new" /></label></li>
+        <li class="text"><label><font color="#ff0000">* </font><span>确认密码:</span><input type="password" name="" required value="" class="ipt ipt-confirm" /></label></li>
         <li class="btn"><input type="submit" value="确认提交" class="submitBtn" /></li>
       </ul>
     </form>

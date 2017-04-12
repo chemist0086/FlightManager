@@ -14,34 +14,45 @@ $(window).resize();
 $(function(){
   getSrceenWH();
   
-
+  /*=============================编辑弹窗===========================================*/
+  //打开弹窗
   $('table').delegate('.bounceInDownEdit', 'click', function() {
     className = $(this).attr('class');
     $('#dialogBgEdit').fadeIn(300);
     $('#dialogEdit').removeAttr('class').addClass('animated '+className+'').fadeIn();
-  }); 
-  
+  });  
   //关闭弹窗
-
   $('.claseDialogBtn').click(function(){
     $('#dialogBgEdit').fadeOut('fast=op-',function(){
       $('#dialogEdit').addClass('bounceOutUp').fadeOut('fast');
     });
   });
-
+  
+  /*=============================密码弹窗===========================================*/
   $('a.bounceInDownPasswd').click(function(){
     className = $(this).attr('class');
     $('#dialogBgPasswd').fadeIn(300);
     $('#dialogPasswd').removeAttr('class').addClass('animated '+className+'').fadeIn();
   });
 
-    $('.claseDialogBtn').click(function(){
-      $('#dialogBgPasswd').fadeOut(300,function(){
-        $('#dialogPasswd').addClass('bounceOutUp').fadeOut();
-      });
-    });
-
-
+   $('.claseDialogBtn').click(function(){
+     $('#dialogBgPasswd').fadeOut(300,function(){
+       $('#dialogPasswd').addClass('bounceOutUp').fadeOut();
+     });
+   });
+   
+   /*=============================添加弹窗===========================================*/
+   $('button.bounceInDownAdd').click(function(){
+	    className = $(this).attr('class');
+	    $('#dialogBgAdd').fadeIn(300);
+	    $('#dialogAdd').removeAttr('class').addClass('animated '+className+'').fadeIn();
+   });   
+   //关闭弹窗
+   $('.claseDialogBtn').click(function(){
+     $('#dialogBgAdd').fadeOut('fast=op-',function(){
+       $('#dialogAdd').addClass('bounceOutUp').fadeOut('fast');
+     });
+   });
 });
   
 
@@ -51,3 +62,6 @@ $("#dialogEdit").resizable();
 
 $("#dialogPasswd").draggable();
 $("#dialogPasswd").resizable();
+
+$("#dialogAdd").draggable();
+$("#dialogAdd").resizable();
