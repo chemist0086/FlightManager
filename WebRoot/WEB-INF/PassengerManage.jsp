@@ -62,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <button class="search-action">搜索</button>
         <button class="reset-action">重置</button>
         <span style="display: inline-block; font-size: 20px; color: grey; user-select: none; margin-right: 15px">||</span>
-        <button class="delete-action" onclick="onDelete()">删除</button>
+        <button class="delete-action">删除</button>
       </div>
     </div>
     <br/>

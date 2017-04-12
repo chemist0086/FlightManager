@@ -225,7 +225,34 @@ var table = document.querySelector('table');
     	}   	
     } 
     
-    
-    function onDelete(){
-    	$("table")
-    }
+    $(function() {
+        $(".delete-action").click(function() {
+        	var checkedData = $("tr[checked=true]");
+        	var count = 0;
+        	var dataArray = new Array();
+        	while (count < checkedData.length){
+        		dataArray[count] = checkedData.eq(count).children().eq(2).text();
+        		count++;
+        	}
+            $.ajax({
+                url: 'editPassenger.action',
+                type: 'post',
+                async: false,
+                dataType: 'json',
+                data: {
+                	data: dataArray
+                },
+                success: function(data, status) {
+                  if(data.status=="1"){
+                    alert("修改成功！");
+                    window.location.reload();
+                  }
+                  if(data.status=="0")
+                  alert("修改失败！");
+                },
+                error: function(){
+                  alert("网络故障");
+                }
+              });    
+        }) 
+    });
