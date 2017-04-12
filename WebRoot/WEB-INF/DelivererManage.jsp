@@ -3,112 +3,106 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>订单管理</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-  	<link rel="stylesheet" type="text/css" href="css/index.css">
-  	<link rel="stylesheet" type="text/css" href="./css/GridManager.css">
-  	<link rel="stylesheet" type="text/css" href="./css/tableArea.css">
-  	<link rel="stylesheet" type="text/css" href="./css/editPopUp.css">
-  	<link rel="stylesheet" type="text/css" href="./css/jquery-ui.css">
-  	<script src="js/jquery-3.2.0.js"></script>
-  	<script src="js/settingButton.js"></script>
-  	<script src="js/navSideBar.js"></script>
-  	<script type="text/javascript" src="./js/GridManager.js"></script>
-  	<script type="text/javascript" src="./js/jquery-ui.js"></script>
-  </head>
-  
-  <body>
-   <div class="main_body">  
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <title>乘机人管理</title>
+  <base href="<%=basePath%>">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <link rel="stylesheet" type="text/css" href="./css/GridManager.css">
+  <link rel="stylesheet" type="text/css" href="./css/tableArea.css">
+  <link rel="stylesheet" type="text/css" href="./css/editPopUp.css">
+  <link rel="stylesheet" type="text/css" href="./css/jquery-ui.css">
+  <script src="js/jquery-3.2.0.js"></script>
+  <script src="js/settingButton.js"></script>
+  <script src="js/navSideBar.js"></script>
+  <script type="text/javascript" src="./js/GridManager.js"></script>
+  <script type="text/javascript" src="./js/jquery-ui.js"></script>
+</head>
+<body>
+<div class="main_body">  
   <div class="myTableArea" style="display: inline-block; left:200px; position: absolute;">
     <div class="search-area">
       <div class="sa-ele">
-        <label class="se-title">订单编号:</label>
-        <input class="se-con" name="order_id"/>
-      </div>
-      <div class="sa-ele">
-        <label class="se-title">乘客编号:</label>
-        <input class="se-con" name="pass_id"/>
-      </div>
-      <div class="sa-ele">
-        <label class="se-title">乘客姓名:</label>
-        <input class="se-con" name="pass_name"/>
-      </div>
-      <div class="sa-ele">
-        <label class="se-title">乘客身份证:</label>
-        <input class="se-con" name="pass_idcard"/>
-      </div>
-      <div class="sa-ele">
-        <label class="se-title">乘客护照:</label>
-        <input class="se-con" name="pass_passport"/>
-      </div>
-      <div class="sa-ele">
-        <label class="se-title">航班编号:</label>
-        <input class="se-con" name="flight_id"/>
-      </div>      
-      <div class="sa-ele">
-        <label class="se-title">出发城市:</label>
-        <input class="se-con" name="dep"/>
-      </div>
-      <div class="sa-ele">
-        <label class="se-title">到达城市:</label>
-        <input class="se-con" name="pass_id"/>
-      </div>
-            <div class="sa-ele">
-        <label class="se-title">乘客编号:</label>
-        <input class="se-con" name="pass_id"/>
-      </div>
-      <div class="sa-ele">
-        <label class="se-title">航班编号:</label>
-        <input class="se-con" name="flight_id"/>
-      </div>
-      <div class="sa-ele">
-        <label class="se-title">送票员编号:</label>
+        <label class="se-title">员工编号:</label>
         <input class="se-con" name="deli_id"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">员工姓名:</label>
+        <input class="se-con" name="deli_name"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">年龄:</label>
+        <input class="se-con" name="deli_age"/>
+      </div>
+      <div class="sa-ele">
+      <!-- TODO: 将性别输入修改了下拉菜单 -->
+        <label class="se-title">性别:</label>
+        <input class="se-con" name="deli_sex"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">联系方式:</label>
+        <input class="se-con" name="deli_phone"/>
+      </div>
+      <div class="sa-ele">
+        <label class="se-title">E-mail:</label>
+        <input class="se-con" name="deli_email"/>
       </div>
       <div class="sa-ele">
         <button class="search-action">搜索</button>
         <button class="reset-action">重置</button>
         <span style="display: inline-block; font-size: 20px; color: grey; user-select: none; margin-right: 15px">||</span>
         <button class="delete-action">删除</button>
+        <button class="add-action bounceInDownAdd">添加送票员</button>
       </div>
     </div>
     <br/>
     <table style="overflow: scroll"></table>
   </div>
-  <script src="js/OrderTable.js"></script>
+  <script src="js/DelivererTable.js"></script>
   
   <!-- 编辑功能弹窗   -->
   <div class="pop-edit">
   	<div id="dialogBgEdit"></div>
     <div id="dialogEdit" class="animated">
       <div class="dialogTop">
-        <a href="javascript:;" class="claseDialogBtn" onclick="refreshWarning()">关闭</a>
+        <a href="javascript:;" class="claseDialogBtn">关闭</a>
       </div>
       <form action="" method="post" id="editForm">
         <ul class="editInfos">
-          <li class="text"><label><span>订单编号:</span><input type="text" name="pass_id" readonly="value" value="" class="ipt ipt-id" /></label></li>
-          <li class="text"><label><span>航班编号:</span><input type="text" name="pass_name" value=""  class="ipt ipt-flight" /></label></li>
-          <li class="text"><label><span>乘客编号:</span><input type="text" name="pass_age" value=""  class="ipt ipt-pass" /></label></li>
-          <li class="text"><label><span>送票员编号:</span><input type="text" name="pass_sex" value=""  class="ipt ipt-deli" /></label></li>
-          <li class="text"><label><span>原价:</span><input type="text" name="pass_idcard" value=""  class="ipt ipt-orig" /></label></li>
-          <li class="text"><label><span>实付款:</span><input type="text" name="pass_passport" value=""  class="ipt ipt-purc" /></label></li>
-          <li class="btn"><input type="button" value="确认提交" class="submitBtn" onclick="submitEdit()"/></li>
+          <li class="text"><label><span>员工编号:</span><input type="text" name="pass_id" readonly="value" value="" class="ipt ipt-id" /></label></li>
+          <li class="text"><label><span>员工姓名:</span><input type="text" name="pass_name" value=""  class="ipt ipt-name" /></label></li>
+          <li class="text"><label><span>年龄:</span><input type="text" name="pass_age" value=""  class="ipt ipt-age" /></label></li>
+          <li class="text"><label><span>性别:</span><select  name="pass_sex" value=""  class="ipt ipt-sex"><option value ="男">男</option><option value ="女">女</option></select><!-- <input type="text" name="pass_sex" value=""  class="ipt ipt-sex" /> --></label></li>
+          <li class="text"><label><span>联系方式:</span><input type="text" name="pass_phone" value=""  class="ipt ipt-phone" /></label></li>
+          <li class="text"><label><span>E-mail:</span><input type="text" name="pass_email" value=""  class="ipt ipt-email" /></label></li>
+          <li class="btn"><input type="button" value="确认提交" class="submitBtn"/></li>
         </ul>
       </form>
     </div>
   </div>
-
+  <!-- 添加员工弹窗   -->
+  <div class="pop-edit">
+  	<div id="dialogBgAdd"></div>
+    <div id="dialogAdd" class="animated">
+      <div class="dialogTop">
+        <a href="javascript:;" class="claseDialogBtn" onclick="refreshWarning()">关闭</a>
+      </div>
+      <form action="" method="post" id="editForm">
+        <ul class="editInfos">
+          <li class="text"><label><span>员工编号:</span><input type="text" name="pass_id" readonly="value" value="" class="ipt ipt-id" /></label></li>
+          <li class="text"><label><span>员工姓名:</span><input type="text" name="pass_name" value=""  class="ipt ipt-name" /></label></li>
+          <li class="text"><label><span>年龄:</span><input type="text" name="pass_age" value=""  class="ipt ipt-age" /></label></li>
+          <li class="text"><label><span>性别:</span><select  name="pass_sex" value=""  class="ipt ipt-sex"><option value ="男">男</option><option value ="女">女</option></select><!-- <input type="text" name="pass_sex" value=""  class="ipt ipt-sex" /> --></label></li>         
+          <li class="text"><label><span>联系方式:</span><input type="text" name="pass_phone" value=""  class="ipt ipt-phone" /></label></li>
+          <li class="text"><label><span>E-mail:</span><input type="text" name="pass_email" value=""  class="ipt ipt-email" /></label></li>          
+          <li class="btn"><input type="button" value="确认提交" class="submitBtn"/></li>
+        </ul>
+      </form>
+    </div>
+  </div>
   <!-- 密码修改弹窗 -->
   <div id="dialogBgPasswd"></div>
   <div id="dialogPasswd" class="animated">
@@ -118,8 +112,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <form action="" method="post" id="editForm">
       <ul class="editInfos">
-        <li class="text"><label><font color="#ff0000">* </font><span>新密码:</span><input type="password" name="" required value="" class="ipt" /></label></li>
-        <li class="text"><label><font color="#ff0000">* </font><span>确认密码:</span><input type="password" name="" required value="" class="ipt" /></label></li>
+        <li class="text"><label><font color="#ff0000">* </font><span>新密码:</span><input type="password" name="" required value="" class="ipt ipt-new" /></label></li>
+        <li class="text"><label><font color="#ff0000">* </font><span>确认密码:</span><input type="password" name="" required value="" class="ipt ipt-confirm" /></label></li>
         <li class="btn"><input type="submit" value="确认提交" class="submitBtn" /></li>
       </ul>
     </form>
@@ -132,7 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <ul class="nav-ul">
           <li><a href="toWelcomePage.action" class="home"><span>首页</span></a></li>
           <li><a href="toPassengerManagePage.action" class="passenger"><span>乘机人管理</span></a></li>
-          <li><a href="toOrderManagePage.action" class="ticket"><span>机票管理</span></a></li>
+          <li><a href="toOrderManagePage.action" class="ticket"><span>订单管理</span></a></li>
           <li><a href="toDelivererManagePage.action" class="deli"><span>业务员管理</span></a></li>
           <li><a href="toFlightManagePage.action" class="flight"><span>航班管理</span></a></li>
         </ul>
@@ -163,6 +157,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 </body>
 <script src="js/popUp.js"></script>
-<script src="js/formWarning.js"></script>
-</body>
+<script src="js/delivererFormWarning.js"></script>
 </html>

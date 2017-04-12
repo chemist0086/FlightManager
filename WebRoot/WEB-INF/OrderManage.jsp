@@ -66,11 +66,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <div class="sa-ele">
         <label class="se-title">出发时间:</label>
-        <input class="se-con" name="dep_time"/>
+        <input class="se-con" name="dep_time" type="datetime-local"/>
       </div>
       <div class="sa-ele">
         <label class="se-title">到达时间:</label>
-        <input class="se-con" name="arr_time"/>
+        <input class="se-con" name="arr_time" type="datetime-local"/>
       </div>
       <div class="sa-ele">
         <label class="se-title">送票员编号:</label>
@@ -110,8 +110,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <li class="text"><label><span>航班编号:</span><input type="text" name="pass_age" value=""  class="ipt ipt-flightId" /></label></li>
           <li class="text"><label><span>出发城市:</span><input type="text" name="pass_age" value=""  class="ipt ipt-depCity" /></label></li>
           <li class="text"><label><span>到达城市:</span><input type="text" name="pass_age" value=""  class="ipt ipt-arrCity" /></label></li>
-          <li class="text"><label><span>出发时间:</span><input type="text" name="pass_age" value=""  class="ipt ipt-depTime" /></label></li>
-          <li class="text"><label><span>到达时间:</span><input type="text" name="pass_age" value=""  class="ipt ipt-arrTime" /></label></li>
+          <li class="text"><label><span>出发时间:</span><input type="datetime-local" name="pass_age" value=""  class="ipt ipt-depTime" /></label></li>
+          <li class="text"><label><span>到达时间:</span><input type="datetime-local" name="pass_age" value=""  class="ipt ipt-arrTime" /></label></li>
           <li class="text"><label><span>送票员姓名:</span><input type="text" name="pass_age" value=""  class="ipt ipt-deliName" /></label></li>
           <li class="text"><label><span>送票员编号:</span><input type="text" name="pass_sex" value=""  class="ipt ipt-deliId" /></label></li>
           <li class="text"><label><span>实付款:</span><input type="text" name="pass_passport" value=""  class="ipt ipt-purc" /></label></li>
@@ -153,8 +153,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <li class="text"><label><span>航班编号:</span><input type="text" name="pass_age" value=""  class="ipt ipt-flightId" /></label></li>
           <li class="text"><label><span>出发城市:</span><input type="text" name="pass_age" value=""  class="ipt ipt-depCity" /></label></li>
           <li class="text"><label><span>到达城市:</span><input type="text" name="pass_age" value=""  class="ipt ipt-arrCity" /></label></li>
-          <li class="text"><label><span>出发时间:</span><input type="text" name="pass_age" value=""  class="ipt ipt-depTime" /></label></li>
-          <li class="text"><label><span>到达时间:</span><input type="text" name="pass_age" value=""  class="ipt ipt-arrTime" /></label></li>
+          <li class="text"><label><span>出发时间:</span><input type="datetime-local" name="pass_age" value=""  class="ipt ipt-depTime" /></label></li>
+          <li class="text"><label><span>到达时间:</span><input type="datetime-local" name="pass_age" value=""  class="ipt ipt-arrTime" /></label></li>
           <li class="text"><label><span>送票员姓名:</span><input type="text" name="pass_age" value=""  class="ipt ipt-deliName" /></label></li>
           <li class="text"><label><span>送票员编号:</span><input type="text" name="pass_sex" value=""  class="ipt ipt-deliId" /></label></li>
           <li class="text"><label><span>实付款:</span><input type="text" name="pass_passport" value=""  class="ipt ipt-purc" /></label></li>
