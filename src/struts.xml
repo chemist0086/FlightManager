@@ -220,7 +220,7 @@
 	
 	<!-- 跳转到OrderManage.jsp界面  -->
   	<action name="toOrderManagePage">
-	  <result>/WEB-INF/OrderManage2.jsp</result>
+	  <result>/WEB-INF/OrderManage.jsp</result>
 	</action>
 	<!-- 处理管理员删除订单的请求,并跳转到OrderManage.jsp界面  -->
   	<action name="deleteOrder2" class="com.mywork.actions.DeleteOrderAction">
