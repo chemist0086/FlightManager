@@ -153,7 +153,6 @@ public class UserManageAction {
 			String sql = "delete from t_user where username='"+data[i]+"'";
 			isDeletedSuccess = userdao.executeUpdate(sql);
 			map.put(data[i], isDeletedSuccess);
-			System.out.println(data[i]+isDeletedSuccess);
 		}
 		userdao.closeDB();
 		ServletActionContext.getResponse().setHeader("Access-Control-Allow-Origin", "*");
@@ -164,7 +163,6 @@ public class UserManageAction {
 		SubDao userdao = new SubDao();
 		userdao.openDB();
 		String sql="insert into t_user values('"+username+"','"+password+"','"+authority+"')";
-		System.out.println(sql);
 		int count = userdao.executeUpdate(sql);
 		userdao.closeDB();
 		map.put("status", count);
@@ -174,7 +172,6 @@ public class UserManageAction {
 		SubDao userdao = new SubDao();
 		userdao.openDB();
 		String sql="update t_user set password='"+password+"',authority="+authority+" where username='"+username+"'";
-		System.out.println(sql);
 		int count = userdao.executeUpdate(sql);
 		userdao.closeDB();
 		map.put("status", count);

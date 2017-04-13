@@ -83,7 +83,6 @@ public class FlightManageAction {
 
 
 	public void setArr_time(String arr_time) {
-		System.out.println("arr_time:"+arr_time);
 		String[] split = arr_time.split("T");
 		this.arr_time = split[0]+" "+split[1];
 	}
@@ -226,7 +225,6 @@ public class FlightManageAction {
 		flightdao.openDB();
 		String sql="insert into t_flight values('"+flight_id+"','"+dep_city+"','"+
 				arr_city+"','"+flight_date+"','"+dep_time+"','"+arr_time+"')";
-		System.out.println(sql);
 		int count = flightdao.executeUpdate(sql);
 		flightdao.closeDB();
 		map.put("status", count);

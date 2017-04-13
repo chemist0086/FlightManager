@@ -301,26 +301,27 @@ public class OrderManageAction {
 	public String AddOrder() throws IOException{
 		SubDao ordershowdao = new SubDao();
 		ordershowdao.openDB();
-		String limitForPassenger = "where pass_id="+pass_id;
+		String limitForPassenger = " where pass_id="+pass_id;
 		int countForPassenger = ordershowdao.getCount("t_passenger", "pass_id", limitForPassenger);
+
 		if(countForPassenger==0){//原表中没有该乘客信息说明需要新建乘客
 			String sqlForPassenger="insert into t_passenger values('"+pass_id+"','"+pass_name+"','"+
 					""+"','"+""+"','"+pass_idcard+"','"+pass_passport+"','"+""+"','"+""+"')";
 			ordershowdao.executeUpdate(sqlForPassenger );
 		}
-		String limitForFlight = "where flight_id="+flight_id;
+		String limitForFlight = " where flight_id="+flight_id;
 		int countForFlight = ordershowdao.getCount("t_flight", "flight_id", limitForFlight);
 		if(countForFlight==0){//原表中没有该航班信息说明需要新建行航班
 			String sqlForFlight = "insert into t_flight values('"+flight_id+"','"+dep_city+"','"+
 					arr_city+"','"+""+"','"+dep_time+"','"+arr_time+"')";
 			ordershowdao.executeUpdate(sqlForFlight);
 		}
-		String limitForDeliverer = "where deli_id="+deli_id;
+		String limitForDeliverer = " where deli_id="+deli_id;
 		int countForDeliverer = ordershowdao.getCount("t_deliverer", "deli_id", limitForDeliverer);
 		if(countForDeliverer==0){//原表中没有该航班信息说明需要新建行航班
-			String sqlForFlight = "insert into t_deliverer values('"+deli_id+"','"+deli_name+"','"+
+			String sqlForDeliverer = "insert into t_deliverer values('"+deli_id+"','"+deli_name+"','"+
 					""+"','"+""+"','"+""+"','"+""+"')";
-			ordershowdao.executeUpdate(sqlForFlight);
+			ordershowdao.executeUpdate(sqlForDeliverer);
 		}
 		String strprice_purc;
 		if(price_purc==-1){
