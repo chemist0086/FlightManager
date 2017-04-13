@@ -18,43 +18,19 @@ var table = document.querySelector('table');
       ,pageSize: 20
       ,sizeData: [5, 10, 15, 20]
       ,columnData: [{
-          key: 'pass_id',
+          key: 'username',
           width: '80px',
-          text: '客户编号',
+          text: '用户名',
           sorting: ''
         },{
-          key: 'pass_name',
+          key: 'password',
           width: '80px',
-          text: '客户姓名'
+          text: '密码'
         },{
-          key: 'pass_age',
+          key: 'authority',
           width: "60px",
-          text: '年龄'
+          text: '权限'
         },{
-          key: 'pass_sex',
-          width: "60px",
-          text: '性别',
-        },{
-          key: 'pass_idcard',
-          text: '身份证号',
-        },{
-          key: 'pass_passport',
-          text: '护照编号',
-        }, {
-          key: 'pass_phone',
-          text: '联系方式',
-        }, {
-          key: 'pass_email',
-          text: 'E-mail'
-        }, {
-          key: 'pass_count',
-          width: "60px",
-          text: '购票数量'
-        }, {
-          key: 'pass_amount',
-          width: "80px",
-          text: '购票金额'
-        }, {
           key: 'action',
           width: "80px",
           text: '操作',
@@ -137,36 +113,32 @@ var table = document.querySelector('table');
 
     // 绑定搜索事件
     document.querySelector('.search-action').addEventListener('click', function () {
-    	if ($("table tbody tr td div").text() == "数据为空"){
-    		window.location.reload();
-    	} else {    	
-    	    var _query = {
-    	    		pass_id: document.querySelector('[name="pass_id"]').value,
-    	    	    pass_name: document.querySelector('[name="pass_name"]').value,
-    	    	    pass_age: document.querySelector('[name="pass_age"]').value,
-    	    	    pass_sex: document.querySelector('[name="pass_sex"]').value,
-    	    	    pass_idcard: document.querySelector('[name="pass_idcard"]').value,
-    	    	    pass_passport: document.querySelector('[name="pass_passport"]').value,
-    	    	    pass_phone: document.querySelector('[name="pass_phone"]').value,
-    	    	    pass_email: document.querySelector('[name="pass_email"]').value,
-    	    	    cPageEmpty: 1
-    	    };
-	      table.GM('setQuery', _query).GM('refreshGrid', function () {
-	    	  console.log('搜索成功...');
-	      });
-    	}
+      var _query = {
+        pass_id: document.querySelector('[name="pass_id"]').value,
+        pass_name: document.querySelector('[name="pass_name"]').value,
+        pass_age: document.querySelector('[name="pass_age"]').value,
+        pass_sex: document.querySelector('[name="pass_sex"]').value,
+        pass_idcard: document.querySelector('[name="pass_idcard"]').value,
+        pass_passport: document.querySelector('[name="pass_passport"]').value,
+        pass_phone: document.querySelector('[name="pass_phone"]').value,
+        pass_email: document.querySelector('[name="pass_email"]').value,
+        cPageEmpty: 1
+      };
+      table.GM('setQuery', _query).GM('refreshGrid', function () {
+        console.log('搜索成功...');
+      });
     });
 
     // 绑定重置
     document.querySelector('.reset-action').addEventListener('click', function () {
-    	document.querySelector('[name="pass_id"]').value = '';
-    	document.querySelector('[name="pass_name"]').value = '';
-    	document.querySelector('[name="pass_age"]').value = '';
-    	document.querySelector('[name="pass_sex"]').value = '';
-    	document.querySelector('[name="pass_idcard"]').value = '';
-    	document.querySelector('[name="pass_passport"]').value = '';
-    	document.querySelector('[name="pass_phone"]').value = '';
-    	document.querySelector('[name="pass_email"]').value = '';
+      document.querySelector('[name="pass_id"]').value = '';
+      document.querySelector('[name="pass_name"]').value = '';
+      document.querySelector('[name="pass_age"]').value = '';
+      document.querySelector('[name="pass_sex"]').value = '';
+      document.querySelector('[name="pass_idcard"]').value = '';
+      document.querySelector('[name="pass_passport"]').value = '';
+      document.querySelector('[name="pass_phone"]').value = '';
+      document.querySelector('[name="pass_email"]').value = '';
     });
             
     //删除/添加/编辑乘机人
@@ -190,17 +162,12 @@ var table = document.querySelector('table');
                 	data: params
                 },
                 success: function(data, status) {
-                    var res = new Array();
-                	if(data.status=="0"){
-                        alert("删除失败！");
-                    } else {
-                    for (var i = 0; i < count; i++){
-                    	res[i] = "乘客编号：" + dataArray[i] + (data[dataArray[i]] == 0 ? "存在订单，无法删除\n": "删除成功\n");
-                    }
-                    var output = res.join("");
-                    alert(output);
+                  if(data["5005"]=="0"){
+                    alert("交互成功！");
                     window.location.reload();
                   }
+                  if(data.status=="0")
+                  alert("修改失败！");
                 },
                 error: function(){
                   alert("网络故障");

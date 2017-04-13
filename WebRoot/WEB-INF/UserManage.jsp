@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>订单管理</title>
+    <title>账户管理</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -33,32 +33,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="myTableArea" style="display: inline-block; left:200px; position: absolute;">
     <div class="search-area">
       <div class="sa-ele">
-        <label class="se-title">订单编号:</label>
-        <input class="se-con" name="order_id"/>
+        <label class="se-title">用户名:</label>
+        <input class="se-con" name="username"/>
       </div>
       <div class="sa-ele">
-        <label class="se-title">航班编号:</label>
-        <input class="se-con" name="flight_id"/>
+        <label class="se-title">密码:</label>
+        <input class="se-con" name="password"/>
       </div>
       <div class="sa-ele">
-        <label class="se-title">乘客编号:</label>
-        <input class="se-con" name="pass_id"/>
-      </div>
-      <div class="sa-ele">
-        <label class="se-title">送票员编号:</label>
-        <input class="se-con" name="deli_id"/>
+        <label class="se-title">权限</label>
+        <select  name="authority" value=""  class="se-con"><option value ="0">普通用户</option><option value ="1">管理员</option></select>
       </div>
       <div class="sa-ele">
         <button class="search-action">搜索</button>
         <button class="reset-action">重置</button>
         <span style="display: inline-block; font-size: 20px; color: grey; user-select: none; margin-right: 15px">||</span>
         <button class="delete-action">删除</button>
+        <button class="add-action bounceInDownAdd">添加用户</button>
       </div>
     </div>
     <br/>
     <table style="overflow: scroll"></table>
   </div>
-  <script src="js/OrderTable.js"></script>
+  <script src="js/UserTable.js"></script>
   
   <!-- 编辑功能弹窗   -->
   <div class="pop-edit">
@@ -69,18 +66,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <form action="" method="post" id="editForm">
         <ul class="editInfos">
-          <li class="text"><label><span>订单编号:</span><input type="text" name="pass_id" readonly="value" value="" class="ipt ipt-id" /></label></li>
-          <li class="text"><label><span>航班编号:</span><input type="text" name="pass_name" value=""  class="ipt ipt-flight" /></label></li>
-          <li class="text"><label><span>乘客编号:</span><input type="text" name="pass_age" value=""  class="ipt ipt-pass" /></label></li>
-          <li class="text"><label><span>送票员编号:</span><input type="text" name="pass_sex" value=""  class="ipt ipt-deli" /></label></li>
-          <li class="text"><label><span>原价:</span><input type="text" name="pass_idcard" value=""  class="ipt ipt-orig" /></label></li>
-          <li class="text"><label><span>实付款:</span><input type="text" name="pass_passport" value=""  class="ipt ipt-purc" /></label></li>
-          <li class="btn"><input type="button" value="确认提交" class="submitBtn" onclick="submitEdit()"/></li>
+          <li class="text"><label><span>用户名:</span><input type="text" name="pass_id" readonly="value" value="" class="ipt ipt-id" /></label></li>
+          <li class="text"><label><span>密码:</span><input type="text" name="pass_name" value=""  class="ipt ipt-flight" /></label></li>
+          <li class="text"><label><span>权限:</span><select  name="authority" value=""  class="ipt ipt-authority"><option value ="0">普通用户</option><option value ="1">管理员</option></select></label></li>
+          <li class="btn"><input type="button" value="确认提交" class="submitBtn"/></li>
         </ul>
       </form>
     </div>
   </div>
-
+  <!-- 添加用户弹窗   -->
+  <div class="pop-edit">
+  	<div id="dialogBgAdd"></div>
+    <div id="dialogAdd" class="animated">
+      <div class="dialogTop">
+        <a href="javascript:;" class="claseDialogBtn" >关闭</a>
+      </div>
+      <form action="" method="post" id="editForm">
+        <ul class="editInfos">
+          <li class="text"><label><span>用户名:</span><input type="text" name="pass_id" readonly="value" value="" class="ipt ipt-id" /></label></li>
+          <li class="text"><label><span>密码:</span><input type="text" name="pass_name" value=""  class="ipt ipt-flight" /></label></li>
+          <li class="text"><label><span>权限:</span><select  name="authority" value=""  class="ipt ipt-authority"><option value ="0">普通用户</option><option value ="1">管理员</option></select></label></li>
+          <li class="btn"><input type="button" value="确认提交" class="submitBtn"/></li>
+        </ul>
+      </form>
+    </div>
+  </div>
   <!-- 密码修改弹窗 -->
   <div id="dialogBgPasswd"></div>
   <div id="dialogPasswd" class="animated">

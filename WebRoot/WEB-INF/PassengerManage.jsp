@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <div class="sa-ele">
       <!-- TODO: 将性别输入修改了下拉菜单 -->
         <label class="se-title">性别:</label>
-        <input class="se-con" name="pass_sex"/>
+        <select  name="pass_sex" value=""  class="se-con"><option value ="男">男</option><option value ="女">女</option></select>
       </div>
       <div class="sa-ele">
         <label class="se-title">身份证号:</label>
@@ -100,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<div id="dialogBgAdd"></div>
     <div id="dialogAdd" class="animated">
       <div class="dialogTop">
-        <a href="javascript:;" class="claseDialogBtn" onclick="refreshWarning()">关闭</a>
+        <a href="javascript:;" class="claseDialogBtn" >关闭</a>
       </div>
       <form action="" method="post" id="editForm">
         <ul class="editInfos">
