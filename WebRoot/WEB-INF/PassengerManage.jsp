@@ -20,6 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script src="js/navSideBar.js"></script>
   <script type="text/javascript" src="./js/GridManager.js"></script>
   <script type="text/javascript" src="./js/jquery-ui.js"></script>
+  <script type="text/javascript" src="./js/EditPassword.js"></script>
 </head>
 <body>
 <div class="main_body">  
@@ -131,6 +132,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <li class="btn"><input type="submit" value="确认提交" class="submitBtn" /></li>
       </ul>
     </form>
+  </div>
+      <!-- 添加订单弹窗   -->
+  <div class="pop-edit">
+  	<div id="dialogBgAddOrder"></div>
+    <div id="dialogAddOrder" class="animated">
+      <div class="dialogTop">
+        <a href="javascript:;" class="claseDialogBtn" onclick="refreshWarning()">关闭</a>
+      </div>
+      <form action="" method="post" id="editForm">
+        <ul class="editInfos">
+          <li class="text"><label><span>订单编号:</span><input type="text" name="pass_id"  value="" class="ipt ipt-orderId" /></label></li>
+          <li class="text"><label><span>乘客编号:</span><input type="text" name="pass_name" readonly value=""  class="ipt ipt-passId" /></label></li>
+          <li class="text"><label><span>乘客姓名:</span><input type="text" name="pass_age" readonly value=""  class="ipt ipt-passName" /></label></li>
+          <li class="text"><label><span>乘客身份证:</span><input type="text" name="pass_age" readonly value=""  class="ipt ipt-passName" /></label></li>
+          <li class="text"><label><span>乘客护照:</span><input type="text" name="pass_name" readonly value=""  class="ipt ipt-passPassport" /></label></li>          
+          <li class="text"><label><span>航班编号:</span><input type="text" name="pass_age" value=""  class="ipt ipt-flightId" /></label></li>
+          <li class="text"><label><span>出发城市:</span><input type="text" name="pass_age" value=""  class="ipt ipt-depCity" /></label></li>
+          <li class="text"><label><span>到达城市:</span><input type="text" name="pass_age" value=""  class="ipt ipt-arrCity" /></label></li>
+          <li class="text"><label><span>出发时间:</span><input type="datetime-local" name="pass_age" value=""  class="ipt ipt-depTime" /></label></li>
+          <li class="text"><label><span>到达时间:</span><input type="datetime-local" name="pass_age" value=""  class="ipt ipt-arrTime" /></label></li>
+          <li class="text"><label><span>送票员姓名:</span><input type="text" name="pass_age" value=""  class="ipt ipt-deliName" /></label></li>
+          <li class="text"><label><span>送票员编号:</span><input type="text" name="pass_sex" value=""  class="ipt ipt-deliId" /></label></li>
+          <li class="text"><label><span>实付款:</span><input type="text" name="pass_passport" value=""  class="ipt ipt-purc" /></label></li>
+          <li class="btn"><input type="button" value="确认提交" class="submitBtn"/></li>
+        </ul>
+      </form>
+    </div>
   </div>
   <!-- General Page -->
 

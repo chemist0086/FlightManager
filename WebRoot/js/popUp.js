@@ -55,7 +55,18 @@ $(function(){
    });
 });
   
-
+/*=============================添加弹窗(乘机人界面)===========================================*/
+$('table').delegate('.bounceInDownAddOrder', 'click', function() {
+    className = $(this).attr('class');
+    $('#dialogBgAddOrder').fadeIn(300);
+    $('#dialogAddOrder').removeAttr('class').addClass('animated '+className+'').fadeIn();
+  });    
+//关闭弹窗
+$('.claseDialogBtn').click(function(){
+  $('#dialogBgAddOrder').fadeOut('fast=op-',function(){
+    $('#dialogAddOrder').addClass('bounceOutUp').fadeOut('fast');
+  });
+});
 
 $("#dialogEdit").draggable();
 $("#dialogEdit").resizable();
@@ -65,3 +76,6 @@ $("#dialogPasswd").resizable();
 
 $("#dialogAdd").draggable();
 $("#dialogAdd").resizable();
+
+$("#dialogAddOrder").draggable();
+$("#dialogAddOrder").resizable();

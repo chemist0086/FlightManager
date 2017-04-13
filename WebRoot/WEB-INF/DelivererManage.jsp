@@ -20,6 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script src="js/navSideBar.js"></script>
   <script type="text/javascript" src="./js/GridManager.js"></script>
   <script type="text/javascript" src="./js/jquery-ui.js"></script>
+  <script type="text/javascript" src="./js/EditPassword.js"></script>
 </head>
 <body>
 <div class="main_body">  
