@@ -360,24 +360,24 @@ var table = document.querySelector('table');
         		alert("请填写必须要填写的选项！");
         	} else {
                 $.ajax({
-                    url: 'editOrder.action',
+                    url: 'addOrder.action',
                     type: 'post',
                     async: false,
                     dataType: 'json',
                     data: {
-                        order_id: $("#dialogAdd .editInfos").children(":eq(0)").find("input").val(),
-                        pass_id: $("#dialogAdd .editInfos").children(":eq(1)").find("input").val(),
-                        pass_name: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),
-                        pass_idcard: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),
-                        pass_passport: $("#dialogAdd .editInfos").children(":eq(4)").find("input").val(),
-                        flight_id: $("#dialogAdd .editInfos").children(":eq(5)").find("input").val(),
-                        dep_city: $("#dialogAdd .editInfos ").children(":eq(6)").find("input").val(),
-                        arr_city: $("#dialogAdd .editInfos").children(":eq(7)").find("input").val(),
-                        dep_time: $("#dialogAdd .editInfos").children(":eq(8)").find("input").val(),
-                        arr_time: $("#dialogAdd .editInfos").children(":eq(9)").find("input").val(),
-                        deli_id: $("#dialogAdd .editInfos").children(":eq(10)").find("input").val(),
-                        deli_name: $("#dialogAdd .editInfos").children(":eq(11)").find("input").val(),
-                        price_purc: $("#dialogAdd .editInfos").children(":eq(12)").find("input").val(),       
+                        order_id: $("#dialogAddOrder .editInfos").children(":eq(0)").find("input").val(),
+                        pass_id: $("#dialogAddOrder .editInfos").children(":eq(1)").find("input").val(),
+                        pass_name: $("#dialogAddOrder .editInfos").children(":eq(2)").find("input").val(),
+                        pass_idcard: $("#dialogAddOrder .editInfos").children(":eq(3)").find("input").val(),
+                        pass_passport: $("#dialogAddOrder .editInfos").children(":eq(4)").find("input").val(),
+                        flight_id: $("#dialogAddOrder .editInfos").children(":eq(5)").find("input").val(),
+                        dep_city: $("#dialogAddOrder .editInfos ").children(":eq(6)").find("input").val(),
+                        arr_city: $("#dialogAddOrder .editInfos").children(":eq(7)").find("input").val(),
+                        dep_time: $("#dialogAddOrder .editInfos").children(":eq(8)").find("input").val(),
+                        arr_time: $("#dialogAddOrder .editInfos").children(":eq(9)").find("input").val(),
+                        deli_id: $("#dialogAddOrder .editInfos").children(":eq(10)").find("input").val(),
+                        deli_name: $("#dialogAddOrder .editInfos").children(":eq(11)").find("input").val(),
+                        price_purc: $("#dialogAddOrder .editInfos").children(":eq(12)").find("input").val(),       
                     },
                     success: function(data, status) {
                       if(data.status=="1"){

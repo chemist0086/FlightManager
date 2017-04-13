@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,com.mytest.beans.Deliverer,com.mywork.dao.DelivererDao,com.mytest.beans.User" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,com.mytest.beans.Deliverer,com.mytest.beans.User" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -20,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script src="js/navSideBar.js"></script>
   <script type="text/javascript" src="./js/GridManager.js"></script>
   <script type="text/javascript" src="./js/jquery-ui.js"></script>
-  <script type="text/javascript" src="./js/EditPassword.js"></script>
+  <!-- <script type="text/javascript" src="./js/EditPassword.js"></script> -->
 </head>
 <body>
 <div class="main_body">  
@@ -129,7 +129,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <ul class="editInfos">
         <li class="text"><label><font color="#ff0000">* </font><span>新密码:</span><input type="password" name="" required value="" class="ipt ipt-new" /></label></li>
         <li class="text"><label><font color="#ff0000">* </font><span>确认密码:</span><input type="password" name="" required value="" class="ipt ipt-confirm" /></label></li>
-        <li class="btn"><input type="submit" value="确认提交" class="submitBtn" /></li>
+        <li class="btn"><input type="submit" value="确认提交" class="submitBtn" onclick="editPass()"/></li>
       </ul>
     </form>
   </div>
@@ -152,8 +152,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <li class="text"><label><span>到达城市:</span><input type="text" name="pass_age" value=""  class="ipt ipt-arrCity" /></label></li>
           <li class="text"><label><span>出发时间:</span><input type="datetime-local" name="pass_age" value=""  class="ipt ipt-depTime" /></label></li>
           <li class="text"><label><span>到达时间:</span><input type="datetime-local" name="pass_age" value=""  class="ipt ipt-arrTime" /></label></li>
-          <li class="text"><label><span>送票员姓名:</span><input type="text" name="pass_age" value=""  class="ipt ipt-deliName" /></label></li>
           <li class="text"><label><span>送票员编号:</span><input type="text" name="pass_sex" value=""  class="ipt ipt-deliId" /></label></li>
+          <li class="text"><label><span>送票员姓名:</span><input type="text" name="pass_age" value=""  class="ipt ipt-deliName" /></label></li>          
           <li class="text"><label><span>实付款:</span><input type="text" name="pass_passport" value=""  class="ipt ipt-purc" /></label></li>
           <li class="btn"><input type="button" value="确认提交" class="submitBtn"/></li>
         </ul>
@@ -200,4 +200,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </body>
 <script src="js/popUp.js"></script>
 <script src="js/passengerFormWarning.js"></script>
+<script>
+function editPass(){
+	if ($("span.editWarning").length != 0){
+		alert("两次密码输入不一致！");
+	} else {
+        $.ajax({
+            url: 'changePassword.action',
+            type: 'post',
+            async: false,
+            dataType: 'json',
+            data: {
+            	newPassword: $("#dialogPasswd .editInfos").children(":eq(0)").find("input").val(),      
+            },
+            success: function(data, status) {
+              if(data.status=="1"){
+                alert("密码修改成功！");
+                //清空表格     	
+                	var selectCount = 0;
+            		var inputCount = ":eq("+selectCount+")";
+            		var COLUM = 2;
+                	while (selectCount < COLUM){
+                		inputCount = ":eq("+selectCount+")";
+                		$("#dialogPasswd .editInfos").children(inputCount).find("input").val();
+                		selectCount++;
+                	}       	       	
+                window.location.reload();
+              }
+              if(data.status=="0")
+              alert("添加失败！");
+            },
+            error: function(){
+              alert("网络故障");
+            }
+          });
+	}  }
+</script>
 </html>

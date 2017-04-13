@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.ServletActionContext;
 
 import com.mytest.beans.User;
-import com.mywork.dao.UserDao;
+import com.mywork.dao.SubDao;
 
 public class LoginAction {
 	private User systemUser;
@@ -63,7 +63,7 @@ public class LoginAction {
 		systemUser.setUsername(username);
 		systemUser.setPassword(password);
 		boolean loginSuccess = false;
-		UserDao dbsql = new UserDao();
+		SubDao dbsql = new SubDao();
 		dbsql.openDB();
 		String sql = "select * from t_user where username='"+systemUser.getUsername()
 				+ "' and password='"+systemUser.getPassword()+"'";
@@ -81,8 +81,6 @@ public class LoginAction {
 		}
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setHeader("Access-Control-Allow-Origin", "*"); 
-/*		response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE"); 
-		response.setHeader("Access-Control-Max-Age", "3600"); */
 		map = new HashMap<String, String>();
 		map.put("state", rslt);
 		return "success";

@@ -1,4 +1,4 @@
-$("#dialogPasswd #editInfos .btn input").click(function() {
+$("#dialogPasswd .editInfos .btn .submitBtn").click(function() {
 	if ($("span.editWarning").length != 0){
 		alert("两次密码输入不一致！");
 	} else {
@@ -8,7 +8,7 @@ $("#dialogPasswd #editInfos .btn input").click(function() {
             async: false,
             dataType: 'json',
             data: {
-            	newPassword: $("#dialogAdd .editInfos").children(":eq(0)").find("input").val(),      
+            	newPassword: $("#dialogPasswd .editInfos").children(":eq(0)").find("input").val(),      
             },
             success: function(data, status) {
               if(data.status=="1"){
