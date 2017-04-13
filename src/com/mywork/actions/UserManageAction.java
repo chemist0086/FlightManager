@@ -107,9 +107,9 @@ public class UserManageAction {
 		String sql = "select top "+pSize+" * from t_user where username not in ( select top "
 	        		+(cPage-1)*pSize+" username from t_user";
 		sql+=limit;
-		sql+=" order by pass_id "+sort_username+")";
+		sql+=" order by username "+sort_username+")";
 		sql+=limit2;//添加可能的搜索限定条件2
-		sql+= " order by pass_id "+sort_username;
+		sql+= " order by username "+sort_username;
 		ResultSet rs = userdao.executeQuery(sql);
 		while(rs.next()){
 			User p=new User();

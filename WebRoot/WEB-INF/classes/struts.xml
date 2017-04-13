@@ -163,6 +163,7 @@
 
   	<!-- 增加了authorityInteceptor,验证是否有权限跳转到UserManage.jsp界面 -->
   	<action name="toUserManagePage" >
+  	
   	  <result>/WEB-INF/UserManage.jsp</result>
   	  <interceptor-ref name="authorityInteceptor"/>
   	  <interceptor-ref name="myStack"/>
