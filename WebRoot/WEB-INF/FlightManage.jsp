@@ -26,6 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<script src="js/navSideBar.js"></script>
   	<script type="text/javascript" src="./js/GridManager.js"></script>
   	<script type="text/javascript" src="./js/jquery-ui.js"></script>
+  	<script type="text/javascript" src="./js/EditPassword.js"></script>
   </head>
   
   <body>
@@ -74,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<div id="dialogBgEdit"></div>
     <div id="dialogEdit" class="animated">
       <div class="dialogTop">
-        <a href="javascript:;" class="claseDialogBtn" onclick="refreshWarning()">关闭</a>
+        <a href="javascript:;" class="claseDialogBtn">关闭</a>
       </div>
       <form action="" method="post" id="editForm">
         <ul class="editInfos">         
