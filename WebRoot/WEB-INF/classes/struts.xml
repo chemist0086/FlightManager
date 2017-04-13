@@ -154,7 +154,7 @@
   	  <result>/WEB-INF/AddDeliverer.jsp</result>
   	</action>
   	<!-- 跳转到AddDeliverer.jsp -->
-  	<action name="addDeliverer" class="com.mywork.actions.AddDelivererAction">
+  	<action name="addDeliverer2" class="com.mywork.actions.AddDelivererAction">
   	  <result>/WEB-INF/DelivererManage.jsp</result>
   	</action>
 	<action name="toDelivererCountPage">
@@ -176,7 +176,7 @@
 	  <result>/WEB-INF/AddUser.jsp</result>
 	</action>
   	<!-- 处理管理员添加新用户的请求 -->
-  	<action name="addUser" class="com.mywork.actions.AddUserAction">
+  	<action name="addUser2" class="com.mywork.actions.AddUserAction">
 	  <result>/WEB-INF/UserManage.jsp</result>
 	</action>
   	<!-- 处理管理员对用户的修改操作，将td的内容更新到后台数据库，并返回到UserManage.jsp界面  -->
@@ -226,7 +226,7 @@
 	  <result>/WEB-INF/AddFlight.jsp</result>
 	</action>
 	<!-- 处理管理员添加新航班的请求 -->
-  	<action name="addFlight" class="com.mywork.actions.AddFlightAction">
+  	<action name="addFlight2" class="com.mywork.actions.AddFlightAction">
 	  <result>/WEB-INF/FlightManage.jsp</result>
 	</action>
 	<!-- 处理管理员删除航班的请求,并跳转到FlightManage.jsp界面  -->
