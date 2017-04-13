@@ -78,12 +78,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <form action="" method="post" id="editForm">
         <ul class="editInfos">         
-          <li class="text"><label><span>航班编号:</span><input type="text" name="pass_name" value=""  class="ipt ipt-id" /></label></li>
-          <li class="text"><label><span>出发地:</span><input type="text" name="pass_age" value=""  class="ipt ipt-depCity" /></label></li>
-          <li class="text"><label><span>到达地:</span><input type="text" name="pass_sex" value=""  class="ipt ipt-arrCity" /></label></li>
-          <li class="text"><label><span>航班日期:</span><input type="date" name="pass_sex" value=""  class="ipt ipt-flightTime" /></label></li>
-          <li class="text"><label><span>出发时间:</span><input type="datetime-local" name="pass_idcard" value=""  class="ipt ipt-depTime" /></label></li>
-          <li class="text"><label><span>到达时间:</span><input type="datetime-local" name="pass_passport" value=""  class="ipt ipt-arrTime" /></label></li>
+          <li class="text"><label><span>航班编号:</span><input type="text" name="flight_id" value=""  class="ipt ipt-id" /></label></li>
+          <li class="text"><label><span>出发地:</span><input type="text" name="dep_city" value=""  class="ipt ipt-depCity" /></label></li>
+          <li class="text"><label><span>到达地:</span><input type="text" name="arr_city" value=""  class="ipt ipt-arrCity" /></label></li>
+          <li class="text"><label><span>航班日期:</span><input type="date" name="flight_time" value=""  class="ipt ipt-flightTime" /></label></li>
+          <li class="text"><label><span>出发时间:</span><input type="datetime-local" name="dep_time" value=""  class="ipt ipt-depTime" /></label></li>
+          <li class="text"><label><span>到达时间:</span><input type="datetime-local" name="arr_time" value=""  class="ipt ipt-arrTime" /></label></li>
           <li class="btn"><input type="button" value="确认提交" class="submitBtn"/></li>
         </ul>
       </form>
@@ -98,12 +98,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <form action="" method="post" id="editForm">
         <ul class="editInfos">
-          <li class="text"><label><span>航班编号:</span><input type="text" name="pass_name" value=""  class="ipt ipt-id" /></label></li>
-          <li class="text"><label><span>出发地:</span><input type="text" name="pass_age" value=""  class="ipt ipt-depCity" /></label></li>
-          <li class="text"><label><span>到达地:</span><input type="text" name="pass_sex" value=""  class="ipt ipt-arrCity" /></label></li>
-          <li class="text"><label><span>航班日期:</span><input type="date" name="pass_sex" value=""  class="ipt ipt-flightTime" /></label></li>
-          <li class="text"><label><span>出发时间:</span><input type="datetime-local" name="pass_idcard" value=""  class="ipt ipt-depTime" /></label></li>
-          <li class="text"><label><span>到达时间:</span><input type="datetime-local" name="pass_passport" value=""  class="ipt ipt-arrTime" /></label></li>
+          <li class="text"><label><span>航班编号:</span><input type="text" name="flight_id" value=""  class="ipt ipt-id" /></label></li>
+          <li class="text"><label><span>出发地:</span><input type="text" name="dep_city" value=""  class="ipt ipt-depCity" /></label></li>
+          <li class="text"><label><span>到达地:</span><input type="text" name="arr_city" value=""  class="ipt ipt-arrCity" /></label></li>
+          <li class="text"><label><span>航班日期:</span><input type="date" name="flight_time" value=""  class="ipt ipt-flightTime" /></label></li>
+          <li class="text"><label><span>出发时间:</span><input type="datetime-local" name="dep_time" value=""  class="ipt ipt-depTime" /></label></li>
+          <li class="text"><label><span>到达时间:</span><input type="datetime-local" name="arr_time" value=""  class="ipt ipt-arrTime" /></label></li>
           <li class="btn"><input type="button" value="确认提交" class="submitBtn"/></li>
         </ul>
       </form>
