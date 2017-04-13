@@ -36,6 +36,9 @@
 	<action name="deleteOrder" class="com.mywork.actions.OrderManageAction" method="DeleteOrder">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
+	<action name="editOrder" class="com.mywork.actions.OrderManageAction" method="EditOrder">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
 	<!-- user -->
 	<action name="generateUserData" class="com.mywork.actions.UserManageAction" method="GenerateData">
 	  <result type="json" name="success"><param name="root">map</param></result>
@@ -235,7 +238,7 @@
 	  <result>/WEB-INF/AddOrder.jsp</result>
 	</action>
 	<!-- 处理管理员添加新订单的请求 -->
-  	<action name="addOrder" class="com.mywork.actions.AddOrderAction">
+  	<action name="addOrder2" class="com.mywork.actions.AddOrderAction">
 	  <result>/WEB-INF/OrderManage.jsp</result>
 	</action>
   	<action name="toPassengerCountPage">
