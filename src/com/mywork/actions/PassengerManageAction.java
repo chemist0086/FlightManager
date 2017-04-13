@@ -18,14 +18,14 @@ public class PassengerManageAction {
 	private Map<String, Object> map = new LinkedHashMap<String, Object>();
 	
 	
-	private int pass_id;
-	private String pass_name;
-	private String pass_sex;
-	private int pass_age;
-	private String pass_idcard;
-	private String pass_passport;
-	private String pass_phone;
-	private String pass_email;
+	private int pass_id=-1;
+	private String pass_name="";
+	private String pass_sex="";
+	private int pass_age=-1;
+	private String pass_idcard="";
+	private String pass_passport="";
+	private String pass_phone="";
+	private String pass_email="";
 	
 	public int pass_id() {
 		return pass_id;
@@ -130,13 +130,13 @@ public class PassengerManageAction {
 		//添加可能的搜索限定条件1
 		String limit = "";
 		String limit2 = "";//控制首部以and开头
-		if(pass_id!=0){
+		if(pass_id>=0){
 			limit = AddConstraints(limit);
 			limit+="pass_id like '%"+pass_id+"%'";
 			limit2+=" and ";
 			limit2+="pass_id like '%"+pass_id+"%'";
 		}
-		if(pass_age!=0){
+		if(pass_age>=0){
 			limit = AddConstraints(limit);
 			limit+="pass_age like '%"+pass_age+"%'";
 			limit2+=" and ";
@@ -179,9 +179,11 @@ public class PassengerManageAction {
 			limit2+=" and ";
 			limit2+="pass_email like '%"+pass_email+"%'";
 		}
-		String cPageEmpty = request.getParameter("cPageEmpty");
-		if(cPageEmpty!=null){//不为null说明点击了搜索
+		if(!(limit.equals(""))){//不为""说明开启了搜索条件
 			cPage=1;
+		}
+		if(cPage==0){//若为0则从第一页开始显示
+			cPage+=1;
 		}
 		String sql = "select top "+pSize+" * from t_passenger where pass_id not in ( select top "
         		+(cPage-1)*pSize+" pass_id from t_passenger";
@@ -252,15 +254,12 @@ public class PassengerManageAction {
 		SubDao passengerdao = new SubDao();
 		passengerdao.openDB();
 		String strAge;
-		if(pass_age==0){
+		if(pass_age==-1){
 			strAge="";
 		}else{
 			strAge=Integer.toString(pass_age);
 		}
-		pass_idcard = pass_idcard==null?"":pass_idcard;
-		pass_passport = pass_passport==null?"":pass_passport;
-		pass_phone = pass_phone==null?"":pass_phone;
-		pass_email = pass_email==null?"":pass_email;
+
 		pass_sex = pass_sex.equals("男")?"1":"0";
 		String sql="insert into t_passenger values('"+pass_id+"','"+pass_name+"','"+
 		strAge+"','"+pass_sex+"','"+pass_idcard+"','"+pass_passport+"','"+pass_phone+"','"+pass_email+"')";
@@ -273,15 +272,12 @@ public class PassengerManageAction {
 		SubDao passengerdao = new SubDao();
 		passengerdao.openDB();
 		String strAge;
-		if(pass_age==0){
+		if(pass_age==-1){
 			strAge="";
 		}else{
 			strAge=Integer.toString(pass_age);
 		}
-		pass_idcard = pass_idcard==null?"":pass_idcard;
-		pass_passport = pass_passport==null?"":pass_passport;
-		pass_phone = pass_phone==null?"":pass_phone;
-		pass_email = pass_email==null?"":pass_email;
+
 		pass_sex = pass_sex.equals("男")?"1":"0";
 		String sql="update t_passenger set  pass_name='"+pass_name+"',pass_age='"+strAge+
 				"',pass_sex='"+pass_sex+"',pass_idcard='"+pass_idcard+"',pass_passport='"+pass_passport+
