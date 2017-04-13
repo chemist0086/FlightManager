@@ -18,12 +18,12 @@ public class FlightManageAction {
 	private Map<String, Object> map = new LinkedHashMap<String, Object>();
 	
 	
-	private int flight_id;
-	private String dep_city;
-	private String arr_city;
-	private String flight_date;
-	private String dep_time;
-	private String arr_time;
+	private int flight_id=-1;
+	private String dep_city="";
+	private String arr_city="";
+	private String flight_date="";
+	private String dep_time="";
+	private String arr_time="";
 	
 
 	public int getFlight_id() {
@@ -114,58 +114,64 @@ public class FlightManageAction {
 		}
 		
 		ArrayList<Flight> alist = new ArrayList<Flight>();
-		SubDao flightdao,flightdao2;
+		SubDao flightdao;
 		flightdao = new SubDao();
 		flightdao.openDB();
 		
-		String sql = "select top "+pSize+" * from t_flight where flight_id not in ( select top "
-	        		+(cPage-1)*pSize+" flight_id from t_flight";
 		//添加可能的搜索限定条件1
 		String limit = "";
 		String limit2 = "";//控制首部以and开头
-		if(flight_id!=0){
+		if(flight_id>=0){
 			limit = AddConstraints(limit);
 			limit+="flight_id like '%"+flight_id+"%'";
 			limit2+=" and ";
 			limit2+="flight_id like '%"+flight_id+"%'";
 		}
-		if(dep_city!=null&&!(dep_city.equals(""))){
+		
+		if(!(dep_city.equals(""))){
 			limit = AddConstraints(limit);
 			limit+="dep_city like '%"+dep_city+"%'";
 			limit2+=" and ";
 			limit2+="dep_city like '%"+dep_city+"%'";
 		}
-		if(arr_city!=null&&!(arr_city.equals(""))){
+		
+		if(!(arr_city.equals(""))){
 			limit = AddConstraints(limit);
 			limit+="arr_city like '%"+arr_city+"%'";
 			limit2+=" and ";
 			limit2+="arr_city like '%"+arr_city+"%'";
 		}
-		if(flight_date!=null&&!(flight_date.equals(""))){
+		if(!(flight_date.equals(""))){
 			limit = AddConstraints(limit);
 			limit+="flight_date like '%"+flight_date+"%'";
 			limit2+=" and ";
 			limit2+="flight_date like '%"+flight_date+"%'";
 		}
-		if(dep_time!=null&&!(dep_time.equals(""))){
+		if(!(dep_time.equals(""))){
 			limit = AddConstraints(limit);
 			limit+="dep_time like '%"+dep_time+"%'";
 			limit2+=" and ";
 			limit2+="dep_time like '%"+dep_time+"%'";
 		}
-		if(arr_time!=null&&!(arr_time.equals(""))){
+		if(!(arr_time.equals(""))){
 			limit = AddConstraints(limit);
 			limit+="arr_time like '%"+arr_time+"%'";
 			limit2+=" and ";
 			limit2+="arr_time like '%"+arr_time+"%'";
 		}
-		sql+=limit;
-		sql+=" order by flight_id "+sort_flight_id+")";
-		sql+=limit2;//添加可能的搜索限定条件2
-		sql+= " order by flight_id "+sort_flight_id;
-		if(limit.equals("")){//若limit为空，则搜索栏为空，从第一页开始抓数据
+		if(!(limit.equals(""))){//不为""说明开启了搜索条件
 			cPage=1;
 		}
+		if(cPage==0){//若为0则从第一页开始显示
+			cPage+=1;
+		}
+		String sql = "select top "+pSize+" * from t_flight where flight_id not in ( select top "
+        		+(cPage-1)*pSize+" flight_id from t_flight";
+		sql+=limit;
+		sql+=" order by pass_id "+sort_flight_id+")";
+		sql+=limit2;//添加可能的搜索限定条件2
+		sql+= " order by pass_id "+sort_flight_id;
+		
 		ResultSet rs = flightdao.executeQuery(sql);
 		while(rs.next()){
 			Flight p=new Flight();
@@ -196,32 +202,42 @@ public class FlightManageAction {
 	
 	//执行删除操作，并产生删除状态
 	public String DeleteFlight() throws IOException{
-		SubDao flightDao;
-		flightDao = new SubDao();
-		flightDao.openDB();
+		SubDao flightdao;
+		flightdao = new SubDao();
+		flightdao.openDB();
 		HttpServletRequest request = ServletActionContext.getRequest();
-		String[] items = request.getParameterValues("items[]");
-		String[]status = new String[items.length];
-		for (int i=0;i<items.length;i++) {
+		String parameter = request.getParameter("data");
+		String[] data = parameter.split(",");
+		for (int i=0;i<data.length;i++) {
 			int isDeletedSuccess=0;
-			String sql = "delete from t_flight where flight_id="+items[0];
-			isDeletedSuccess = flightDao.executeUpdate(sql);
-			status[i]=items[0]+":"+isDeletedSuccess;
+			String sql = "delete from t_flight where flight_id="+data[i];
+			isDeletedSuccess = flightdao.executeUpdate(sql);
+			map.put(data[i], isDeletedSuccess);
 		}
-		flightDao.closeDB();
+		flightdao.closeDB();
 		ServletActionContext.getResponse().setHeader("Access-Control-Allow-Origin", "*");
-		map.put("status", status);
 		return "success";
 	}
 	
-	/*public String AddFlight() throws IOException{
-		SubDao delivererDao = new SubDao();
-		delivererDao.openDB();
-		flight_sex = flight_sex.equals("男")?"1":"0";
-		String sql="insert into t_flight values('"+flight_id+"','"+flight_name+"','"+
-		flight_age+"','"+flight_sex+"','"+flight_idcard+"','"+flight_passport+"','"+flight_phone+"','"+flight_email+"')";
-		delivererDao.executeUpdate(sql);
-		delivererDao.closeDB();
+	public String AddFlight() throws IOException{
+		SubDao flightdao = new SubDao();
+		flightdao.openDB();
+		String sql="insert into t_flight values('"+flight_id+"','"+dep_city+"','"+
+				arr_city+"','"+flight_date+"','"+dep_time+"','"+arr_time+"')";
+		int count = flightdao.executeUpdate(sql);
+		flightdao.closeDB();
+		map.put("status", count);
 		return "success";
-	}*/
+	}
+	public String EditFlight() throws IOException{
+		SubDao flightdao = new SubDao();
+		flightdao.openDB();
+		String sql="update t_flight set dep_city='"+dep_city+"',arr_city='"+arr_city+
+				"',flight_date='"+flight_date+"',dep_time='"+dep_time+"',arr_time='"+arr_time+
+				"' where flight_id='"+flight_id+"'";
+		int count = flightdao.executeUpdate(sql);
+		flightdao.closeDB();
+		map.put("status", count);
+		return "success";
+	}
 }
