@@ -26,13 +26,13 @@
   	<action name="generateFlightData" class="com.mywork.actions.FlightManageAction" method="GenerateData">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
-	<action name="deleteFlight" class="com.mywork.actions.FlightManageAction" method="DeleteFligt">
+	<action name="deleteFlight" class="com.mywork.actions.FlightManageAction" method="DeleteFlight">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
-	<action name="editFlight" class="com.mywork.actions.FlightManageAction" method="EditFligt">
+	<action name="editFlight" class="com.mywork.actions.FlightManageAction" method="EditFlight">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
-	<action name="addFlight" class="com.mywork.actions.FlightManageAction" method="AddFligt">
+	<action name="addFlight" class="com.mywork.actions.FlightManageAction" method="AddFlight">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
 	<!-- order -->
@@ -59,6 +59,9 @@
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
 	<action name="addUser" class="com.mywork.actions.UserManageAction" method="AddUser">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="changePassword" class="com.mywork.actions.UserManageAction" method="ChangePassword">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
 	<!-- deliverer -->
@@ -125,7 +128,7 @@
   	  <result>/WEB-INF/ChangePassword.jsp</result>
   	</action>
   	<!-- 处理用户更改密码请求，并返回到welcome.jsp界面 -->
-  	<action name="changePassword" class="com.mywork.actions.ChangePasswordAction">
+  	<action name="changePassword2" class="com.mywork.actions.ChangePasswordAction">
   	  <result>/WEB-INF/Welcome.jsp</result>
   	</action>
   	

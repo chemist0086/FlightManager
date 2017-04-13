@@ -246,7 +246,7 @@ var table = document.querySelector('table');
         		alert("请填写必须要填写的选项！");
         	} else {
                 $.ajax({
-                    url: 'editOrder.action',
+                    url: 'addOrder.action',
                     type: 'post',
                     async: false,
                     dataType: 'json',
@@ -254,7 +254,7 @@ var table = document.querySelector('table');
                         order_id: $("#dialogAdd .editInfos").children(":eq(0)").find("input").val(),
                         pass_id: $("#dialogAdd .editInfos").children(":eq(1)").find("input").val(),
                         pass_name: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),
-                        pass_idcard: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),
+                        pass_idcard: $("#dialogAdd .editInfos").children(":eq(3)").find("input").val(),
                         pass_passport: $("#dialogAdd .editInfos").children(":eq(4)").find("input").val(),
                         flight_id: $("#dialogAdd .editInfos").children(":eq(5)").find("input").val(),
                         dep_city: $("#dialogAdd .editInfos ").children(":eq(6)").find("input").val(),
