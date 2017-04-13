@@ -16,19 +16,19 @@ import com.mywork.dao.SubDao;
 
 public class OrderManageAction {
 	
-	private int order_id;
-	private int pass_id;
-	private String pass_idcard;
-	private String pass_passport;
-	private String pass_name;
-	private int flight_id;
-	private String dep_city;
-	private String arr_city;
-	private String dep_time;
-	private String arr_time;
-	private int deli_id;
-	private String deli_name;
-	private double price_purc;
+	private int order_id=-1;
+	private int pass_id=-1;
+	private String pass_idcard="";
+	private String pass_passport="";
+	private String pass_name="";
+	private int flight_id=-1;
+	private String dep_city="";
+	private String arr_city="";
+	private String dep_time="";
+	private String arr_time="";
+	private int deli_id=-1;
+	private String deli_name="";
+	private double price_purc=-1;//为-1不为0的原因，若等于-1未开启搜索条件，在插入时要改成0
 	
 	
 	public String getPass_idcard() {
@@ -149,25 +149,25 @@ public class OrderManageAction {
 		//添加可能的搜索限定条件1
 		String limit = "";
 		String limit2 = "";//控制首部以and开头
-		if(order_id!=0){
+		if(order_id>=0){
 			limit = AddConstraints(limit);
 			limit+="order_id like '%"+order_id+"%'";
 			limit2+=" and ";
 			limit2+="order_id like '%"+order_id+"%'";
 		}
-		if(pass_id!=0){
+		if(pass_id>=0){
 			limit = AddConstraints(limit);
 			limit+="pass_id like '%"+pass_id+"%'";
 			limit2+=" and ";
 			limit2+="pass_id like '%"+pass_id+"%'";
 		}
-		if(flight_id!=0){
+		if(flight_id>=0){
 			limit = AddConstraints(limit);
 			limit+="flight_id like '%"+flight_id+"%'";
 			limit2+=" and ";
 			limit2+="flight_id like '%"+flight_id+"%'";
 		}
-		if(deli_id!=0){
+		if(deli_id>=0){
 			limit = AddConstraints(limit);
 			limit+="deli_id like '%"+deli_id+"%'";
 			limit2+=" and ";
@@ -221,7 +221,7 @@ public class OrderManageAction {
 			limit2+=" and ";
 			limit2+="deli_name like '%"+deli_name+"%'";
 		}
-		if(price_purc!=0){
+		if(price_purc>=0){
 			limit = AddConstraints(limit);
 			limit+="price_purc like '%"+price_purc+"%'";
 			limit2+=" and ";
@@ -296,32 +296,59 @@ public class OrderManageAction {
 		return "success";
 	}
 	
-	/*public String AddOrder() throws IOException{
+	public String AddOrder() throws IOException{
 		SubDao ordershowdao = new SubDao();
 		ordershowdao.openDB();
-		String strAge;
-		if(pass_age==0){
-			strAge="";
-		}else{
-			strAge=Integer.toString(pass_age);
+		String limitForPassenger = "where pass_id="+pass_id;
+		int countForPassenger = ordershowdao.getCount("t_passenger", "pass_id", limitForPassenger);
+		if(countForPassenger==0){//原表中没有该乘客信息说明需要新建乘客
+			String sqlForPassenger="insert into t_passenger values('"+pass_id+"','"+pass_name+"','"+
+					""+"','"+""+"','"+pass_idcard+"','"+pass_passport+"','"+""+"','"+""+"')";
+			ordershowdao.executeUpdate(sqlForPassenger );
 		}
-		pass_idcard = pass_idcard==null?"":pass_idcard;
-		pass_passport = pass_passport==null?"":pass_passport;
-		pass_phone = pass_phone==null?"":pass_phone;
-		pass_email = pass_email==null?"":pass_email;
-		pass_sex = pass_sex.equals("男")?"1":"0";
-		String sql="insert into t_passenger values('"+pass_id+"','"+pass_name+"','"+
-		strAge+"','"+pass_sex+"','"+pass_idcard+"','"+pass_passport+"','"+pass_phone+"','"+pass_email+"')";
-		int count = passengerdao.executeUpdate(sql);
-		passengerdao.closeDB();
-		map.put("status", count);
+		String limitForFlight = "where flight_id="+flight_id;
+		int countForFlight = ordershowdao.getCount("t_flight", "flight_id", limitForFlight);
+		if(countForFlight==0){//原表中没有该航班信息说明需要新建行航班
+			String sqlForFlight = "insert into t_flight values('"+flight_id+"','"+dep_city+"','"+
+					arr_city+"','"+""+"','"+dep_time+"','"+arr_time+"')";
+			ordershowdao.executeUpdate(sqlForFlight);
+		}
+		String limitForDeliverer = "where deli_id="+deli_id;
+		int countForDeliverer = ordershowdao.getCount("t_deliverer", "deli_id", limitForDeliverer);
+		if(countForDeliverer==0){//原表中没有该航班信息说明需要新建行航班
+			String sqlForFlight = "insert into t_deliverer values('"+deli_id+"','"+deli_name+"','"+
+					""+"','"+""+"','"+""+"','"+""+"')";
+			ordershowdao.executeUpdate(sqlForFlight);
+		}
+		String strprice_purc;
+		if(price_purc==-1){
+			strprice_purc="";
+		}else{
+			strprice_purc=Double.toString(price_purc);
+		}
+		String sqlForOrder = "insert into t_order values('"+order_id+"','"+flight_id+"','"+
+				pass_id+"','"+deli_id+"','"+strprice_purc+"','"+strprice_purc+"')";
+		int countForOrder = ordershowdao.executeUpdate(sqlForOrder);
+		if(countForOrder==0){//为0说明插入失败，删除上面可能创建的记录
+			ordershowdao.executeUpdate("delete from t_passenger where pass_id ="+pass_id);
+			ordershowdao.executeUpdate("delete from t_flight where flight_id ="+flight_id);
+			ordershowdao.executeUpdate("delete from t_deliverer where deli_id ="+deli_id);
+		}
+		ordershowdao.closeDB();
+		map.put("status", countForOrder);
 		return "success";
-	}*/
+	}
 	public String EditOrder() throws IOException{
 		SubDao ordershowdao = new SubDao();
 		ordershowdao.openDB();
+		String strprice_purc;
+		if(price_purc==-1){
+			strprice_purc="";
+		}else{
+			strprice_purc=Double.toString(price_purc);
+		}
 		//仅结算金额可编辑
-		String sql="update t_order set price_purc='"+price_purc+
+		String sql="update t_order set price_purc='"+strprice_purc+
 				"' where order_id='"+order_id+"'";
 		int count = ordershowdao.executeUpdate(sql);
 		ordershowdao.closeDB();

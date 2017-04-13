@@ -39,6 +39,9 @@
 	<action name="editOrder" class="com.mywork.actions.OrderManageAction" method="EditOrder">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
+	<action name="addOrder" class="com.mywork.actions.OrderManageAction" method="AddOrder">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
 	<!-- user -->
 	<action name="generateUserData" class="com.mywork.actions.UserManageAction" method="GenerateData">
 	  <result type="json" name="success"><param name="root">map</param></result>
