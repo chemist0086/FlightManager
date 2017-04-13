@@ -158,16 +158,15 @@ public class DelivererManageAction {
 		String sql = "select top "+pSize+" * from t_deliverer where deli_id not in ( select top "
         		+(cPage-1)*pSize+" deli_id from t_deliverer";
 		sql+=limit;
-		sql+=" order by pass_id "+sort_deli_id+")";
+		sql+=" order by deli_id "+sort_deli_id+")";
 		sql+=limit2;//添加可能的搜索限定条件2
-		sql+= " order by pass_id "+sort_deli_id;
-		
+		sql+= " order by deli_id "+sort_deli_id;
 		
 		ResultSet rs = delivererdao.executeQuery(sql);
 		while(rs.next()){
 			Deliverer p=new Deliverer();
 			//得到当前乘客的购票数量和购票金额
-			String sql2 = "select count(*) as count as sum from t_order where deli_id="+rs.getInt("deli_id");
+			String sql2 = "select count(*) as count from t_order where deli_id="+rs.getInt("deli_id");
 			ResultSet rs2 = delivererdao2.executeQuery(sql2);
 			if(rs2.next()){
 				p.setDeli_count(rs2.getInt("count"));
