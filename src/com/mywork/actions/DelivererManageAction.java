@@ -15,15 +15,14 @@ import com.mytest.beans.Deliverer;
 import com.mywork.dao.SubDao;
 
 public class DelivererManageAction {
-private Map<String, Object> map = new LinkedHashMap<String, Object>();
+	private Map<String, Object> map = new LinkedHashMap<String, Object>();
 	
-	
-	private int deli_id;
-	private String deli_name;
-	private String deli_sex;
-	private int deli_age;
-	private String deli_phone;
-	private String deli_email;
+	private int deli_id=-1;
+	private String deli_name="";
+	private String deli_sex="";
+	private int deli_age=-1;
+	private String deli_phone="";
+	private String deli_email="";
 	
 	public int deli_id() {
 		return deli_id;
@@ -109,55 +108,61 @@ private Map<String, Object> map = new LinkedHashMap<String, Object>();
 		delivererdao.openDB();
 		delivererdao2.openDB();
 		
-		String sql = "select top "+pSize+" * from t_deliverer where deli_id not in ( select top "
-	        		+(cPage-1)*pSize+" deli_id from t_deliverer";
 		//添加可能的搜索限定条件1
 		String limit = "";
 		String limit2 = "";//控制首部以and开头
-		if(deli_id!=0){
+		if(deli_id>=0){
 			limit = AddConstraints(limit);
 			limit+="deli_id like '%"+deli_id+"%'";
 			limit2+=" and ";
 			limit2+="deli_id like '%"+deli_id+"%'";
 		}
-		if(deli_age!=0){
+		if(deli_age>=0){
 			limit = AddConstraints(limit);
 			limit+="deli_age like '%"+deli_age+"%'";
 			limit2+=" and ";
 			limit2+="deli_age like '%"+deli_age+"%'";
 		}
-		if(deli_name!=null&&!(deli_name.equals(""))){
+		if(!(deli_name.equals(""))){
 			limit = AddConstraints(limit);
 			limit+="deli_name like '%"+deli_name+"%'";
 			limit2+=" and ";
 			limit2+="deli_name like '%"+deli_name+"%'";
 		}
-		if(deli_sex!=null&&!(deli_sex.equals(""))){
+		if(!(deli_sex.equals(""))){
 			limit = AddConstraints(limit);
 			int int_sex = deli_sex.equals("男")?1:0;
 			limit+="deli_sex like '%"+int_sex+"%'";
 			limit2+=" and ";
 			limit2+="deli_sex like '%"+int_sex+"%'";
 		}
-		if(deli_phone!=null&&!(deli_phone.equals(""))){
+		
+		if(!(deli_phone.equals(""))){
 			limit = AddConstraints(limit);
 			limit+="deli_phone like '%"+deli_phone+"%'";
 			limit2+=" and ";
 			limit2+="deli_phone like '%"+deli_phone+"%'";
 		}
-		if(deli_email!=null&&!(deli_email.equals(""))){
+		if(!(deli_email.equals(""))){
 			limit = AddConstraints(limit);
 			limit+="deli_email like '%"+deli_email+"%'";
 			limit2+=" and ";
 			limit2+="deli_email like '%"+deli_email+"%'";
 		}
-		sql+=limit;
-		sql+=" order by deli_id "+sort_deli_id+")";
-		sql+=limit2;//添加可能的搜索限定条件2
-		sql+= " order by deli_id "+sort_deli_id;
-		if(limit.equals("")){//若limit为空，则搜索栏为空，从第一页开始抓数据
+		if(!(limit.equals(""))){//不为""说明开启了搜索条件
 			cPage=1;
 		}
+		if(cPage==0){//若为0则从第一页开始显示
+			cPage+=1;
+		}
+		String sql = "select top "+pSize+" * from t_deliverer where deli_id not in ( select top "
+        		+(cPage-1)*pSize+" deli_id from t_deliverer";
+		sql+=limit;
+		sql+=" order by pass_id "+sort_deli_id+")";
+		sql+=limit2;//添加可能的搜索限定条件2
+		sql+= " order by pass_id "+sort_deli_id;
+		
+		
 		ResultSet rs = delivererdao.executeQuery(sql);
 		while(rs.next()){
 			Deliverer p=new Deliverer();
@@ -196,34 +201,58 @@ private Map<String, Object> map = new LinkedHashMap<String, Object>();
 	}
 	
 	//执行删除操作，并产生删除状态
-	public String DeleteDeliverer(){
+	public String DeleteDeliverer() throws IOException{
+		SubDao delivererdao;
+		delivererdao = new SubDao();
+		delivererdao.openDB();
 		HttpServletRequest request = ServletActionContext.getRequest();
-		String deli_id = request.getParameter("deli_id");
-		
-		int isDeletedSuccess=0;
-		try {
-			SubDao delivererDao;
-			delivererDao = new SubDao();
-			delivererDao.openDB();
-			String sql = "delete from t_deliverer where deli_id="+deli_id;
-			isDeletedSuccess = delivererDao.executeUpdate(sql);
-			delivererDao.closeDB();
-		} catch (IOException e) {
-			e.printStackTrace();
+		String parameter = request.getParameter("data");
+		String[] data = parameter.split(",");
+		for (int i=0;i<data.length;i++) {
+			int isDeletedSuccess=0;
+			String sql = "delete from t_deliverer where deli_id="+data[i];
+			isDeletedSuccess = delivererdao.executeUpdate(sql);
+			map.put(data[i], isDeletedSuccess);
 		}
+		delivererdao.closeDB();
 		ServletActionContext.getResponse().setHeader("Access-Control-Allow-Origin", "*");
-		map.put("isDeletedSuccess", isDeletedSuccess);
 		return "success";
 	}
 	
 	public String AddDeliverer() throws IOException{
-		SubDao delivererDao = new SubDao();
-		delivererDao.openDB();
+		SubDao delivererdao = new SubDao();
+		delivererdao.openDB();
+		String strAge;
+		if(deli_age==-1){
+			strAge="";
+		}else{
+			strAge=Integer.toString(deli_age);
+		}
+
 		deli_sex = deli_sex.equals("男")?"1":"0";
 		String sql="insert into t_deliverer values('"+deli_id+"','"+deli_name+"','"+
-		deli_age+"','"+deli_sex+"','"+deli_phone+"','"+deli_email+"')";
-		delivererDao.executeUpdate(sql);
-		delivererDao.closeDB();
+				strAge+"','"+deli_sex+"','"+deli_phone+"','"+deli_email+"')";
+		int count = delivererdao.executeUpdate(sql);
+		delivererdao.closeDB();
+		map.put("status", count);
+		return "success";
+	}
+	public String EditDeliverer() throws IOException{
+		SubDao delivererdao = new SubDao();
+		delivererdao.openDB();
+		String strAge;
+		if(deli_age==-1){
+			strAge="";
+		}else{
+			strAge=Integer.toString(deli_age);
+		}
+		deli_sex = deli_sex.equals("男")?"1":"0";
+		String sql="update t_deliverer set deli_name='"+deli_name+"',deli_age='"+strAge+
+				"',deli_sex='"+deli_sex+"',deli_phone='"+deli_phone+"',deli_email='"+deli_email+
+				"' where deli_id='"+deli_id+"'";
+		int count = delivererdao.executeUpdate(sql);
+		delivererdao.closeDB();
+		map.put("status", count);
 		return "success";
 	}
 }

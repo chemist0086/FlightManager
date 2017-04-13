@@ -29,6 +29,12 @@
 	<action name="deleteFlight" class="com.mywork.actions.FlightManageAction" method="DeleteFligt">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
+	<action name="editFlight" class="com.mywork.actions.FlightManageAction" method="EditFligt">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="addFlight" class="com.mywork.actions.FlightManageAction" method="AddFligt">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
 	<!-- order -->
 	<action name="generateOrderData" class="com.mywork.actions.OrderManageAction" method="GenerateData">
 	  <result type="json" name="success"><param name="root">map</param></result>
@@ -39,6 +45,9 @@
 	<action name="editOrder" class="com.mywork.actions.OrderManageAction" method="EditOrder">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
+	<action name="addOrder" class="com.mywork.actions.OrderManageAction" method="AddOrder">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
 	<!-- user -->
 	<action name="generateUserData" class="com.mywork.actions.UserManageAction" method="GenerateData">
 	  <result type="json" name="success"><param name="root">map</param></result>
@@ -46,11 +55,23 @@
 	<action name="deleteUser" class="com.mywork.actions.UserManageAction" method="DeleteUser">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
+	<action name="editUser" class="com.mywork.actions.UserManageAction" method="EditUser">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="addUser" class="com.mywork.actions.UserManageAction" method="AddUser">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
 	<!-- deliverer -->
 	<action name="generateDelivererData" class="com.mywork.actions.DelivererManageAction" method="GenerateData">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
 	<action name="deleteDeliverer" class="com.mywork.actions.DelivererManageAction" method="DeleteDeliverer">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="editDeliverer" class="com.mywork.actions.DelivererManageAction" method="EditDeliverer">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="addDeliverer" class="com.mywork.actions.DelivererManageAction" method="AddDeliverer">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
 	
@@ -133,7 +154,7 @@
   	  <result>/WEB-INF/AddDeliverer.jsp</result>
   	</action>
   	<!-- 跳转到AddDeliverer.jsp -->
-  	<action name="addDeliverer" class="com.mywork.actions.AddDelivererAction">
+  	<action name="addDeliverer2" class="com.mywork.actions.AddDelivererAction">
   	  <result>/WEB-INF/DelivererManage.jsp</result>
   	</action>
 	<action name="toDelivererCountPage">
@@ -155,7 +176,7 @@
 	  <result>/WEB-INF/AddUser.jsp</result>
 	</action>
   	<!-- 处理管理员添加新用户的请求 -->
-  	<action name="addUser" class="com.mywork.actions.AddUserAction">
+  	<action name="addUser2" class="com.mywork.actions.AddUserAction">
 	  <result>/WEB-INF/UserManage.jsp</result>
 	</action>
   	<!-- 处理管理员对用户的修改操作，将td的内容更新到后台数据库，并返回到UserManage.jsp界面  -->
@@ -205,7 +226,7 @@
 	  <result>/WEB-INF/AddFlight.jsp</result>
 	</action>
 	<!-- 处理管理员添加新航班的请求 -->
-  	<action name="addFlight" class="com.mywork.actions.AddFlightAction">
+  	<action name="addFlight2" class="com.mywork.actions.AddFlightAction">
 	  <result>/WEB-INF/FlightManage.jsp</result>
 	</action>
 	<!-- 处理管理员删除航班的请求,并跳转到FlightManage.jsp界面  -->

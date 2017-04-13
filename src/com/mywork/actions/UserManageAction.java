@@ -17,9 +17,9 @@ import com.mywork.dao.SubDao;
 public class UserManageAction {
 	private Map<String, Object> map = new LinkedHashMap<String, Object>();
 	
-	private String username;
-	private String password;
-	private int authority;
+	private String username="";
+	private String password="";
+	private int authority=-1;
 	
 	public int getAuthority() {
 		return authority;
@@ -69,42 +69,47 @@ public class UserManageAction {
 		}
 		
 		ArrayList<User> alist = new ArrayList<User>();
-		SubDao userdao,userdao2;
+		SubDao userdao;
 		userdao = new SubDao();
 		userdao.openDB();
 		
-		String sql = "select top "+pSize+" * from t_user where username not in ( select top "
-	        		+(cPage-1)*pSize+" username from t_user";
 		//添加可能的搜索限定条件1
 		String limit = "";
 		String limit2 = "";//控制首部以and开头
-		
-		if(username!=null&&!(username.equals(""))){
-			limit = AddConstraints(limit);
-			limit+="username like '%"+username+"%'";
-			limit2+=" and ";
-			limit2+="username like '%"+username+"%'";
-		}
-		if(password!=null&&!(password.equals(""))){
-			limit = AddConstraints(limit);
-			limit+="password like '%"+password+"%'";
-			limit2+=" and ";
-			limit2+="password like '%"+password+"%'";
-		}
-		if(authority!=0){
+		if(authority>=0){
 			limit = AddConstraints(limit);
 			limit+="authority like '%"+authority+"%'";
 			limit2+=" and ";
 			limit2+="authority like '%"+authority+"%'";
 		}
 		
-		sql+=limit;
-		sql+=" order by username "+sort_username+")";
-		sql+=limit2;//添加可能的搜索限定条件2
-		sql+= " order by authority "+sort_username;
-		if(limit.equals("")){//若limit为空，则搜索栏为空，从第一页开始抓数据
+		if(!(username.equals(""))){
+			limit = AddConstraints(limit);
+			limit+="username like '%"+username+"%'";
+			limit2+=" and ";
+			limit2+="username like '%"+username+"%'";
+		}
+		
+		if(!(password.equals(""))){
+			limit = AddConstraints(limit);
+			limit+="password like '%"+password+"%'";
+			limit2+=" and ";
+			limit2+="password like '%"+password+"%'";
+		}
+		if(!(limit.equals(""))){//不为""说明开启了搜索条件
 			cPage=1;
 		}
+		if(cPage==0){//若为0则从第一页开始显示
+			cPage+=1;
+		}
+		
+
+		String sql = "select top "+pSize+" * from t_user where username not in ( select top "
+	        		+(cPage-1)*pSize+" username from t_user";
+		sql+=limit;
+		sql+=" order by pass_id "+sort_username+")";
+		sql+=limit2;//添加可能的搜索限定条件2
+		sql+= " order by pass_id "+sort_username;
 		ResultSet rs = userdao.executeQuery(sql);
 		while(rs.next()){
 			User p=new User();
@@ -128,34 +133,40 @@ public class UserManageAction {
 	}
 	
 	//执行删除操作，并产生删除状态
-	public String DeleteUser(){
+	public String DeleteUser() throws IOException{
+		SubDao userdao;
+		userdao = new SubDao();
+		userdao.openDB();
 		HttpServletRequest request = ServletActionContext.getRequest();
-		String un = request.getParameter("username");
-		
-		int isDeletedSuccess=0;
-		try {
-			SubDao userDao;
-			userDao = new SubDao();
-			userDao.openDB();
-			String sql = "delete from t_user where username="+un;
-			isDeletedSuccess = userDao.executeUpdate(sql);
-			userDao.closeDB();
-		} catch (IOException e) {
-			e.printStackTrace();
+		String parameter = request.getParameter("data");
+		String[] data = parameter.split(",");
+		for (int i=0;i<data.length;i++) {
+			int isDeletedSuccess=0;
+			String sql = "delete from t_user where username="+data[i];
+			isDeletedSuccess = userdao.executeUpdate(sql);
+			map.put(data[i], isDeletedSuccess);
 		}
+		userdao.closeDB();
 		ServletActionContext.getResponse().setHeader("Access-Control-Allow-Origin", "*");
-		map.put("isDeletedSuccess", isDeletedSuccess);
 		return "success";
 	}
 	
-	/*public String AddUser() throws IOException{
-		SubDao delivererDao = new SubDao();
-		delivererDao.openDB();
-		user_sex = user_sex.equals("男")?"1":"0";
-		String sql="insert into t_user values('"+user_id+"','"+user_name+"','"+
-		user_age+"','"+user_sex+"','"+user_idcard+"','"+user_passport+"','"+user_phone+"','"+user_email+"')";
-		delivererDao.executeUpdate(sql);
-		delivererDao.closeDB();
+	public String AddUser() throws IOException{
+		SubDao userdao = new SubDao();
+		userdao.openDB();
+		String sql="insert into t_user values('"+username+"','"+password+"','"+authority+"')";
+		int count = userdao.executeUpdate(sql);
+		userdao.closeDB();
+		map.put("status", count);
 		return "success";
-	}*/
+	}
+	public String EditUser() throws IOException{
+		SubDao userdao = new SubDao();
+		userdao.openDB();
+		String sql="update t_user set password='"+password+"',authority="+authority+" where username='"+username+"'";
+		int count = userdao.executeUpdate(sql);
+		userdao.closeDB();
+		map.put("status", count);
+		return "success";
+	}
 }
