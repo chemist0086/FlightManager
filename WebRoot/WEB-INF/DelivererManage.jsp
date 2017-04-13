@@ -72,12 +72,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <form action="" method="post" id="editForm">
         <ul class="editInfos">
-          <li class="text"><label><span>员工编号:</span><input type="text" name="pass_id" readonly="value" value="" class="ipt ipt-id" /></label></li>
-          <li class="text"><label><span>员工姓名:</span><input type="text" name="pass_name" value=""  class="ipt ipt-name" /></label></li>
-          <li class="text"><label><span>年龄:</span><input type="text" name="pass_age" value=""  class="ipt ipt-age" /></label></li>
-          <li class="text"><label><span>性别:</span><select  name="pass_sex" value=""  class="ipt ipt-sex"><option value ="男">男</option><option value ="女">女</option></select><!-- <input type="text" name="pass_sex" value=""  class="ipt ipt-sex" /> --></label></li>
-          <li class="text"><label><span>联系方式:</span><input type="text" name="pass_phone" value=""  class="ipt ipt-phone" /></label></li>
-          <li class="text"><label><span>E-mail:</span><input type="text" name="pass_email" value=""  class="ipt ipt-email" /></label></li>
+          <li class="text"><label><span>员工编号:</span><input type="text" name="deli_id" readonly="value" value="" class="ipt ipt-id" /></label></li>
+          <li class="text"><label><span>员工姓名:</span><input type="text" name="deli_name" value=""  class="ipt ipt-name" /></label></li>
+          <li class="text"><label><span>年龄:</span><input type="text" name="deli_age" value=""  class="ipt ipt-age" /></label></li>
+          <li class="text"><label><span>性别:</span><select  name="deli_sex" value=""  class="ipt ipt-sex"><option value ="男">男</option><option value ="女">女</option></select><!-- <input type="text" name="pass_sex" value=""  class="ipt ipt-sex" /> --></label></li>         
+          <li class="text"><label><span>联系方式:</span><input type="text" name="deli_phone" value=""  class="ipt ipt-phone" /></label></li>
+          <li class="text"><label><span>E-mail:</span><input type="text" name="deli_email" value=""  class="ipt ipt-email" /></label></li>   
           <li class="btn"><input type="button" value="确认提交" class="submitBtn"/></li>
         </ul>
       </form>
@@ -92,12 +92,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <form action="" method="post" id="editForm">
         <ul class="editInfos">
-          <li class="text"><label><span>员工编号:</span><input type="text" name="pass_id" readonly="value" value="" class="ipt ipt-id" /></label></li>
-          <li class="text"><label><span>员工姓名:</span><input type="text" name="pass_name" value=""  class="ipt ipt-name" /></label></li>
-          <li class="text"><label><span>年龄:</span><input type="text" name="pass_age" value=""  class="ipt ipt-age" /></label></li>
-          <li class="text"><label><span>性别:</span><select  name="pass_sex" value=""  class="ipt ipt-sex"><option value ="男">男</option><option value ="女">女</option></select><!-- <input type="text" name="pass_sex" value=""  class="ipt ipt-sex" /> --></label></li>         
-          <li class="text"><label><span>联系方式:</span><input type="text" name="pass_phone" value=""  class="ipt ipt-phone" /></label></li>
-          <li class="text"><label><span>E-mail:</span><input type="text" name="pass_email" value=""  class="ipt ipt-email" /></label></li>          
+          <li class="text"><label><span>员工编号:</span><input type="text" name="deli_id" readonly="value" value="" class="ipt ipt-id" /></label></li>
+          <li class="text"><label><span>员工姓名:</span><input type="text" name="deli_name" value=""  class="ipt ipt-name" /></label></li>
+          <li class="text"><label><span>年龄:</span><input type="text" name="deli_age" value=""  class="ipt ipt-age" /></label></li>
+          <li class="text"><label><span>性别:</span><select  name="deli_sex" value=""  class="ipt ipt-sex"><option value ="男">男</option><option value ="女">女</option></select><!-- <input type="text" name="pass_sex" value=""  class="ipt ipt-sex" /> --></label></li>         
+          <li class="text"><label><span>联系方式:</span><input type="text" name="deli_phone" value=""  class="ipt ipt-phone" /></label></li>
+          <li class="text"><label><span>E-mail:</span><input type="text" name="deli_email" value=""  class="ipt ipt-email" /></label></li>          
           <li class="btn"><input type="button" value="确认提交" class="submitBtn"/></li>
         </ul>
       </form>

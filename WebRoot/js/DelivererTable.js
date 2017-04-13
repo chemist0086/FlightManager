@@ -68,8 +68,8 @@ var table = document.querySelector('table');
     	  			deli_name: document.querySelector('[name="deli_name"]').value,
     	  			deli_age: document.querySelector('[name="deli_age"]').value,
     	  			deli_sex: document.querySelector('[name="deli_sex"]').value,
-    	  			pass_phone: document.querySelector('[name="pass_phone"]').value,
-    	  			pass_email: document.querySelector('[name="pass_email"]').value,
+    	  			deli_phone: document.querySelector('[name="deli_phone"]').value,
+    	  			deli_email: document.querySelector('[name="deli_email"]').value,
     	  			cPageEmpty: 1
         	      };
     	  	table.GM('setQuery', _query).GM('refreshGrid', function () {
@@ -130,8 +130,8 @@ var table = document.querySelector('table');
 	  			deli_name: document.querySelector('[name="deli_name"]').value,
 	  			deli_age: document.querySelector('[name="deli_age"]').value,
 	  			deli_sex: document.querySelector('[name="deli_sex"]').value,
-	  			pass_phone: document.querySelector('[name="pass_phone"]').value,
-	  			pass_email: document.querySelector('[name="pass_email"]').value,
+	  			deli_phone: document.querySelector('[name="deli_phone"]').value,
+	  			deli_email: document.querySelector('[name="deli_email"]').value,
 	  			cPageEmpty: 1
     	      };
 	  	table.GM('setQuery', _query).GM('refreshGrid', function () {
@@ -201,17 +201,17 @@ var table = document.querySelector('table');
         		alert("请填写必须要填写的选项！");
         	} else {
                 $.ajax({
-                    url: 'addPassenger.action',
+                    url: 'addDeliverer.action',
                     type: 'post',
                     async: false,
                     dataType: 'json',
                     data: {
-                      deli_id: $("#dialogAdd .editInfos").children(":eq(0)").find("input").val(),
-                      deli_name: $("#dialogAdd .editInfos").children(":eq(1)").find("input").val(),
-                      deli_age: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),
-                      pass_sex: $("#dialogAdd .editInfos").children(":eq(3)").find("select").val(),
-                      pass_phone: $("#dialogAdd .editInfos ").children(":eq(4)").find("input").val(),
-                      pass_email: $("#dialogAdd .editInfos").children(":eq(5)").find("input").val()         
+                        deli_id: $("#dialogAdd .editInfos").children(":eq(0)").find("input").val(),
+                        deli_name: $("#dialogAdd .editInfos").children(":eq(1)").find("input").val(),
+                        deli_age: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),
+                        deli_sex: $("#dialogAdd .editInfos").children(":eq(3)").find("select").val(),
+                        deli_phone: $("#dialogAdd .editInfos ").children(":eq(4)").find("input").val(),
+                        deli_email: $("#dialogAdd .editInfos").children(":eq(5)").find("input").val()         
                     },
                     success: function(data, status) {
                       if(data.status=="1"){
@@ -264,18 +264,19 @@ var table = document.querySelector('table');
         	if ($("span.editWarning").length != 0){
         		alert("请填写必须要填写的选项！");
         	} else {
+        		console.log($("#dialogAdd .editInfos").children(":eq(0)").find("input"));
                 $.ajax({
-                    url: 'editPassenger.action',
+                    url: 'editDeliverer.action',
                     type: 'post',
                     async: false,
                     dataType: 'json',
                     data: {
-                        deli_id: $("#dialogAdd .editInfos").children(":eq(0)").find("input").val(),
-                        deli_name: $("#dialogAdd .editInfos").children(":eq(1)").find("input").val(),
-                        deli_age: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),
-                        pass_sex: $("#dialogAdd .editInfos").children(":eq(3)").find("select").val(),
-                        pass_phone: $("#dialogAdd .editInfos ").children(":eq(4)").find("input").val(),
-                        pass_email: $("#dialogAdd .editInfos").children(":eq(5)").find("input").val()       
+                        deli_id: $("#dialogEdit .editInfos").children(":eq(0)").find("input").val(),
+                        deli_name: $("#dialogEdit .editInfos").children(":eq(1)").find("input").val(),
+                        deli_age: $("#dialogEdit .editInfos").children(":eq(2)").find("input").val(),
+                        deli_sex: $("#dialogEdit .editInfos").children(":eq(3)").find("select").val(),
+                        deli_phone: $("#dialogEdit .editInfos ").children(":eq(4)").find("input").val(),
+                        deli_email: $("#dialogEdit .editInfos").children(":eq(5)").find("input").val()       
                     },
                     success: function(data, status) {
                       if(data.status=="1"){
