@@ -20,7 +20,15 @@ public class UserManageAction {
 	private String username="";
 	private String password="";
 	private int authority=-1;
+	private String newPassword="";
 	
+	
+	public String getNewPassword() {
+		return newPassword;
+	}
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
 	public int getAuthority() {
 		return authority;
 	}
@@ -169,6 +177,15 @@ public class UserManageAction {
 		System.out.println(sql);
 		int count = userdao.executeUpdate(sql);
 		userdao.closeDB();
+		map.put("status", count);
+		return "success";
+	}
+	public String ChangePassword() throws IOException{
+		User user = (User) ServletActionContext.getRequest().getSession().getAttribute("LoginSuccess");
+		SubDao dbsql = new SubDao();
+		dbsql.openDB();
+		String sql="update t_user set password='"+newPassword+"' where username='"+user.getUsername()+"'";
+		int count = dbsql.executeUpdate(sql);
 		map.put("status", count);
 		return "success";
 	}

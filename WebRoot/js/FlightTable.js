@@ -159,7 +159,7 @@ var table = document.querySelector('table');
         	}
         	var params = dataArray.join();
             $.ajax({
-                url: 'deletePassenger.action',
+                url: 'deleteFlight.action',
                 type: 'post',
                 async: false,
                 dataType: 'json',
@@ -203,7 +203,7 @@ var table = document.querySelector('table');
         		alert("请填写必须要填写的选项！");
         	} else {
                 $.ajax({
-                    url: 'addPassenger.action',
+                    url: 'addFlight.action',
                     type: 'post',
                     async: false,
                     dataType: 'json',
@@ -211,9 +211,9 @@ var table = document.querySelector('table');
                         flight_id: $("#dialogAdd .editInfos").children(":eq(0)").find("input").val(),
                         dep_city: $("#dialogAdd .editInfos").children(":eq(1)").find("input").val(),
                         arr_city: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),
-                        flight_data: $("#dialogAdd .editInfos").children(":eq(4)").find("input").val(),
-                        dep_time: $("#dialogAdd .editInfos").children(":eq(5)").find("input").val(),
-                        arr_time: $("#dialogAdd .editInfos ").children(":eq(6)").find("input").val(),          
+                        flight_date: $("#dialogAdd .editInfos").children(":eq(3)").find("input").val(),
+                        dep_time: $("#dialogAdd .editInfos").children(":eq(4)").find("input").val(),
+                        arr_time: $("#dialogAdd .editInfos ").children(":eq(5)").find("input").val(),          
                     },
                     success: function(data, status) {
                       if(data.status=="1"){
@@ -272,7 +272,7 @@ var table = document.querySelector('table');
         		alert("请填写必须要填写的选项！");
         	} else {
                 $.ajax({
-                    url: 'editPassenger.action',
+                    url: 'editFlight.action',
                     type: 'post',
                     async: false,
                     dataType: 'json',

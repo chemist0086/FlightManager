@@ -83,6 +83,7 @@ public class FlightManageAction {
 
 
 	public void setArr_time(String arr_time) {
+		System.out.println("arr_time:"+arr_time);
 		String[] split = arr_time.split("T");
 		this.arr_time = split[0]+" "+split[1];
 	}
@@ -211,7 +212,7 @@ public class FlightManageAction {
 		String[] data = parameter.split(",");
 		for (int i=0;i<data.length;i++) {
 			int isDeletedSuccess=0;
-			String sql = "delete from t_flight where flight_id="+data[i];
+			String sql = "delete from t_flight where flight_id='"+data[i]+"'";
 			isDeletedSuccess = flightdao.executeUpdate(sql);
 			map.put(data[i], isDeletedSuccess);
 		}
