@@ -72,7 +72,8 @@ public class FlightManageAction {
 
 
 	public void setDep_time(String dep_time) {
-		this.dep_time = dep_time;
+		String[] split = dep_time.split("T");
+		this.dep_time = split[0]+" "+split[1];
 	}
 
 
@@ -82,7 +83,8 @@ public class FlightManageAction {
 
 
 	public void setArr_time(String arr_time) {
-		this.arr_time = arr_time;
+		String[] split = arr_time.split("T");
+		this.arr_time = split[0]+" "+split[1];
 	}
 	
 	public Map<String, Object> getMap() {
@@ -149,15 +151,15 @@ public class FlightManageAction {
 		}
 		if(!(dep_time.equals(""))){
 			limit = AddConstraints(limit);
-			limit+="dep_time like '%"+dep_time+"%'";
+			limit+="dep_time='"+dep_time+"'";
 			limit2+=" and ";
-			limit2+="dep_time like '%"+dep_time+"%'";
+			limit2+="dep_time ='"+dep_time+"'";
 		}
 		if(!(arr_time.equals(""))){
 			limit = AddConstraints(limit);
-			limit+="arr_time like '%"+arr_time+"%'";
+			limit+="arr_time ='"+arr_time+"'";
 			limit2+=" and ";
-			limit2+="arr_time like '%"+arr_time+"%'";
+			limit2+="arr_time ='"+arr_time+"'";
 		}
 		if(!(limit.equals(""))){//不为""说明开启了搜索条件
 			cPage=1;
@@ -171,7 +173,6 @@ public class FlightManageAction {
 		sql+=" order by flight_id "+sort_flight_id+")";
 		sql+=limit2;//添加可能的搜索限定条件2
 		sql+= " order by flight_id "+sort_flight_id;
-		System.out.println(sql);
 		ResultSet rs = flightdao.executeQuery(sql);
 		while(rs.next()){
 			Flight p=new Flight();
