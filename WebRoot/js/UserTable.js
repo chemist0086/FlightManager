@@ -50,14 +50,9 @@ var table = document.querySelector('table');
       // 排序前事件
       ,sortingBefore: function (data) {
     	  	var _query = {
-    	  			pass_id: document.querySelector('[name="pass_id"]').value,
-    	  			pass_name: document.querySelector('[name="pass_name"]').value,
-    	  			pass_age: document.querySelector('[name="pass_age"]').value,
-    	  			pass_sex: document.querySelector('[name="pass_sex"]').value,
-    	  			pass_idcard: document.querySelector('[name="pass_idcard"]').value,
-    	  			pass_passport: document.querySelector('[name="pass_passport"]').value,
-    	  			pass_phone: document.querySelector('[name="pass_phone"]').value,
-    	  			pass_email: document.querySelector('[name="pass_email"]').value,
+    	  			username: document.querySelector('[name="username"]').value,
+    	  			password: document.querySelector('[name="password"]').value,
+    	  			authority: document.querySelector('[name="authority"]').value,
     	  			cPageEmpty: 1
         	      };
     	  	table.GM('setQuery', _query).GM('refreshGrid', function () {

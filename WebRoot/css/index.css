@@ -105,7 +105,8 @@ html, body {
 
 /*===========================一级导航==============================================*/
 .nav-main{
-	position: fixed;
+	position: absolute;
+	left: 0;
 	top: 0;
 	z-index: 12;
 	height: 100%;

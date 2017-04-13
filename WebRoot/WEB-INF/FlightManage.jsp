@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <div class="sa-ele">
         <label class="se-title">航班日期:</label>
-        <input class="se-con" name="dep_date" type="date"/>
+        <input class="se-con" name="flight_date" type="date"/>
       </div>   
       <div class="sa-ele">
         <label class="se-title">出发时间:</label>
@@ -81,7 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <li class="text"><label><span>航班编号:</span><input type="text" name="pass_name" value=""  class="ipt ipt-id" /></label></li>
           <li class="text"><label><span>出发地:</span><input type="text" name="pass_age" value=""  class="ipt ipt-depCity" /></label></li>
           <li class="text"><label><span>到达地:</span><input type="text" name="pass_sex" value=""  class="ipt ipt-arrCity" /></label></li>
-          <li class="text"><label><span>航班日期:</span><input type="date" name="pass_sex" value=""  class="ipt ipt-arrCity" /></label></li>
+          <li class="text"><label><span>航班日期:</span><input type="date" name="pass_sex" value=""  class="ipt ipt-flightTime" /></label></li>
           <li class="text"><label><span>出发时间:</span><input type="datetime-local" name="pass_idcard" value=""  class="ipt ipt-depTime" /></label></li>
           <li class="text"><label><span>到达时间:</span><input type="datetime-local" name="pass_passport" value=""  class="ipt ipt-arrTime" /></label></li>
           <li class="btn"><input type="button" value="确认提交" class="submitBtn"/></li>
@@ -101,7 +101,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <li class="text"><label><span>航班编号:</span><input type="text" name="pass_name" value=""  class="ipt ipt-id" /></label></li>
           <li class="text"><label><span>出发地:</span><input type="text" name="pass_age" value=""  class="ipt ipt-depCity" /></label></li>
           <li class="text"><label><span>到达地:</span><input type="text" name="pass_sex" value=""  class="ipt ipt-arrCity" /></label></li>
-          <li class="text"><label><span>航班日期:</span><input type="date" name="pass_sex" value=""  class="ipt ipt-arrCity" /></label></li>
+          <li class="text"><label><span>航班日期:</span><input type="date" name="pass_sex" value=""  class="ipt ipt-flightTime" /></label></li>
           <li class="text"><label><span>出发时间:</span><input type="datetime-local" name="pass_idcard" value=""  class="ipt ipt-depTime" /></label></li>
           <li class="text"><label><span>到达时间:</span><input type="datetime-local" name="pass_passport" value=""  class="ipt ipt-arrTime" /></label></li>
           <li class="btn"><input type="button" value="确认提交" class="submitBtn"/></li>
