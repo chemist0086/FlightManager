@@ -60,19 +60,17 @@ var table = document.querySelector('table');
       // 排序前事件
       ,sortingBefore: function (data) {
     	  	var _query = {
-    	  			pass_id: document.querySelector('[name="pass_id"]').value,
-    	  			pass_name: document.querySelector('[name="pass_name"]').value,
-    	  			pass_age: document.querySelector('[name="pass_age"]').value,
-    	  			pass_sex: document.querySelector('[name="pass_sex"]').value,
-    	  			pass_idcard: document.querySelector('[name="pass_idcard"]').value,
-    	  			pass_passport: document.querySelector('[name="pass_passport"]').value,
-    	  			pass_phone: document.querySelector('[name="pass_phone"]').value,
-    	  			pass_email: document.querySelector('[name="pass_email"]').value,
+    	  			flight_id: document.querySelector('[name="flight_id"]').value,
+    	  			dep_city: document.querySelector('[name="dep_city"]').value,
+    	  			arr_city: document.querySelector('[name="arr_city"]').value,
+    	  			flight_date: document.querySelector('[name="flight_date"]').value,
+    	  			dep_time: document.querySelector('[name="dep_time"]').value,
+    	  			arr_time: document.querySelector('[name="arr_time"]').value,
     	  			cPageEmpty: 1
         	      };
     	  	table.GM('setQuery', _query).GM('refreshGrid', function () {
     	  		console.log('搜索成功...');
-        });
+    	  	});
         console.log('sortBefore', data);
       }
       // 排序后事件
@@ -123,32 +121,29 @@ var table = document.querySelector('table');
 
     // 绑定搜索事件
     document.querySelector('.search-action').addEventListener('click', function () {
-      var _query = {
-        pass_id: document.querySelector('[name="pass_id"]').value,
-        pass_name: document.querySelector('[name="pass_name"]').value,
-        pass_age: document.querySelector('[name="pass_age"]').value,
-        pass_sex: document.querySelector('[name="pass_sex"]').value,
-        pass_idcard: document.querySelector('[name="pass_idcard"]').value,
-        pass_passport: document.querySelector('[name="pass_passport"]').value,
-        pass_phone: document.querySelector('[name="pass_phone"]').value,
-        pass_email: document.querySelector('[name="pass_email"]').value,
-        cPageEmpty: 1
-      };
-      table.GM('setQuery', _query).GM('refreshGrid', function () {
-        console.log('搜索成功...');
-      });
+	  	var _query = {
+	  			flight_id: document.querySelector('[name="flight_id"]').value,
+	  			dep_city: document.querySelector('[name="dep_city"]').value,
+	  			arr_city: document.querySelector('[name="arr_city"]').value,
+	  			flight_date: document.querySelector('[name="flight_date"]').value,
+	  			dep_time: document.querySelector('[name="dep_time"]').value,
+	  			arr_time: document.querySelector('[name="arr_time"]').value,
+	  			cPageEmpty: 1
+    	      };
+	  	console.log(document.querySelector('[name="flight_date"]').value);
+	  	table.GM('setQuery', _query).GM('refreshGrid', function () {
+	  		console.log('搜索成功...');
+	  	});
     });
 
     // 绑定重置
     document.querySelector('.reset-action').addEventListener('click', function () {
-      document.querySelector('[name="pass_id"]').value = '';
-      document.querySelector('[name="pass_name"]').value = '';
-      document.querySelector('[name="pass_age"]').value = '';
-      document.querySelector('[name="pass_sex"]').value = '';
-      document.querySelector('[name="pass_idcard"]').value = '';
-      document.querySelector('[name="pass_passport"]').value = '';
-      document.querySelector('[name="pass_phone"]').value = '';
-      document.querySelector('[name="pass_email"]').value = '';
+      document.querySelector('[name="flight_id"]').value = '';
+      document.querySelector('[name="dep_city"]').value = '';
+      document.querySelector('[name="arr_city"]').value = '';
+      document.querySelector('[name="flight_date"]').value = '';
+      document.querySelector('[name="dep_time"]').value = '';
+      document.querySelector('[name="arr_time"]').value = '';
     });
             
     //删除/添加/编辑乘机人
@@ -190,7 +185,7 @@ var table = document.querySelector('table');
         $(".search-area .sa-ele .add-action").click(function() {        	
         	var selectCount = 0;
     		var inputCount = ":eq("+selectCount+")";
-    		var COLUM = 10;
+    		var COLUM = 6;
         	while (selectCount < COLUM){
         		inputCount = ":eq("+selectCount+")";
         		$("#dialogAdd .editInfos").children(inputCount).find("input").val();
@@ -198,11 +193,7 @@ var table = document.querySelector('table');
         	}       	       	
         });
       //提交添加
-        $("#dialogAdd .editInfos .btn .submitBtn").click(function(){
-        	var pass_sex = $("#dialogAdd .editInfos").children(":eq(3)").find("select").val();
-        	if (pass_sex == "/"){
-        		pass_sex = "";
-        	}       	   	
+        $("#dialogAdd .editInfos .btn .submitBtn").click(function(){    	   	
         	if ($("span.editWarning").length != 0){
         		alert("请填写必须要填写的选项！");
         	} else {
@@ -212,14 +203,12 @@ var table = document.querySelector('table');
                     async: false,
                     dataType: 'json',
                     data: {
-                      pass_id: $("#dialogAdd .editInfos").children(":eq(0)").find("input").val(),
-                      pass_name: $("#dialogAdd .editInfos").children(":eq(1)").find("input").val(),
-                      pass_age: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),
-                      pass_sex: pass_sex,
-                      pass_idcard: $("#dialogAdd .editInfos").children(":eq(4)").find("input").val(),
-                      pass_passport: $("#dialogAdd .editInfos").children(":eq(5)").find("input").val(),
-                      pass_phone: $("#dialogAdd .editInfos ").children(":eq(6)").find("input").val(),
-                      pass_email: $("#dialogAdd .editInfos").children(":eq(7)").find("input").val()         
+                        flight_id: $("#dialogEdit .editInfos").children(":eq(0)").find("input").val(),
+                        dep_city: $("#dialogEdit .editInfos").children(":eq(1)").find("input").val(),
+                        arr_city: $("#dialogEdit .editInfos").children(":eq(2)").find("input").val(),
+                        flight_data: $("#dialogEdit .editInfos").children(":eq(4)").find("input").val(),
+                        dep_time: $("#dialogEdit .editInfos").children(":eq(5)").find("input").val(),
+                        arr_time: $("#dialogEdit .editInfos ").children(":eq(6)").find("input").val(),          
                     },
                     success: function(data, status) {
                       if(data.status=="1"){
@@ -228,7 +217,8 @@ var table = document.querySelector('table');
                         $(".search-area .sa-ele .add-action").click(function() {        	
                         	var selectCount = 0;
                     		var inputCount = ":eq("+selectCount+")";
-                        	while (selectCount < 10){
+                    		var COLUM = 6;
+                        	while (selectCount < COLUM){
                         		inputCount = ":eq("+selectCount+")";
                         		$("#dialogAdd .editInfos").children(inputCount).find("input").val();
                         		selectCount++;
@@ -252,27 +242,17 @@ var table = document.querySelector('table');
         	var selectCount = 0;
     		var inputCount = ":eq("+selectCount+")";
     		var valueCount = ":eq("+(selectCount + 2)+")";
-    		var COLUM = 10;
+    		var COLUM = 6;
         	while (selectCount < COLUM){
         		inputCount = ":eq("+selectCount+")";
         		valueCount = ":eq("+(selectCount + 2)+")";
         		$("#dialogEdit .editInfos").children(inputCount).find("input").val($(this).parents("tr").children(valueCount).text());
         		selectCount++;
-        	}
-        	var sex = $(this).parents("tr").children(":eq(5)").text();
-        	if (sex == "男" || sex == "女") {
-        		$("#dialogEdit .editInfos").children(":eq(3)").find("select").val(sex);
-        	} else {
-        		$("#dialogEdit .editInfos").children(":eq(3)").find("select").val("/");
-        	}       		        	
+        	}      		        	
         }); 
         
         //提交修改
-        $("#dialogEdit .editInfos .btn .submitBtn").click(function(){
-        	var pass_sex = $("#dialogEdit .editInfos").children(":eq(3)").find("select").val();
-        	if (pass_sex == "/"){
-        		pass_sex = "";
-        	}       	   	
+        $("#dialogEdit .editInfos .btn .submitBtn").click(function(){     	   	
         	if ($("span.editWarning").length != 0){
         		alert("请填写必须要填写的选项！");
         	} else {
@@ -282,14 +262,12 @@ var table = document.querySelector('table');
                     async: false,
                     dataType: 'json',
                     data: {
-                      pass_id: $("#dialogEdit .editInfos").children(":eq(0)").find("input").val(),
-                      pass_name: $("#dialogEdit .editInfos").children(":eq(1)").find("input").val(),
-                      pass_age: $("#dialogEdit .editInfos").children(":eq(2)").find("input").val(),
-                      pass_sex: pass_sex,
-                      pass_idcard: $("#dialogEdit .editInfos").children(":eq(4)").find("input").val(),
-                      pass_passport: $("#dialogEdit .editInfos").children(":eq(5)").find("input").val(),
-                      pass_phone: $("#dialogEdit .editInfos ").children(":eq(6)").find("input").val(),
-                      pass_email: $("#dialogEdit .editInfos").children(":eq(7)").find("input").val()         
+                      flight_id: $("#dialogEdit .editInfos").children(":eq(0)").find("input").val(),
+                      dep_city: $("#dialogEdit .editInfos").children(":eq(1)").find("input").val(),
+                      arr_city: $("#dialogEdit .editInfos").children(":eq(2)").find("input").val(),
+                      flight_data: $("#dialogEdit .editInfos").children(":eq(4)").find("input").val(),
+                      dep_time: $("#dialogEdit .editInfos").children(":eq(5)").find("input").val(),
+                      arr_time: $("#dialogEdit .editInfos ").children(":eq(6)").find("input").val(),     
                     },
                     success: function(data, status) {
                       if(data.status=="1"){
