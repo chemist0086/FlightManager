@@ -225,6 +225,7 @@ public class FlightManageAction {
 		flightdao.openDB();
 		String sql="insert into t_flight values('"+flight_id+"','"+dep_city+"','"+
 				arr_city+"','"+flight_date+"','"+dep_time+"','"+arr_time+"')";
+		System.out.println(sql);
 		int count = flightdao.executeUpdate(sql);
 		flightdao.closeDB();
 		map.put("status", count);
