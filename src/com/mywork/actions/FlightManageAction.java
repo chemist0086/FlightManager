@@ -168,10 +168,10 @@ public class FlightManageAction {
 		String sql = "select top "+pSize+" * from t_flight where flight_id not in ( select top "
         		+(cPage-1)*pSize+" flight_id from t_flight";
 		sql+=limit;
-		sql+=" order by pass_id "+sort_flight_id+")";
+		sql+=" order by flight_id "+sort_flight_id+")";
 		sql+=limit2;//添加可能的搜索限定条件2
-		sql+= " order by pass_id "+sort_flight_id;
-		
+		sql+= " order by flight_id "+sort_flight_id;
+		System.out.println(sql);
 		ResultSet rs = flightdao.executeQuery(sql);
 		while(rs.next()){
 			Flight p=new Flight();
