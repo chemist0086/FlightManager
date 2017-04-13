@@ -85,13 +85,15 @@ public class OrderManageAction {
 		return dep_time;
 	}
 	public void setDep_time(String dep_time) {
-		this.dep_time = dep_time;
+		String[] split = dep_time.split("T");
+		this.dep_time = split[0]+" "+split[1];
 	}
 	public String getArr_time() {
 		return arr_time;
 	}
 	public void setArr_time(String arr_time) {
-		this.arr_time = arr_time;
+		String[] split = arr_time.split("T");
+		this.arr_time = split[0]+" "+split[1];
 	}
 	public int getDeli_id() {
 		return deli_id;

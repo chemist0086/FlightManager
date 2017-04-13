@@ -161,7 +161,7 @@ public class DelivererManageAction {
 		sql+=" order by deli_id "+sort_deli_id+")";
 		sql+=limit2;//添加可能的搜索限定条件2
 		sql+= " order by deli_id "+sort_deli_id;
-		
+		System.out.println(sql);
 		ResultSet rs = delivererdao.executeQuery(sql);
 		while(rs.next()){
 			Deliverer p=new Deliverer();

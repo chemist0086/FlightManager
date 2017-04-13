@@ -72,7 +72,8 @@ public class FlightManageAction {
 
 
 	public void setDep_time(String dep_time) {
-		this.dep_time = dep_time;
+		String[] split = dep_time.split("T");
+		this.dep_time = split[0]+" "+split[1];
 	}
 
 
@@ -82,7 +83,9 @@ public class FlightManageAction {
 
 
 	public void setArr_time(String arr_time) {
-		this.arr_time = arr_time;
+		System.out.println("arr_time:"+arr_time);
+		String[] split = arr_time.split("T");
+		this.arr_time = split[0]+" "+split[1];
 	}
 	
 	public Map<String, Object> getMap() {
@@ -149,15 +152,15 @@ public class FlightManageAction {
 		}
 		if(!(dep_time.equals(""))){
 			limit = AddConstraints(limit);
-			limit+="dep_time like '%"+dep_time+"%'";
+			limit+="dep_time='"+dep_time+"'";
 			limit2+=" and ";
-			limit2+="dep_time like '%"+dep_time+"%'";
+			limit2+="dep_time ='"+dep_time+"'";
 		}
 		if(!(arr_time.equals(""))){
 			limit = AddConstraints(limit);
-			limit+="arr_time like '%"+arr_time+"%'";
+			limit+="arr_time ='"+arr_time+"'";
 			limit2+=" and ";
-			limit2+="arr_time like '%"+arr_time+"%'";
+			limit2+="arr_time ='"+arr_time+"'";
 		}
 		if(!(limit.equals(""))){//不为""说明开启了搜索条件
 			cPage=1;
@@ -171,7 +174,6 @@ public class FlightManageAction {
 		sql+=" order by flight_id "+sort_flight_id+")";
 		sql+=limit2;//添加可能的搜索限定条件2
 		sql+= " order by flight_id "+sort_flight_id;
-		System.out.println(sql);
 		ResultSet rs = flightdao.executeQuery(sql);
 		while(rs.next()){
 			Flight p=new Flight();
@@ -210,7 +212,7 @@ public class FlightManageAction {
 		String[] data = parameter.split(",");
 		for (int i=0;i<data.length;i++) {
 			int isDeletedSuccess=0;
-			String sql = "delete from t_flight where flight_id="+data[i];
+			String sql = "delete from t_flight where flight_id='"+data[i]+"'";
 			isDeletedSuccess = flightdao.executeUpdate(sql);
 			map.put(data[i], isDeletedSuccess);
 		}
@@ -224,6 +226,7 @@ public class FlightManageAction {
 		flightdao.openDB();
 		String sql="insert into t_flight values('"+flight_id+"','"+dep_city+"','"+
 				arr_city+"','"+flight_date+"','"+dep_time+"','"+arr_time+"')";
+		System.out.println(sql);
 		int count = flightdao.executeUpdate(sql);
 		flightdao.closeDB();
 		map.put("status", count);

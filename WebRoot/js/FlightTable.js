@@ -159,7 +159,7 @@ var table = document.querySelector('table');
         	}
         	var params = dataArray.join();
             $.ajax({
-                url: 'deletePassenger.action',
+                url: 'deleteFlight.action',
                 type: 'post',
                 async: false,
                 dataType: 'json',
@@ -203,7 +203,7 @@ var table = document.querySelector('table');
         		alert("请填写必须要填写的选项！");
         	} else {
                 $.ajax({
-                    url: 'addPassenger.action',
+                    url: 'addFlight.action',
                     type: 'post',
                     async: false,
                     dataType: 'json',
@@ -272,7 +272,7 @@ var table = document.querySelector('table');
         		alert("请填写必须要填写的选项！");
         	} else {
                 $.ajax({
-                    url: 'editPassenger.action',
+                    url: 'editFlight.action',
                     type: 'post',
                     async: false,
                     dataType: 'json',

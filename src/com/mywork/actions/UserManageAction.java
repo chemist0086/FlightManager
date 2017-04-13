@@ -20,7 +20,15 @@ public class UserManageAction {
 	private String username="";
 	private String password="";
 	private int authority=-1;
+	private String newPassword="";
 	
+	
+	public String getNewPassword() {
+		return newPassword;
+	}
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
 	public int getAuthority() {
 		return authority;
 	}
@@ -142,9 +150,10 @@ public class UserManageAction {
 		String[] data = parameter.split(",");
 		for (int i=0;i<data.length;i++) {
 			int isDeletedSuccess=0;
-			String sql = "delete from t_user where username="+data[i];
+			String sql = "delete from t_user where username='"+data[i]+"'";
 			isDeletedSuccess = userdao.executeUpdate(sql);
 			map.put(data[i], isDeletedSuccess);
+			System.out.println(data[i]+isDeletedSuccess);
 		}
 		userdao.closeDB();
 		ServletActionContext.getResponse().setHeader("Access-Control-Allow-Origin", "*");
@@ -155,6 +164,7 @@ public class UserManageAction {
 		SubDao userdao = new SubDao();
 		userdao.openDB();
 		String sql="insert into t_user values('"+username+"','"+password+"','"+authority+"')";
+		System.out.println(sql);
 		int count = userdao.executeUpdate(sql);
 		userdao.closeDB();
 		map.put("status", count);
@@ -164,8 +174,18 @@ public class UserManageAction {
 		SubDao userdao = new SubDao();
 		userdao.openDB();
 		String sql="update t_user set password='"+password+"',authority="+authority+" where username='"+username+"'";
+		System.out.println(sql);
 		int count = userdao.executeUpdate(sql);
 		userdao.closeDB();
+		map.put("status", count);
+		return "success";
+	}
+	public String ChangePassword() throws IOException{
+		User user = (User) ServletActionContext.getRequest().getSession().getAttribute("LoginSuccess");
+		SubDao dbsql = new SubDao();
+		dbsql.openDB();
+		String sql="update t_user set password='"+newPassword+"' where username='"+user.getUsername()+"'";
+		int count = dbsql.executeUpdate(sql);
 		map.put("status", count);
 		return "success";
 	}
