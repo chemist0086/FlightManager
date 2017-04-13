@@ -33,32 +33,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="myTableArea" style="display: inline-block; left:200px; position: absolute;">
     <div class="search-area">
       <div class="sa-ele">
-        <label class="se-title">订单编号:</label>
-        <input class="se-con" name="order_id"/>
-      </div>
-      <div class="sa-ele">
         <label class="se-title">航班编号:</label>
         <input class="se-con" name="flight_id"/>
       </div>
       <div class="sa-ele">
-        <label class="se-title">乘客编号:</label>
-        <input class="se-con" name="pass_id"/>
+        <label class="se-title">出发城市:</label>
+        <input class="se-con" name="dep_city"/>
       </div>
       <div class="sa-ele">
-        <label class="se-title">送票员编号:</label>
-        <input class="se-con" name="deli_id"/>
+        <label class="se-title">到达城市:</label>
+        <input class="se-con" name="arr_city"/>
       </div>
+      <div class="sa-ele">
+        <label class="se-title">航班日期:</label>
+        <input class="se-con" name="dep_date" type="date"/>
+      </div>   
+      <div class="sa-ele">
+        <label class="se-title">出发时间:</label>
+        <input class="se-con" name="dep_time" type="datetime-local"/>
+      </div>      
+      <div class="sa-ele">
+        <label class="se-title">到达时间:</label>
+        <input class="se-con" name="arr_time" type="datetime-local"/>
+      </div>      
       <div class="sa-ele">
         <button class="search-action">搜索</button>
         <button class="reset-action">重置</button>
         <span style="display: inline-block; font-size: 20px; color: grey; user-select: none; margin-right: 15px">||</span>
         <button class="delete-action">删除</button>
+        <button class="add-action bounceInDownAdd">添加</button>
       </div>
     </div>
     <br/>
     <table style="overflow: scroll"></table>
   </div>
-  <script src="js/OrderTable.js"></script>
+  <script src="js/FlightTable.js"></script>
   
   <!-- 编辑功能弹窗   -->
   <div class="pop-edit">
@@ -68,19 +77,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <a href="javascript:;" class="claseDialogBtn" onclick="refreshWarning()">关闭</a>
       </div>
       <form action="" method="post" id="editForm">
-        <ul class="editInfos">
-          <li class="text"><label><span>订单编号:</span><input type="text" name="pass_id" readonly="value" value="" class="ipt ipt-id" /></label></li>
-          <li class="text"><label><span>航班编号:</span><input type="text" name="pass_name" value=""  class="ipt ipt-flight" /></label></li>
-          <li class="text"><label><span>乘客编号:</span><input type="text" name="pass_age" value=""  class="ipt ipt-pass" /></label></li>
-          <li class="text"><label><span>送票员编号:</span><input type="text" name="pass_sex" value=""  class="ipt ipt-deli" /></label></li>
-          <li class="text"><label><span>原价:</span><input type="text" name="pass_idcard" value=""  class="ipt ipt-orig" /></label></li>
-          <li class="text"><label><span>实付款:</span><input type="text" name="pass_passport" value=""  class="ipt ipt-purc" /></label></li>
-          <li class="btn"><input type="button" value="确认提交" class="submitBtn" onclick="submitEdit()"/></li>
+        <ul class="editInfos">         
+          <li class="text"><label><span>航班编号:</span><input type="text" name="pass_name" value=""  class="ipt ipt-id" /></label></li>
+          <li class="text"><label><span>出发地:</span><input type="text" name="pass_age" value=""  class="ipt ipt-depCity" /></label></li>
+          <li class="text"><label><span>到达地:</span><input type="text" name="pass_sex" value=""  class="ipt ipt-arrCity" /></label></li>
+          <li class="text"><label><span>航班日期:</span><input type="date" name="pass_sex" value=""  class="ipt ipt-arrCity" /></label></li>
+          <li class="text"><label><span>出发时间:</span><input type="datetime-local" name="pass_idcard" value=""  class="ipt ipt-depTime" /></label></li>
+          <li class="text"><label><span>到达时间:</span><input type="datetime-local" name="pass_passport" value=""  class="ipt ipt-arrTime" /></label></li>
+          <li class="btn"><input type="button" value="确认提交" class="submitBtn"/></li>
         </ul>
       </form>
     </div>
   </div>
-
+	<!-- 添加航班弹窗   -->
+  <div class="pop-edit">
+  	<div id="dialogBgAdd"></div>
+    <div id="dialogAdd" class="animated">
+      <div class="dialogTop">
+        <a href="javascript:;" class="claseDialogBtn" onclick="refreshWarning()">关闭</a>
+      </div>
+      <form action="" method="post" id="editForm">
+        <ul class="editInfos">
+          <li class="text"><label><span>航班编号:</span><input type="text" name="pass_name" value=""  class="ipt ipt-id" /></label></li>
+          <li class="text"><label><span>出发地:</span><input type="text" name="pass_age" value=""  class="ipt ipt-depCity" /></label></li>
+          <li class="text"><label><span>到达地:</span><input type="text" name="pass_sex" value=""  class="ipt ipt-arrCity" /></label></li>
+          <li class="text"><label><span>航班日期:</span><input type="date" name="pass_sex" value=""  class="ipt ipt-arrCity" /></label></li>
+          <li class="text"><label><span>出发时间:</span><input type="datetime-local" name="pass_idcard" value=""  class="ipt ipt-depTime" /></label></li>
+          <li class="text"><label><span>到达时间:</span><input type="datetime-local" name="pass_passport" value=""  class="ipt ipt-arrTime" /></label></li>
+          <li class="btn"><input type="button" value="确认提交" class="submitBtn"/></li>
+        </ul>
+      </form>
+    </div>
+  </div>
   <!-- 密码修改弹窗 -->
   <div id="dialogBgPasswd"></div>
   <div id="dialogPasswd" class="animated">
@@ -90,8 +118,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <form action="" method="post" id="editForm">
       <ul class="editInfos">
-        <li class="text"><label><font color="#ff0000">* </font><span>新密码:</span><input type="password" name="" required value="" class="ipt" /></label></li>
-        <li class="text"><label><font color="#ff0000">* </font><span>确认密码:</span><input type="password" name="" required value="" class="ipt" /></label></li>
+        <li class="text"><label><font color="#ff0000">* </font><span>新密码:</span><input type="password" name="" required value="" class="ipt ipt-new" /></label></li>
+        <li class="text"><label><font color="#ff0000">* </font><span>确认密码:</span><input type="password" name="" required value="" class="ipt ipt-confirm" /></label></li>
         <li class="btn"><input type="submit" value="确认提交" class="submitBtn" /></li>
       </ul>
     </form>
@@ -123,7 +151,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <li><a href="javascript:;" class="bounceInDownPasswd">修改密码</a></li>       
         <%
     		User user =(User)session.getAttribute("LoginSuccess");
-    		if(user.getAuthority()==1){
+    		if(user.getAuthority() == 1){
     			out.print("<li class='accountMgr'><a href='toUserManagePage.action'>账户管理</a><li>");
     		}
      	%>
@@ -135,6 +163,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 </body>
 <script src="js/popUp.js"></script>
-<script src="js/formWarning.js"></script>
+<script src="js/flightFormWarning.js"></script>
 </body>
 </html>

@@ -29,6 +29,12 @@
 	<action name="deleteFlight" class="com.mywork.actions.FlightManageAction" method="DeleteFligt">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
+	<action name="editFlight" class="com.mywork.actions.FlightManageAction" method="EditFligt">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="addFlight" class="com.mywork.actions.FlightManageAction" method="AddFligt">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
 	<!-- order -->
 	<action name="generateOrderData" class="com.mywork.actions.OrderManageAction" method="GenerateData">
 	  <result type="json" name="success"><param name="root">map</param></result>
@@ -49,11 +55,23 @@
 	<action name="deleteUser" class="com.mywork.actions.UserManageAction" method="DeleteUser">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
+	<action name="editUser" class="com.mywork.actions.UserManageAction" method="EditUser">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="addUser" class="com.mywork.actions.UserManageAction" method="AddUser">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
 	<!-- deliverer -->
 	<action name="generateDelivererData" class="com.mywork.actions.DelivererManageAction" method="GenerateData">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
 	<action name="deleteDeliverer" class="com.mywork.actions.DelivererManageAction" method="DeleteDeliverer">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="editDeliverer" class="com.mywork.actions.DelivererManageAction" method="EditDeliverer">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="addDeliverer" class="com.mywork.actions.DelivererManageAction" method="AddDeliverer">
 	  <result type="json" name="success"><param name="root">map</param></result>
 	</action>
 	
