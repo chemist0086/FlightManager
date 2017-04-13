@@ -71,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <form action="" method="post" id="editForm">
         <ul class="editInfos">
-          <li class="text"><label><span>员工编号:</span><input type="text" name="deli_id" readonly="value" value="" class="ipt ipt-id" /></label></li>
+          <li class="text"><label><span>员工编号:</span><input type="text" name="deli_id" value="" class="ipt ipt-id" /></label></li>
           <li class="text"><label><span>员工姓名:</span><input type="text" name="deli_name" value=""  class="ipt ipt-name" /></label></li>
           <li class="text"><label><span>年龄:</span><input type="text" name="deli_age" value=""  class="ipt ipt-age" /></label></li>
           <li class="text"><label><span>性别:</span><select  name="deli_sex" value=""  class="ipt ipt-sex"><option value ="男">男</option><option value ="女">女</option></select><!-- <input type="text" name="pass_sex" value=""  class="ipt ipt-sex" /> --></label></li>         
