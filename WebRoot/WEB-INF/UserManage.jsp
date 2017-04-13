@@ -26,6 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<script src="js/navSideBar.js"></script>
   	<script type="text/javascript" src="./js/GridManager.js"></script>
   	<script type="text/javascript" src="./js/jquery-ui.js"></script>
+  	<script type="text/javascript" src="./js/EditPassword.js"></script>
   </head>
   
   <body>
@@ -83,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <form action="" method="post" id="editForm">
         <ul class="editInfos">
-          <li class="text"><label><span>用户名:</span><input type="text" name="pass_id" readonly="value" value="" class="ipt ipt-id" /></label></li>
+          <li class="text"><label><span>用户名:</span><input type="text" name="pass_id" value="" class="ipt ipt-id" /></label></li>
           <li class="text"><label><span>密码:</span><input type="text" name="pass_name" value=""  class="ipt ipt-flight" /></label></li>
           <li class="text"><label><span>权限:</span><select  name="authority" value=""  class="ipt ipt-authority"><option value ="0">普通用户</option><option value ="1">管理员</option></select></label></li>
           <li class="btn"><input type="button" value="确认提交" class="submitBtn"/></li>
@@ -145,6 +146,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 </body>
 <script src="js/popUp.js"></script>
-<script src="js/formWarning.js"></script>
+<script src="js/userFormWarning.js"></script>
 </body>
 </html>

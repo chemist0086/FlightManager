@@ -36,6 +36,7 @@ var table = document.querySelector('table');
           text: '性别',
         },{
           key: 'pass_idcard',
+          width: "150px",
           text: '身份证号',
         },{
           key: 'pass_passport',
@@ -56,10 +57,11 @@ var table = document.querySelector('table');
           text: '购票金额'
         }, {
           key: 'action',
-          width: "80px",
+          width: "180px",
           text: '操作',
           template: function(action, rowObject){
-              return '<span class="plugin-action edit-action" learnLink-id="'+rowObject.id+'"><a href="javascript:;" class="bounceInDownEdit editTable">编辑</a></span>';
+              return '<span class="plugin-action edit-action" learnLink-id="'+rowObject.id+'" style="margin-right: 1em;"><a href="javascript:;" class="bounceInDownEdit editTable">编辑</a></span>' + 
+              '<span class="plugin-action add-action" learnLink-id="'+rowObject.id+'"><a href="javascript:;" class="bounceInDownAddOrder addOrder">添加订单</a></span>';
           }
         }
       ]
@@ -251,7 +253,8 @@ var table = document.querySelector('table');
                         $(".search-area .sa-ele .add-action").click(function() {        	
                         	var selectCount = 0;
                     		var inputCount = ":eq("+selectCount+")";
-                        	while (selectCount < 10){
+                    		var COLUM = 10;
+                        	while (selectCount < COLUM){
                         		inputCount = ":eq("+selectCount+")";
                         		$("#dialogAdd .editInfos").children(inputCount).find("input").val();
                         		selectCount++;
@@ -321,6 +324,77 @@ var table = document.querySelector('table');
                       }
                       if(data.status=="0")
                       alert("修改失败！");
+                    },
+                    error: function(){
+                      alert("网络故障");
+                    }
+                  });
+        	}   	
+        });
+        /*=====================================添加订单===================================================*/
+        //清空表单
+        $('table').delegate('.addOrder', 'click', function() {
+        	var selectCount = 0;
+    		var inputCount = ":eq("+selectCount+")";
+    		var COLUM = 13;
+        	while (selectCount < COLUM){
+        		inputCount = ":eq("+selectCount+")";
+        		$("#dialogAdd .editInfos").children(inputCount).find("input").val();
+        		selectCount++;
+        	}  
+          });
+        //预填充表格
+        $("table").delegate('.addOrder', 'click', function(){        	
+        	var selectCount = 0;
+    		var inputCount = ":eq("+selectCount+")";
+    		var valueCount = ":eq("+(selectCount + 2)+")";
+    		var COLUM = 10;
+    		$("#dialogAddOrder .editInfos").children(":eq(1)").find("input").val($(this).parents("tr").children(":eq(2)").text());
+    		$("#dialogAddOrder .editInfos").children(":eq(2)").find("input").val($(this).parents("tr").children(":eq(3)").text());
+    		$("#dialogAddOrder .editInfos").children(":eq(3)").find("input").val($(this).parents("tr").children(":eq(6)").text());
+    		$("#dialogAddOrder .editInfos").children(":eq(4)").find("input").val($(this).parents("tr").children(":eq(7)").text());
+        }); 
+        //提交添加
+        $("#dialogAddOrder .editInfos .btn .submitBtn").click(function(){   	   	
+        	if ($("span.editWarning").length != 0){
+        		alert("请填写必须要填写的选项！");
+        	} else {
+                $.ajax({
+                    url: 'editOrder.action',
+                    type: 'post',
+                    async: false,
+                    dataType: 'json',
+                    data: {
+                        order_id: $("#dialogAdd .editInfos").children(":eq(0)").find("input").val(),
+                        pass_id: $("#dialogAdd .editInfos").children(":eq(1)").find("input").val(),
+                        pass_name: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),
+                        pass_idcard: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),
+                        pass_passport: $("#dialogAdd .editInfos").children(":eq(4)").find("input").val(),
+                        flight_id: $("#dialogAdd .editInfos").children(":eq(5)").find("input").val(),
+                        dep_city: $("#dialogAdd .editInfos ").children(":eq(6)").find("input").val(),
+                        arr_city: $("#dialogAdd .editInfos").children(":eq(7)").find("input").val(),
+                        dep_time: $("#dialogAdd .editInfos").children(":eq(8)").find("input").val(),
+                        arr_time: $("#dialogAdd .editInfos").children(":eq(9)").find("input").val(),
+                        deli_id: $("#dialogAdd .editInfos").children(":eq(10)").find("input").val(),
+                        deli_name: $("#dialogAdd .editInfos").children(":eq(11)").find("input").val(),
+                        price_purc: $("#dialogAdd .editInfos").children(":eq(12)").find("input").val(),       
+                    },
+                    success: function(data, status) {
+                      if(data.status=="1"){
+                        alert("添加成功！");
+                        //清空表单     	
+                        	var selectCount = 0;
+                    		var inputCount = ":eq("+selectCount+")";
+                    		var COLUM = 13
+                        	while (selectCount < 13){
+                        		inputCount = ":eq("+selectCount+")";
+                        		$("#dialogAdd .editInfos").children(inputCount).find("input").val();
+                        		selectCount++;
+                        	}       	       	
+                        window.location.reload();
+                      }
+                      if(data.status=="0")
+                      alert("添加失败！");
                     },
                     error: function(){
                       alert("网络故障");
