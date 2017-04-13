@@ -11,9 +11,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <title>航空管理系统</title>
   <base href="<%=basePath%>">
   <link rel="stylesheet" type="text/css" href="css/index.css">
+  <link rel="stylesheet" type="text/css" href="./css/editPopUp.css">
+  <link rel="stylesheet" type="text/css" href="./css/jquery-ui.css">
   <script src="js/jquery-3.2.0.js"></script>
   <script src="js/settingButton.js"></script>
   <script src="js/navSideBar.js"></script>
+  <script type="text/javascript" src="./js/jquery-ui.js"></script>
 </head>
 <body>
 <div class="main_body">  
@@ -36,7 +39,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
     </div>
   </div>
-
   <div class="setting_button_warpper">
     <section class="cd-section">
       <a class="cd-bouncy-nav-trigger">显示菜单</a>
@@ -45,18 +47,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="cd-bouncy-nav-modal">
     <nav>
       <ul class="cd-bouncy-nav">
-        <li><a href="#">修改密码</a></li>        
+        <li><a href="javascript:;" class="bounceInDownPasswd">修改密码</a></li>       
         <%
     		User user =(User)session.getAttribute("LoginSuccess");
     		if(user.getAuthority()==1){
-    			out.print("<li class='accountMgr'><a href='toUserManagePage.action' >账户管理</a><li>");
+    			out.print("<li class='accountMgr'><a href='toUserManagePage.action'>账户管理</a><li>");
     		}
      	%>
-     	<li class='logOut'><a href="Logout.action" class="logOut">退出登录</a></li>
+     	<li class="logOut"><a href="Logout.action">退出登录</a></li>
       </ul>
     </nav>
     <a class="cd-close">Close modal</a>
   </div>
+          <!-- 密码修改弹窗 -->
+  <div id="dialogBgPasswd"></div>
+  <div id="dialogPasswd" class="animated">
+    <img class="dialogIco" width="50" height="50" src="images/ico.png" alt="" />
+    <div class="dialogTop">
+      <a href="javascript:;" class="claseDialogBtn">关闭</a>      
+    </div>
+    <form action="" method="post" id="editForm">
+      <ul class="editInfos">
+        <li class="text"><label><font color="#ff0000">* </font><span>新密码:</span><input type="password" name="" required value="" class="ipt ipt-new" /></label></li>
+        <li class="text"><label><font color="#ff0000">* </font><span>确认密码:</span><input type="password" name="" required value="" class="ipt ipt-confirm" /></label></li>
+        <li class="btn"><input type="submit" value="确认提交" class="submitBtn" /></li>
+      </ul>
+    </form>
+  </div>
 </div>
 </body>
+<script src="js/popUp.js"></script>
 </html>

@@ -38,9 +38,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <input class="se-con" name="deli_age"/>
       </div>
       <div class="sa-ele">
-      <!-- TODO: 将性别输入修改了下拉菜单 -->
         <label class="se-title">性别:</label>
-        <select  name="pass_sex" value=""  class="ipt ipt-sex"><option value ="男">男</option><option value ="女">女</option></select>
+        <select name="deli_sex" value=""  class="se-con"><option value ="男">男</option><option value ="女">女</option></select>
       </div>
       <div class="sa-ele">
         <label class="se-title">联系方式:</label>
@@ -72,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <form action="" method="post" id="editForm">
         <ul class="editInfos">
-          <li class="text"><label><span>员工编号:</span><input type="text" name="deli_id" readonly="value" value="" class="ipt ipt-id" /></label></li>
+          <li class="text"><label><span>员工编号:</span><input type="text" name="deli_id" value="" class="ipt ipt-id" /></label></li>
           <li class="text"><label><span>员工姓名:</span><input type="text" name="deli_name" value=""  class="ipt ipt-name" /></label></li>
           <li class="text"><label><span>年龄:</span><input type="text" name="deli_age" value=""  class="ipt ipt-age" /></label></li>
           <li class="text"><label><span>性别:</span><select  name="deli_sex" value=""  class="ipt ipt-sex"><option value ="男">男</option><option value ="女">女</option></select><!-- <input type="text" name="pass_sex" value=""  class="ipt ipt-sex" /> --></label></li>         

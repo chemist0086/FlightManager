@@ -145,7 +145,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <form action="" method="post" id="editForm">
         <ul class="editInfos">
-          <li class="text"><label><span>订单编号:</span><input type="text" name="pass_id" readonly="value" value="" class="ipt ipt-orderId" /></label></li>
+          <li class="text"><label><span>订单编号:</span><input type="text" name="pass_id" value="" class="ipt ipt-orderId" /></label></li>
           <li class="text"><label><span>乘客编号:</span><input type="text" name="pass_name" value=""  class="ipt ipt-passId" /></label></li>
           <li class="text"><label><span>乘客姓名:</span><input type="text" name="pass_age" value=""  class="ipt ipt-passName" /></label></li>
           <li class="text"><label><span>乘客身份证:</span><input type="text" name="pass_age" value=""  class="ipt ipt-passName" /></label></li>
