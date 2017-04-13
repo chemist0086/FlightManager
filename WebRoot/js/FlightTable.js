@@ -9,7 +9,7 @@ var table = document.querySelector('table');
       ,supportAjaxPage:true
       ,supportSorting: true
       /*,ajax_url: 'http://www.lovejavascript.com/learnLinkManager/getLearnLinkList'*/
-      ,ajax_url: 'http://127.0.0.1:8080/myWork-05/generatePassengerData.action'
+      ,ajax_url: 'http://127.0.0.1:8080/myWork-05/generateFlightData.action'
   //    ,ajax_url: 'http://127.0.0.1:1314/learnLinkManager/getLearnLinkList'
   //      ,ajax_headers: {'header-test': 'baukh'}
       ,ajax_type: 'POST'
@@ -238,6 +238,14 @@ var table = document.querySelector('table');
         
         /*========================================编辑==========================================*/
         //预填充表格
+        //格式化日期
+        function formatDate(oriDate){
+        	var resArr = new Array();
+        	resArr = oriDate.split(" ");
+        	var res = resArr[0] + "T" + resArr[1].substr(0, 5);
+        	console.log(res);
+        	return res;
+        }
         $("table").delegate('.editTable', 'click', function(){        	
         	var selectCount = 0;
     		var inputCount = ":eq("+selectCount+")";
@@ -248,7 +256,9 @@ var table = document.querySelector('table');
         		valueCount = ":eq("+(selectCount + 2)+")";
         		$("#dialogEdit .editInfos").children(inputCount).find("input").val($(this).parents("tr").children(valueCount).text());
         		selectCount++;
-        	}      		        	
+        	}
+        	$("#dialogEdit .editInfos").children(":eq(4)").find("input").val(formatDate($(this).parents("tr").children(":eq(6)").text()));
+        	$("#dialogEdit .editInfos").children(":eq(5)").find("input").val(formatDate($(this).parents("tr").children(":eq(7)").text()));
         }); 
         
         //提交修改
@@ -284,3 +294,5 @@ var table = document.querySelector('table');
         	}   	
         });
     });
+    
+  
