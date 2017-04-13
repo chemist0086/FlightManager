@@ -313,17 +313,6 @@ var table = document.querySelector('table');
                     dataType: 'json',
                     data: {
                       order_id: $("#dialogEdit .editInfos").children(":eq(0)").find("input").val(),
-                      pass_id: $("#dialogEdit .editInfos").children(":eq(1)").find("input").val(),
-                      pass_name: $("#dialogEdit .editInfos").children(":eq(2)").find("input").val(),
-                      pass_idcard: $("#dialogEdit .editInfos").children(":eq(2)").find("input").val(),
-                      pass_passport: $("#dialogEdit .editInfos").children(":eq(4)").find("input").val(),
-                      flight_id: $("#dialogEdit .editInfos").children(":eq(5)").find("input").val(),
-                      dep_city: $("#dialogEdit .editInfos ").children(":eq(6)").find("input").val(),
-                      arr_city: $("#dialogEdit .editInfos").children(":eq(7)").find("input").val(),
-                      dep_time: $("#dialogEdit .editInfos").children(":eq(8)").find("input").val(),
-                      arr_time: $("#dialogEdit .editInfos").children(":eq(9)").find("input").val(),
-                      deli_id: $("#dialogEdit .editInfos").children(":eq(10)").find("input").val(),
-                      deli_name: $("#dialogEdit .editInfos").children(":eq(11)").find("input").val(),
                       price_purc: $("#dialogEdit .editInfos").children(":eq(12)").find("input").val(),
                     },
                     success: function(data, status) {

@@ -9,7 +9,7 @@ var table = document.querySelector('table');
       ,supportAjaxPage:true
       ,supportSorting: true
       /*,ajax_url: 'http://www.lovejavascript.com/learnLinkManager/getLearnLinkList'*/
-      ,ajax_url: 'http://127.0.0.1:8080/myWork-05/generatePassengerData.action'
+      ,ajax_url: 'http://127.0.0.1:8080/myWork-05/generateDelivererData.action'
   //    ,ajax_url: 'http://127.0.0.1:1314/learnLinkManager/getLearnLinkList'
   //      ,ajax_headers: {'header-test': 'baukh'}
       ,ajax_type: 'POST'
@@ -196,11 +196,7 @@ var table = document.querySelector('table');
         	}       	       	
         });
       //提交添加
-        $("#dialogAdd .editInfos .btn .submitBtn").click(function(){
-        	var pass_sex = $("#dialogAdd .editInfos").children(":eq(3)").find("select").val();
-        	if (pass_sex == "/"){
-        		pass_sex = "";
-        	}       	   	
+        $("#dialogAdd .editInfos .btn .submitBtn").click(function(){	   	
         	if ($("span.editWarning").length != 0){
         		alert("请填写必须要填写的选项！");
         	} else {
@@ -213,7 +209,7 @@ var table = document.querySelector('table');
                       deli_id: $("#dialogAdd .editInfos").children(":eq(0)").find("input").val(),
                       deli_name: $("#dialogAdd .editInfos").children(":eq(1)").find("input").val(),
                       deli_age: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),
-                      pass_sex: pass_sex,
+                      pass_sex: $("#dialogAdd .editInfos").children(":eq(3)").find("select").val(),
                       pass_phone: $("#dialogAdd .editInfos ").children(":eq(4)").find("input").val(),
                       pass_email: $("#dialogAdd .editInfos").children(":eq(5)").find("input").val()         
                     },
@@ -264,11 +260,7 @@ var table = document.querySelector('table');
         }); 
         
         //提交修改
-        $("#dialogEdit .editInfos .btn .submitBtn").click(function(){
-        	var pass_sex = $("#dialogEdit .editInfos").children(":eq(3)").find("select").val();
-        	if (pass_sex == "/"){
-        		pass_sex = "";
-        	}       	   	
+        $("#dialogEdit .editInfos .btn .submitBtn").click(function(){    	   	
         	if ($("span.editWarning").length != 0){
         		alert("请填写必须要填写的选项！");
         	} else {
@@ -281,9 +273,9 @@ var table = document.querySelector('table');
                         deli_id: $("#dialogAdd .editInfos").children(":eq(0)").find("input").val(),
                         deli_name: $("#dialogAdd .editInfos").children(":eq(1)").find("input").val(),
                         deli_age: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),
-                        pass_sex: pass_sex,
+                        pass_sex: $("#dialogAdd .editInfos").children(":eq(3)").find("select").val(),
                         pass_phone: $("#dialogAdd .editInfos ").children(":eq(4)").find("input").val(),
-                        pass_email: $("#dialogAdd .editInfos").children(":eq(5)").find("input").val()        
+                        pass_email: $("#dialogAdd .editInfos").children(":eq(5)").find("input").val()       
                     },
                     success: function(data, status) {
                       if(data.status=="1"){

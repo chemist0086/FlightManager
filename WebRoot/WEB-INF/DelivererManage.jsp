@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <div class="sa-ele">
       <!-- TODO: 将性别输入修改了下拉菜单 -->
         <label class="se-title">性别:</label>
-        <input class="se-con" name="deli_sex"/>
+        <select  name="pass_sex" value=""  class="ipt ipt-sex"><option value ="男">男</option><option value ="女">女</option></select>
       </div>
       <div class="sa-ele">
         <label class="se-title">联系方式:</label>
