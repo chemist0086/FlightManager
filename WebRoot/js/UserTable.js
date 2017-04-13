@@ -147,12 +147,17 @@ var table = document.querySelector('table');
                 	data: params
                 },
                 success: function(data, status) {
-                  if(data["5005"]=="0"){
-                    alert("交互成功！");
+                    var res = new Array();
+                	if(data.status=="0"){
+                        alert("删除失败！");
+                    } else {
+                    for (var i = 0; i < count; i++){
+                    	res[i] = "用户：" + dataArray[i] + (data[dataArray[i]] == 0 ? "无法删除\n": "删除成功\n");
+                    }
+                    var output = res.join("");
+                    alert(output);
                     window.location.reload();
                   }
-                  if(data.status=="0")
-                  alert("修改失败！");
                 },
                 error: function(){
                   alert("网络故障");
@@ -189,7 +194,7 @@ var table = document.querySelector('table');
                     data: {
                       username: $("#dialogAdd .editInfos").children(":eq(0)").find("input").val(),
                       password: $("#dialogAdd .editInfos").children(":eq(1)").find("input").val(),
-                      authority: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),       
+                      authority: $("#dialogAdd .editInfos").children(":eq(2)").find("select").val(),       
                     },
                     success: function(data, status) {
                       if(data.status=="1"){
@@ -233,11 +238,7 @@ var table = document.querySelector('table');
         }); 
         
         //提交修改
-        $("#dialogEdit .editInfos .btn .submitBtn").click(function(){
-        	var pass_sex = $("#dialogEdit .editInfos").children(":eq(3)").find("select").val();
-        	if (pass_sex == "/"){
-        		pass_sex = "";
-        	}       	   	
+        $("#dialogEdit .editInfos .btn .submitBtn").click(function(){     	   	
         	if ($("span.editWarning").length != 0){
         		alert("请填写必须要填写的选项！");
         	} else {
@@ -249,7 +250,7 @@ var table = document.querySelector('table');
                     data: {
                         username: $("#dialogEdit .editInfos").children(":eq(0)").find("input").val(),
                         password: $("#dialogEdit .editInfos").children(":eq(1)").find("input").val(),
-                        authority: $("#dialogEdit .editInfos").children(":eq(2)").find("input").val(),           
+                        authority: $("#dialogEdit .editInfos").children(":eq(2)").find("select").val(),           
                     },
                     success: function(data, status) {
                       if(data.status=="1"){
