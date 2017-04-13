@@ -139,7 +139,7 @@ var table = document.querySelector('table');
         	}
         	var params = dataArray.join();
             $.ajax({
-                url: 'deletePassenger.action',
+                url: 'deleteUser.action',
                 type: 'post',
                 async: false,
                 dataType: 'json',
@@ -182,7 +182,7 @@ var table = document.querySelector('table');
         		alert("请填写必须要填写的选项！");
         	} else {
                 $.ajax({
-                    url: 'addPassenger.action',
+                    url: 'addUser.action',
                     type: 'post',
                     async: false,
                     dataType: 'json',
@@ -242,14 +242,14 @@ var table = document.querySelector('table');
         		alert("请填写必须要填写的选项！");
         	} else {
                 $.ajax({
-                    url: 'editPassenger.action',
+                    url: 'editUser.action',
                     type: 'post',
                     async: false,
                     dataType: 'json',
                     data: {
-                        username: $("#dialogAdd .editInfos").children(":eq(0)").find("input").val(),
-                        password: $("#dialogAdd .editInfos").children(":eq(1)").find("input").val(),
-                        authority: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),           
+                        username: $("#dialogEdit .editInfos").children(":eq(0)").find("input").val(),
+                        password: $("#dialogEdit .editInfos").children(":eq(1)").find("input").val(),
+                        authority: $("#dialogEdit .editInfos").children(":eq(2)").find("input").val(),           
                     },
                     success: function(data, status) {
                       if(data.status=="1"){
