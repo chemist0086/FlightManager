@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="logo">
       <h1><span><img src="images/main_logo.png"></span></h1>
     </div>
-    <p>航班管理系统V1.0</p>
+    <p>航班管理系统V-0.1</p>
   </div>
   <div class="nav-main">
     <div class="nav-box">
