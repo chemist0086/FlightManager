@@ -162,7 +162,7 @@ var table = document.querySelector('table');
         	}
         	var params = dataArray.join();
             $.ajax({
-                url: 'deletePassenger.action',
+                url: 'deleteDeliverer.action',
                 type: 'post',
                 async: false,
                 dataType: 'json',

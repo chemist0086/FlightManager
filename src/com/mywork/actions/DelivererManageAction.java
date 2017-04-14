@@ -205,10 +205,12 @@ public class DelivererManageAction {
 		delivererdao.openDB();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String parameter = request.getParameter("data");
+		System.out.println(parameter);
 		String[] data = parameter.split(",");
 		for (int i=0;i<data.length;i++) {
 			int isDeletedSuccess=0;
-			String sql = "delete from t_deliverer where deli_id="+data[i];
+			String sql = "delete from t_deliverer where deli_id='"+data[i]+"'";
+			System.out.println(sql);
 			isDeletedSuccess = delivererdao.executeUpdate(sql);
 			map.put(data[i], isDeletedSuccess);
 		}
