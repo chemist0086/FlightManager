@@ -115,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <ul class="nav-ul">
           <li><a href="toWelcomePage.action" class="home"><span>首页</span></a></li>
           <li><a href="toPassengerManagePage.action" class="passenger"><span>乘机人管理</span></a></li>
-          <li><a href="toOrderManagePage.action" class="ticket"><span>机票管理</span></a></li>
+          <li><a href="toOrderManagePage.action" class="ticket"><span>订单管理</span></a></li>
           <li><a href="toDelivererManagePage.action" class="deli"><span>业务员管理</span></a></li>
           <li><a href="toFlightManagePage.action" class="flight"><span>航班管理</span></a></li>
         </ul>
