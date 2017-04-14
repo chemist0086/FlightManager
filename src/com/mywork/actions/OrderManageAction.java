@@ -24,6 +24,7 @@ public class OrderManageAction {
 	private int flight_id=-1;
 	private String dep_city="";
 	private String arr_city="";
+	private String dep_date="";
 	private String dep_time="";
 	private String arr_time="";
 	private int deli_id=-1;
@@ -87,6 +88,7 @@ public class OrderManageAction {
 	public void setDep_time(String dep_time) {
 		String[] split = dep_time.split("T");
 		this.dep_time = split[0]+" "+split[1];
+		this.dep_date = split[0];
 	}
 	public String getArr_time() {
 		return arr_time;
@@ -313,7 +315,7 @@ public class OrderManageAction {
 		int countForFlight = ordershowdao.getCount("t_flight", "flight_id", limitForFlight);
 		if(countForFlight==0){//原表中没有该航班信息说明需要新建行航班
 			String sqlForFlight = "insert into t_flight values('"+flight_id+"','"+dep_city+"','"+
-					arr_city+"','"+""+"','"+dep_time+"','"+arr_time+"')";
+					arr_city+"','"+dep_date+"','"+dep_time+"','"+arr_time+"')";
 			ordershowdao.executeUpdate(sqlForFlight);
 		}
 		String limitForDeliverer = " where deli_id="+deli_id;
