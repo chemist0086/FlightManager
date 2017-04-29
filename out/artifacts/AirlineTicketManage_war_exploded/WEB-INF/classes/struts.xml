@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+  <!-- 向ajax请求的页面传递json参数 -->
+  <package name="json"  namespace="/" extends="json-default">
+  	<action name="validateUser" class="com.mywork.actions.LoginAction" method="validateUser">
+  	<interceptor-ref name="defaultStack"></interceptor-ref>
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<!-- passerger -->
+  	<action name="generatePassengerData" class="com.mywork.actions.PassengerManageAction" method="GenerateData">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+  	<action name="deletePassenger" class="com.mywork.actions.PassengerManageAction" method="DeletePassenger">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="editPassenger" class="com.mywork.actions.PassengerManageAction" method="EditPassenger">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="addPassenger" class="com.mywork.actions.PassengerManageAction" method="AddPassenger">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<!-- flight -->
+  	<action name="generateFlightData" class="com.mywork.actions.FlightManageAction" method="GenerateData">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="deleteFlight" class="com.mywork.actions.FlightManageAction" method="DeleteFlight">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="editFlight" class="com.mywork.actions.FlightManageAction" method="EditFlight">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="addFlight" class="com.mywork.actions.FlightManageAction" method="AddFlight">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<!-- order -->
+	<action name="generateOrderData" class="com.mywork.actions.OrderManageAction" method="GenerateData">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="deleteOrder" class="com.mywork.actions.OrderManageAction" method="DeleteOrder">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="editOrder" class="com.mywork.actions.OrderManageAction" method="EditOrder">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="addOrder" class="com.mywork.actions.OrderManageAction" method="AddOrder">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<!-- user -->
+	<action name="generateUserData" class="com.mywork.actions.UserManageAction" method="GenerateData">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="deleteUser" class="com.mywork.actions.UserManageAction" method="DeleteUser">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="editUser" class="com.mywork.actions.UserManageAction" method="EditUser">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="addUser" class="com.mywork.actions.UserManageAction" method="AddUser">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="changePassword" class="com.mywork.actions.UserManageAction" method="ChangePassword">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<!-- deliverer -->
+	<action name="generateDelivererData" class="com.mywork.actions.DelivererManageAction" method="GenerateData">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="deleteDeliverer" class="com.mywork.actions.DelivererManageAction" method="DeleteDeliverer">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="editDeliverer" class="com.mywork.actions.DelivererManageAction" method="EditDeliverer">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	<action name="addDeliverer" class="com.mywork.actions.DelivererManageAction" method="AddDeliverer">
+	  <result type="json" name="success"><param name="root">map</param></result>
+	</action>
+	
+  </package>
+  
+  <package name="global" namespace="/" extends="struts-default">
+  	<!-- 配置拦截器 -->
+    <interceptors>
+    <!-- 定义权限拦截器 -->
+      <interceptor name="permissionInteceptor" class="com.mywork.interceptors.PermissionInterceptor"/>
+      <interceptor name="authorityInteceptor" class="com.mywork.interceptors.AuthorityInterceptors"/>
+      <interceptor-stack name="myStack">
+        <interceptor-ref name="permissionInteceptor"/>
+        <interceptor-ref name="defaultStack"/>
+      </interceptor-stack>
+    </interceptors>
+    
+    <!-- 设置action的默认拦截器，拦截未经登陆验证的请求 -->
+    <default-interceptor-ref name="myStack"/> 
+    
+    <!-- 全局视图 -->
+    <global-results>
+  	  <result name="fail">/WEB-INF/Fail.jsp</result>
+  	  <result name="loginFail">/index.html</result>
+  	  <result name="LoginSuccess">/WEB-INF/Welcome.jsp</result>
+    </global-results>
+    
+    
+    <!-- 跳转到welcome.jsp界面 -->
+    <action name="toWelcomePage">
+  	  <result>/WEB-INF/Welcome.jsp</result>
+  	</action>
+
+    <!-- 跳转到index.html界面 -->
+  	<action name="toLoginPage">
+  	  <result>/index.html</result>
+  	</action>
+  	
+  	<!-- 处理退出请求，并跳转到index.html界面(实际是尝试跳转到Welcome.jsp页面，但是会被拦截器拦截) -->
+  	<action name="Logout" class="com.mywork.actions.LogoutAction">
+  	  <!-- 此处必须使用重定向，因为index.html的window.location.href无法正常完成跳转，须保持浏览器地址
+  	  为myWork-05/toWelcomePage或myWork-05-->
+  	  <result type="redirectAction" name="LogoutSuccess">
+  	  	<param name="actionName">toWelcomePage</param>
+  	  </result>
+  	</action>
+  	
+  	
+  	<!-- 跳转到DelivererManage.jsp界面 -->
+  	<action name="toDelivererManagePage">
+  	  <result>/WEB-INF/DelivererManage.jsp</result>
+  	</action>
+  	
+  	<!-- 增加了authorityInteceptor,验证是否有权限跳转到UserManage.jsp界面 -->
+  	<action name="toUserManagePage" >
+  	  <result>/WEB-INF/UserManage.jsp</result>
+  	  <interceptor-ref name="authorityInteceptor"/>
+  	  <interceptor-ref name="myStack"/>
+  	</action>
+	
+	<!-- 跳转到PassengerManage.jsp界面  -->
+  	<action name="toPassengerManagePage">
+	  <result>/WEB-INF/PassengerManage.jsp</result>
+	</action>
+  	
+	<!-- 跳转到FlightManage.jsp界面  -->
+  	<action name="toFlightManagePage">
+	  <result>/WEB-INF/FlightManage.jsp</result>
+	</action>
+	
+	
+	<!-- 跳转到OrderManage.jsp界面  -->
+  	<action name="toOrderManagePage">
+	  <result>/WEB-INF/OrderManage.jsp</result>
+	</action>
+	
+  </package>
+  
+</struts>
