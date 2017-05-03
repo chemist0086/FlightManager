@@ -75,6 +75,8 @@ var table = document.querySelector('table');
       }
       // 排序前事件
       ,sortingBefore: function (data) {
+        // =====================================================================
+        // 在搜索结果中排序
     	  	var _query = {
     	  			pass_id: document.querySelector('[name="pass_id"]').value,
     	  			pass_name: document.querySelector('[name="pass_name"]').value,
@@ -84,11 +86,11 @@ var table = document.querySelector('table');
     	  			pass_passport: document.querySelector('[name="pass_passport"]').value,
     	  			pass_phone: document.querySelector('[name="pass_phone"]').value,
     	  			pass_email: document.querySelector('[name="pass_email"]').value,
-    	  			cPageEmpty: 1
         	      };
     	  	table.GM('setQuery', _query).GM('refreshGrid', function () {
     	  		console.log('搜索成功...');
         });
+        // =====================================================================
         console.log('sortBefore', data);
       }
       // 排序后事件

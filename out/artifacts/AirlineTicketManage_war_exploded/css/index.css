@@ -110,6 +110,7 @@ html, body {
 	top: 0;
 	z-index: 12;
 	height: 100%;
+    min-height: 700px;
 	width: 200px;
 	color: #fff;
 	background: #197dbf;
@@ -218,7 +219,6 @@ html, body {
 .nav-ul li a span {
 	font-size: 18px;
 }
-
 
 /*=============================================setting icon=================================*/
 #settingIcon {
