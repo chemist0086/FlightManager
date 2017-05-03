@@ -32,3 +32,8 @@ jQuery(document).ready(function($) {
         }
     }
 });
+
+
+$(function(){
+    $(".cd-bouncy-nav-trigger").draggable({ axis: "x", cancel: "span#show-menu"});
+})
