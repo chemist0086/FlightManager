@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b148bc5f-a452-4625-b170-44c8fdfed32a" name="Default" comment="完善了用户管理的删除和编辑逻辑，当管理员数量为1时，删除失败">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/AirlineTicketManage_war_exploded/WEB-INF/classes/com/mywork/actions/UserManageAction.class" afterPath="$PROJECT_DIR$/out/artifacts/AirlineTicketManage_war_exploded/WEB-INF/classes/com/mywork/actions/UserManageAction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/com/mywork/actions/UserManageAction.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/com/mywork/actions/UserManageAction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AirlineTicketManage.iml" afterPath="$PROJECT_DIR$/AirlineTicketManage.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/AirlineTicketManage_war_exploded/css/index.css" afterPath="$PROJECT_DIR$/out/artifacts/AirlineTicketManage_war_exploded/css/index.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mywork/actions/UserManageAction.java" afterPath="$PROJECT_DIR$/src/com/mywork/actions/UserManageAction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/css/index.css" afterPath="$PROJECT_DIR$/web/css/index.css" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -770,19 +764,27 @@
       <workItem from="1493788289919" duration="112000" />
       <workItem from="1493788429798" duration="1619000" />
       <workItem from="1493792038371" duration="2831000" />
-      <workItem from="1494391980650" duration="5931000" />
+      <workItem from="1494391980650" duration="6317000" />
     </task>
+    <task id="LOCAL-00001" summary="完善了用户管理的删除和编辑逻辑，当管理员数量为1时，删除失败">
+      <created>1494398015319</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1494398015319</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12727000" />
+    <option name="totallyTimeSpent" value="13113000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1303" height="780" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32886904" sideWeight="0.50730205" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32886904" sideWeight="0.50730205" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32986626" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -794,7 +796,7 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32886904" sideWeight="0.49269792" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32886904" sideWeight="0.49269792" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1213,33 +1215,33 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1494397876704" expanded="true" signature="73321:73363" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="73321:73381" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="73321:73394" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="73321:73409" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="73444:76086" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="73457:76071" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="73511:73915" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="73530:73900" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="73663:73880" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="73703:73846" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="73724:73824" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="73965:74271" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="73984:74256" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="74058:74236" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="74098:74202" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="74119:74180" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="74322:74636" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="74341:74621" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="74423:74601" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="74463:74567" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="74484:74545" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="74679:74985" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="74698:74970" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="74772:74950" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="74812:74916" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="74833:74894" ph="..." />
-            <marker date="1494397876704" expanded="true" signature="75036:75358" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="72523:72565" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="72523:72583" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="72523:72596" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="72523:72611" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="72646:75288" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="72659:75273" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="72713:73117" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="72732:73102" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="72865:73082" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="72905:73048" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="72926:73026" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="73167:73473" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="73186:73458" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="73260:73438" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="73300:73404" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="73321:73382" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="73524:73838" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="73543:73823" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="73625:73803" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="73665:73769" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="73686:73747" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="73881:74187" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="73900:74172" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="73974:74152" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="74014:74118" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="74035:74096" ph="..." />
+            <marker date="1494398241686" expanded="true" signature="74238:74560" ph="..." />
           </folding>
         </state>
       </provider>
