@@ -1,2 +1,7 @@
+<<<<<<< Updated upstream
 workspace.xml
 AirlineTicketManage.iml
+=======
+.idea/
+*.iml
+>>>>>>> Stashed changes

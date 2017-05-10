@@ -9,7 +9,7 @@ var table = document.querySelector('table');
       ,supportAjaxPage:true
       ,supportSorting: true
       /*,ajax_url: 'http://www.lovejavascript.com/learnLinkManager/getLearnLinkList'*/
-      ,ajax_url: 'http://127.0.0.1:8080/generateDelivererData.action'
+      ,ajax_url: 'http://127.0.0.1:8080/generateUserData.action'
   //    ,ajax_url: 'http://127.0.0.1:1314/learnLinkManager/getLearnLinkList'
   //      ,ajax_headers: {'header-test': 'baukh'}
       ,ajax_type: 'POST'
@@ -18,38 +18,24 @@ var table = document.querySelector('table');
       ,pageSize: 20
       ,sizeData: [5, 10, 15, 20]
       ,columnData: [{
-          key: 'deli_id',
-          width: '100px',
-          text: '员工编号',
+          key: 'username',
+          width: '80px',
+          text: '用户名',
           sorting: ''
         },{
-          key: 'deli_name',
-          width: '120px',
-          text: '员工姓名'
+          key: 'password',
+          width: '80px',
+          text: '密码'
         },{
-          key: 'deli_age',
-          width: "100px",
-          text: '年龄'
+          key: 'authority',
+          width: "60px",
+          text: '权限'
         },{
-          key: 'deli_sex',
-          width: "100px",
-          text: '性别',
-        },{
-          key: 'deli_phone',
-          text: '联系方式',
-        }, {
-          key: 'deli_email',
-          text: 'E-mail'
-        }, {
-          key: 'deli_count',
-          width: "120px",
-          text: '送票业绩'
-        }, {
           key: 'action',
-          width: "120px",
+          width: "80px",
           text: '操作',
           template: function(action, rowObject){
-              return '<span class="plugin-action edit-action" learnLink-id="'+rowObject.id+'"><a href="javascript:;" class="bounceInDownEdit editTable">编辑</a></span>';
+              return '<span class="plugin-action edit-action" learnLink-id="'+rowObject.id+'"><a href="javascript:;" class="bounce-in-down-edit edit-table">编辑</a></span>';
           }
         }
       ]
@@ -64,13 +50,9 @@ var table = document.querySelector('table');
       // 排序前事件
       ,sortingBefore: function (data) {
     	  	var _query = {
-    	  			deli_id: document.querySelector('[name="deli_id"]').value,
-    	  			deli_name: document.querySelector('[name="deli_name"]').value,
-    	  			deli_age: document.querySelector('[name="deli_age"]').value,
-    	  			deli_sex: document.querySelector('[name="deli_sex"]').value,
-    	  			deli_phone: document.querySelector('[name="deli_phone"]').value,
-    	  			deli_email: document.querySelector('[name="deli_email"]').value,
-    	  			cPageEmpty: 1
+    	  			username: document.querySelector('[name="username"]').value,
+    	  			password: document.querySelector('[name="password"]').value,
+    	  			authority: document.querySelector('[name="authority"]').value,
         	      };
     	  	table.GM('setQuery', _query).GM('refreshGrid', function () {
     	  		console.log('搜索成功...');
@@ -125,31 +107,25 @@ var table = document.querySelector('table');
 
     // 绑定搜索事件
     document.querySelector('.search-action').addEventListener('click', function () {
-	  	var _query = {
-	  			deli_id: document.querySelector('[name="deli_id"]').value,
-	  			deli_name: document.querySelector('[name="deli_name"]').value,
-	  			deli_age: document.querySelector('[name="deli_age"]').value,
-	  			deli_sex: document.querySelector('[name="deli_sex"]').value,
-	  			deli_phone: document.querySelector('[name="deli_phone"]').value,
-	  			deli_email: document.querySelector('[name="deli_email"]').value,
-	  			cPageEmpty: 1
-    	      };
-	  	table.GM('setQuery', _query).GM('refreshGrid', function () {
-	  		console.log('搜索成功...');
-	  	});
+      var _query = {
+        username: document.querySelector('[name="username"]').value,
+        password: document.querySelector('[name="password"]').value,
+        authority: document.querySelector('[name="authority"]').value,
+        cPageEmpty: 1
+      };
+      table.GM('setQuery', _query).GM('refreshGrid', function () {
+        console.log('搜索成功...');
+      });
     });
 
     // 绑定重置
     document.querySelector('.reset-action').addEventListener('click', function () {
-      document.querySelector('[name="deli_id"]').value = '';
-      document.querySelector('[name="deli_name"]').value = '';
-      document.querySelector('[name="deli_age"]').value = '';
-      document.querySelector('[name="deli_sex"]').value = '';
-      document.querySelector('[name="pass_phone"]').value = '';
-      document.querySelector('[name="pass_email"]').value = '';
+      document.querySelector('[name="username"]').value = '';
+      document.querySelector('[name="pass_npasswordame"]').value = '';
+      document.querySelector('[name="authority"]').value = '';
     });
             
-    //删除/添加/编辑送票员
+    //删除/添加/编辑乘机人
     $(function() {
     	/*========================================删除==========================================*/
         $(".search-area .sa-ele .delete-action").click(function() {
@@ -162,7 +138,7 @@ var table = document.querySelector('table');
         	}
         	var params = dataArray.join();
             $.ajax({
-                url: 'deleteDeliverer.action',
+                url: 'deleteUser.action',
                 type: 'post',
                 async: false,
                 dataType: 'json',
@@ -175,7 +151,7 @@ var table = document.querySelector('table');
                         alert("删除失败！");
                     } else {
                     for (var i = 0; i < count; i++){
-                    	res[i] = "业务员编号：" + dataArray[i] + (data[dataArray[i]] == 0 ? "无法删除\n": "删除成功\n");
+                    	res[i] = "用户：" + dataArray[i] + (data[dataArray[i]] == 0 ? "无法删除\n": "删除成功\n");
                     }
                     var output = res.join("");
                     alert(output);
@@ -193,30 +169,31 @@ var table = document.querySelector('table');
         $(".search-area .sa-ele .add-action").click(function() {        	
         	var selectCount = 0;
     		var inputCount = ":eq("+selectCount+")";
-    		var COLUM = 6;
+    		var COLUM = 10;
         	while (selectCount < COLUM){
         		inputCount = ":eq("+selectCount+")";
-        		$("#dialogAdd .editInfos").children(inputCount).find("input").val();
+        		$("#dialog-add .edit-infos").children(inputCount).find("input").val();
         		selectCount++;
         	}       	       	
         });
       //提交添加
-        $("#dialogAdd .editInfos .btn .submitBtn").click(function(){	   	
-        	if ($("span.editWarning").length != 0){
+        $("#dialog-add .edit-infos .btn .submit-btn").click(function(){
+        	var pass_sex = $("#dialog-add .edit-infos").children(":eq(3)").find("select").val();
+        	if (pass_sex == "/"){
+        		pass_sex = "";
+        	}       	   	
+        	if ($("span.edit-warning").length != 0){
         		alert("请填写必须要填写的选项！");
         	} else {
                 $.ajax({
-                    url: 'addDeliverer.action',
+                    url: 'addUser.action',
                     type: 'post',
                     async: false,
                     dataType: 'json',
                     data: {
-                        deli_id: $("#dialogAdd .editInfos").children(":eq(0)").find("input").val(),
-                        deli_name: $("#dialogAdd .editInfos").children(":eq(1)").find("input").val(),
-                        deli_age: $("#dialogAdd .editInfos").children(":eq(2)").find("input").val(),
-                        deli_sex: $("#dialogAdd .editInfos").children(":eq(3)").find("select").val(),
-                        deli_phone: $("#dialogAdd .editInfos ").children(":eq(4)").find("input").val(),
-                        deli_email: $("#dialogAdd .editInfos").children(":eq(5)").find("input").val()         
+                      username: $("#dialog-add .edit-infos").children(":eq(0)").find("input").val(),
+                      password: $("#dialog-add .edit-infos").children(":eq(1)").find("input").val(),
+                      authority: $("#dialog-add .edit-infos").children(":eq(2)").find("select").val(),
                     },
                     success: function(data, status) {
                       if(data.status=="1"){
@@ -225,9 +202,10 @@ var table = document.querySelector('table');
                         $(".search-area .sa-ele .add-action").click(function() {        	
                         	var selectCount = 0;
                     		var inputCount = ":eq("+selectCount+")";
-                        	while (selectCount < 6){
+                    		var COLUM = 3;
+                        	while (selectCount < 3){
                         		inputCount = ":eq("+selectCount+")";
-                        		$("#dialogAdd .editInfos").children(inputCount).find("input").val();
+                        		$("#dialog-add .edit-infos").children(inputCount).find("input").val();
                         		selectCount++;
                         	}       	       	
                         });
@@ -245,43 +223,33 @@ var table = document.querySelector('table');
         
         /*========================================编辑==========================================*/
         //预填充表格
-        $("table").delegate('.editTable', 'click', function(){        	
+        $("table").delegate('.edit-table', 'click', function(){
         	var selectCount = 0;
     		var inputCount = ":eq("+selectCount+")";
     		var valueCount = ":eq("+(selectCount + 2)+")";
-    		var COLUM = 6;
+    		var COLUM = 3;
         	while (selectCount < COLUM){
         		inputCount = ":eq("+selectCount+")";
         		valueCount = ":eq("+(selectCount + 2)+")";
-        		$("#dialogEdit .editInfos").children(inputCount).find("input").val($(this).parents("tr").children(valueCount).text());
+        		$("#dialog-edit .edit-infos").children(inputCount).find("input").val($(this).parents("tr").children(valueCount).text());
         		selectCount++;
-        	}
-        	var sex = $(this).parents("tr").children(":eq(5)").text();
-        	if (sex == "男" || sex == "女") {
-        		$("#dialogEdit .editInfos").children(":eq(3)").find("select").val(sex);
-        	} else {
-        		$("#dialogEdit .editInfos").children(":eq(3)").find("select").val("/");
-        	}       		        	
+        	}   		        	
         }); 
         
         //提交修改
-        $("#dialogEdit .editInfos .btn .submitBtn").click(function(){    	   	
-        	if ($("span.editWarning").length != 0){
+        $("#dialog-edit .edit-infos .btn .submit-btn").click(function(){
+        	if ($("span.edit-warning").length != 0){
         		alert("请填写必须要填写的选项！");
         	} else {
-        		console.log($("#dialogAdd .editInfos").children(":eq(0)").find("input"));
                 $.ajax({
-                    url: 'editDeliverer.action',
+                    url: 'editUser.action',
                     type: 'post',
                     async: false,
                     dataType: 'json',
                     data: {
-                        deli_id: $("#dialogEdit .editInfos").children(":eq(0)").find("input").val(),
-                        deli_name: $("#dialogEdit .editInfos").children(":eq(1)").find("input").val(),
-                        deli_age: $("#dialogEdit .editInfos").children(":eq(2)").find("input").val(),
-                        deli_sex: $("#dialogEdit .editInfos").children(":eq(3)").find("select").val(),
-                        deli_phone: $("#dialogEdit .editInfos ").children(":eq(4)").find("input").val(),
-                        deli_email: $("#dialogEdit .editInfos").children(":eq(5)").find("input").val()       
+                        username: $("#dialog-edit .edit-infos").children(":eq(0)").find("input").val(),
+                        password: $("#dialog-edit .edit-infos").children(":eq(1)").find("input").val(),
+                        authority: $("#dialog-edit .edit-infos").children(":eq(2)").find("select").val(),
                     },
                     success: function(data, status) {
                       if(data.status=="1"){

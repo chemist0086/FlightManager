@@ -1,96 +1,125 @@
-/* =============================================================================
-   HTML5 CSS Reset Minified - Eric Meyer
-   ========================================================================== */
-
-html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}
-body{line-height:1}
-article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
-nav ul{list-style:none}
-blockquote,q{quotes:none}
-blockquote:before,blockquote:after,q:before,q:after{content:none}
-a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent;text-decoration:none}
-mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}
-del{text-decoration:line-through}
-abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}
-table{border-collapse:collapse;border-spacing:0}
-hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}
-input,select{vertical-align:middle}
-li{list-style:none}
-
-
-/* =============================================================================
-   My CSS
-   ========================================================================== */
-
-/* ---- base ---- */
-
-html,body{ 
-	width:100%;
-	height:100%;
-	background:#111;
+body {
+    margin: 0;
+    padding: 0;    
 }
 
-html{
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+html, body{
+    height: 100%;
+    background: transparent;
 }
 
-body{
-  font:normal 75% Arial, Helvetica, sans-serif;
+#index-main {
+    text-align: center;
+    height: 100%;
+    background: transparent;
 }
 
-canvas{
-  display:block;
-  vertical-align:bottom;
+#index-main-body {
+    z-index: 1;
+    display: inline-block;
+    vertical-align: middle;
 }
 
-
-/* ---- stats.js ---- */
-
-.count-particles{
-  background: #000022;
-  position: absolute;
-  top: 48px;
-  left: 0;
-  width: 80px;
-  color: #13E8E9;
-  font-size: .8em;
-  text-align: left;
-  text-indent: 4px;
-  line-height: 14px;
-  padding-bottom: 2px;
-  font-family: Helvetica, Arial, sans-serif;
-  font-weight: bold;
+#index-main:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
 }
 
-.js-count-particles{
-  font-size: 1.1em;
+.index-logo img{
+    width: 200px;
+    height: 200px;
 }
 
-#stats,
-.count-particles{
-  -webkit-user-select: none;
-  margin-top: 5px;
-  margin-left: 5px;
+.index-logo #title{
+    margin: 30px;
+    font-size: 30px;
+    color: #166ca6;
 }
 
-#stats{
-  border-radius: 3px 3px 0 0;
-  overflow: hidden;
+#signin-flow {
+    height: 200px;
 }
 
-.count-particles{
-  border-radius: 0 0 3px 3px;
+#signin-flow form {
+    display: inline-block;
 }
 
+#group-inputs {
+    padding: 1px;
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+    display: inline-block;
+}
 
-/* ---- particles.js container ---- */
+#group-inputs input {
+    width: 300px;
+    height: 40px;
+}
+
+#input-username {
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+}
+
+#input-password {
+    border: 0;
+}
+
+#button-wrapper {
+    display: inline-block;
+    vertical-align: 50%;
+}
+
+#login-icon {
+    height: 32px;
+    width: 45px;
+}
 
 #particles-js{
-  width: 100%;
-  height: 100%;
-  background-color: #b61924;
-  background-image: url('');
-  background-size: cover;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background-color: #f7fafc;
+}
+
+#more {
+    margin-top: 20px;
+    width: 300px;
+}
+
+#more-ul {
+    padding: 0;
+    margin-top: 0;
+    text-align: left;
+}
+
+.more-li {
+    list-style-type: none;
+    display: inline-block;
+}
+
+#remember-me {
+    margin-right: 140px;
+}
+
+#iforget a:link,:visited {
+    text-decoration: none;
+    color: #404040;
+}
+
+#iforget a:hover {
+    text-decoration: underline;
+    color: #404040;
+}
+
+#more-button {
+    background: url(../img/show_button.png) no-repeat top left;
+    width: 300px;
+    height: 30px;
+    display: inline-block;
 }
