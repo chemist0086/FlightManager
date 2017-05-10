@@ -130,8 +130,8 @@ public class UserManageAction {
 		return "success";
 	}
 	
-	//执行删除操作，并产生删除状态
-	public String DeleteUser() throws IOException{
+	//执行删除操作，并产生删除状态,若管理员数量为1时删除失败
+	public String DeleteUser() throws IOException, SQLException {
 		SubDao userdao;
 		userdao = new SubDao();
 		userdao.openDB();
@@ -140,8 +140,27 @@ public class UserManageAction {
 		String[] data = parameter.split(",");
 		for (int i=0;i<data.length;i++) {
 			int isDeletedSuccess=0;
-			String sql = "delete from t_user where username='"+data[i]+"'";
-			isDeletedSuccess = userdao.executeUpdate(sql);
+			String sql3 = "select * from t_user where username='"+data[i]+"'";
+            ResultSet rs3 = userdao.executeQuery(sql3);
+            int authority=0;
+            int count=0;
+            if(rs3.next()){
+                authority = rs3.getInt("authority");
+            }
+            if(authority==1) {
+				String sql2 = "select count(*) as count from t_user where authority=1";
+				ResultSet rs = userdao.executeQuery(sql2);
+				if (rs.next()) {
+					count = rs.getInt("count");
+				}
+				if (count > 1) {
+					String sql = "delete from t_user where username='" + data[i] + "'";
+					isDeletedSuccess = userdao.executeUpdate(sql);
+				}
+			}else{
+				String sql = "delete from t_user where username='" + data[i] + "'";
+				isDeletedSuccess = userdao.executeUpdate(sql);
+			}
 			map.put(data[i], isDeletedSuccess);
 		}
 		userdao.closeDB();
@@ -158,13 +177,38 @@ public class UserManageAction {
 		map.put("status", count);
 		return "success";
 	}
-	public String EditUser() throws IOException{
+	public String EditUser() throws IOException, SQLException {
 		SubDao userdao = new SubDao();
 		userdao.openDB();
-		String sql="update t_user set password='"+password+"',authority="+authority+" where username='"+username+"'";
-		int count = userdao.executeUpdate(sql);
-		userdao.closeDB();
+		int count=0;
+		if(authority==0){
+			//查看登录账号是否为管理员
+			String sql3="select * from t_user where username='"+username+"'";
+			ResultSet rs3 = userdao.executeQuery(sql3);
+			int authority3=0;
+			if(rs3.next()){
+				authority3=rs3.getInt("authority");
+			}
+			if(authority3==1){
+				//查看当前管理员数量
+				String sql2="select count(*) as count from t_user where authority=1";
+				ResultSet rs2 = userdao.executeQuery(sql2);
+				int count2=0;
+				if(rs2.next()){
+					count2 = rs2.getInt("count");
+				}
+				if(count2!=1){
+					String sql="update t_user set password='"+password+"',authority="+authority+" where username='"+username+"'";
+					count = userdao.executeUpdate(sql);
+					map.put("status", count);
+				}
+			}
+		}else{
+			String sql="update t_user set password='"+password+"',authority="+authority+" where username='"+username+"'";
+			count = userdao.executeUpdate(sql);
+		}
 		map.put("status", count);
+		userdao.closeDB();
 		return "success";
 	}
 	public String ChangePassword() throws IOException{
