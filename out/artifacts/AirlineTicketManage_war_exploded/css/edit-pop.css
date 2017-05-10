@@ -1,0 +1,255 @@
+/*================================Animated Part==============================================*/
+.animated {
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both
+}
+
+@-webkit-keyframes bounce-in-down {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-2000px);
+        transform: translateY(-2000px);
+    }
+
+    60% {
+        opacity: 1;
+        -webkit-transform: translateY(30px);
+        transform: translateY(30px);
+    }
+
+    80% {
+        -webkit-transform: translateY(-10px);
+        transform: translateY(-10px);
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce-in-down {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-2000px);
+        -ms-transform: translateY(-2000px);
+        transform: translateY(-2000px);
+    }
+
+    60% {
+        opacity: 1;
+        -webkit-transform: translateY(30px);
+        -ms-transform: translateY(30px);
+        transform: translateY(30px);
+    }
+
+    80% {
+        -webkit-transform: translateY(-10px);
+        -ms-transform: translateY(-10px);
+        transform: translateY(-10px);
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+.bounce-in-down {
+    -webkit-animation-name: bounce-in-down;
+    animation-name: bounce-in-down;
+}
+
+@-webkit-keyframes bounce-out-up {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    20% {
+        opacity: 1;
+        -webkit-transform: translateY(20px);
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(-2000px);
+        transform: translateY(-2000px);
+    }
+}
+
+@keyframes bounce-out-up {
+    0% {
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    20% {
+        opacity: 1;
+        -webkit-transform: translateY(20px);
+        -ms-transform: translateY(20px);
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(-2000px);
+        -ms-transform: translateY(-2000px);
+        transform: translateY(-2000px);
+    }
+}
+
+.bounce-out-up {
+    -webkit-animation-name: bounce-out-up;
+    animation-name: bounce-out-up;
+}
+
+/*================================Animated Part==============================================*/
+
+/*================================Default Style==============================================*/
+
+#dialog-bg-add, #dialog-bg-edit, #dialog-bg-passwd, #dialog-bg-add-order {
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: .8;
+    filter: alpha(opacity=60);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: none;
+}
+
+#dialog-add, #dialog-edit, #dialog-passwd, #dialog-add-order {
+    text-align: center;
+    width: 35em;
+    height: 50em;
+    margin: 0 auto;
+    display: none;
+    background-color: #F0EFEF;
+    position: fixed;
+    top: auto;
+    left: 500px;
+    z-index: 10000;
+    border: 1px solid #ccc;
+}
+
+.dialog-top {
+    width: 90%;
+    margin: 0 auto;
+    border-bottom: 1px dotted #ccc;
+    letter-spacing: 1px;
+    padding: 10px 0;
+    text-align: right;
+}
+
+.dialog-ico {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    margin-left: -25px;
+}
+
+.edit-infos {
+    padding: 15px 0;
+}
+
+.edit-infos li {
+    width: 90%;
+    margin: 8px auto auto;
+    text-align: center;
+}
+
+.ipt {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 0 3px #ccc inset;
+    -webkit-box-shadow: 0 0 3px #ccc inset;
+    margin-left: 5px;
+    width: 20em;
+}
+
+.ipt:focus {
+    outline: none;
+    border-color: #66afe9;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+.submit-btn {
+    width: 90px;
+    height: 30px;
+    line-height: 30px;
+    font-family: "微软雅黑", "microsoft yahei";
+    cursor: pointer;
+    margin-top: 10px;
+    display: inline-block;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    text-align: center;
+    background-color: #428bca;
+    color: #fff;
+}
+
+/*================================Custom Style==============================================*/
+#dialog-bg-add, #dialog-bg-edit, #dialog-bg-passwd, #dialog-bg-add-order {
+    background-color: #BFBFBF;
+    opacity: .5;
+}
+
+#dialog-add ul.edit-infos li.text, #dialog-edit ul.edit-infos li.text, #dialog-passwd ul.edit-infos li.text, #dialog-add-order ul.edit-infos li.text {
+    line-height: 2.2em;
+    text-align: left;
+}
+
+#dialog-add ul.edit-infos li span, #dialog-edit ul.edit-infos li span, #dialog-passwd ul.edit-infos li span, #dialog-add-order ul.edit-infos li span {
+    display: inline-block;
+    width: 6em;
+}
+
+a.close {
+    text-decoration: none;
+    color: black;
+}
+
+#dialog-add, #dialog-edit, #dialog-passwd, #dialog-add-order {
+    text-align: center;
+    width: 35em;
+    height: auto;
+    background-color: #F0EFEF;
+    top: 25%;
+}
+
+a.close-dialog-btn:hover {
+    text-decoration: underline;
+    color: black;
+}
+
+#dialog-add ul, #dialog-edit ul, #dialog-passwd ul, #dialog-add-order ul {
+    list-style-type: none;
+}
+
+.ipt[readonly] {
+    color: grey;
+}
+
+span.edit-warning {
+    display: inline-block;
+    margin-left: 1em;
+    color: red;
+}
+
+select.ipt-sex {
+    height: 2.5em;
+    width: 21em;
+}
