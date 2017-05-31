@@ -195,6 +195,8 @@ html, body {
 }
 
 /*===========================一级导航==============================================*/
+<<<<<<< HEAD
+=======
 <<<<<<< Updated upstream
 .nav-main{
 	position: absolute;
@@ -307,6 +309,7 @@ html, body {
 	z-index: 15;
 	visibility: visible;
 =======
+>>>>>>> origin/brunch-for-intellij
 .nav-main {
     position: absolute;
     left: 0;
@@ -430,7 +433,6 @@ html, body {
     -ms-transform: rotateY(0deg);
     z-index: 15;
     visibility: visible;
->>>>>>> Stashed changes
 }
 
 .nav-ul li a span {

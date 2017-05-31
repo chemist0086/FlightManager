@@ -52,6 +52,7 @@ table.GM({
         text: '到达城市',
     }, {
         key: 'dep_time',
+
         text: '出发时间',
     }, {
         key: 'arr_time',
