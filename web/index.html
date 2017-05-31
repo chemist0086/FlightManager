@@ -1,88 +1,89 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
+
   <meta charset="utf-8">
-  <link rel="stylesheet" href="css/style.css" type="text/css">
+  <link rel="stylesheet" href="style.css" type="text/css">
   <script src="js/jquery-3.2.0.js"></script>
   <title>航班管理系统v-0.1</title>
-
+ 
 </head>
 <body>
-<div id="index-main">
-  <div id="index-main-body">
-    <div class="index-logo">
-      <img class="index-logo" src="img/main_logo.png" alt="航空售票管理系统Logo"/>
-      <div id="title">航班管理系统</div>
-    </div>
-    <div id="signin-flow">
-      <form method="POST" novalidate="novalidate">
-        <div id="group-inputs">
-          <div id="username-wrap">
-            <input id="input-username" type="text" id="username" class="input" aria-label="输入用户名" placeholder="输入用户名">
+  <div id="index_main">
+    <div id="index_main_body">
+      <div class="index_logo">
+        <img class="index_logo" src="img/main_logo.png" alt="航空售票管理系统Logo" />
+        <div id="title">航班管理系统</div>
+      </div>
+      <div id="signin-flow">
+        <form method="POST" novalidate="novalidate">
+          <div id="group-inputs">
+            <div id="username">
+              <input id="input-username" type="text" data-role="none" id="username" class="input" aria-label="输入用户名" placeholder="输入用户名">
+            </div>
+            <div id="password">
+              <input id="input-password" type="password" data-role="none" id="username" class="input" aria-label="输入密码" placeholder="输入密码">
+            </div>
           </div>
-          <div id="password-wrap">
-            <input id="input-password" type="password" id="password" class="input" aria-label="输入密码" placeholder="输入密码">
+          <div id="button_wrapper">
+            <input type="image" id="login-icon" src="img/login_icon.png" alt="submit" onclick="onClick()">
           </div>
+        </form>
+        <div id="more">
+          <span id="more_button"></span>
+          <ul id="more_ul">
+            <li class="more_li" id="remember_me"><p><input type="checkbox">记住密码</p></li>
+            <li class="more_li" id="iforget"><a href="#"><span>找回账号</span></a></li>
+          </ul>
         </div>
-        <div id="button-wrapper">
-          <input type="image" id="login-icon" src="img/login_icon.png" alt="submit" onclick="onClick()">
-        </div>
-      </form>
-      <div id="more">
-        <span id="more-button"></span>
-        <ul id="more-ul">
-          <li class="more-li" id="remember-me"><p><input type="checkbox">记住密码</p></li>
-          <li class="more-li" id="iforget"><a href="#"><span>找回账号</span></a></li>
-        </ul>
       </div>
     </div>
-  </div>
-  <!-- particles.js container -->
-  <div id="particles-js"></div>
-  <!-- scripts -->
-  <script src="particles.js"></script>
-  <script src="js/app.js"></script>
-  <script>
-      $(function () {
-          var $showmore = $("#more-ul");
-          var $toggleButton = $("#more-button");
+    <!-- particles.js container -->
+    <div id="particles-js"></div>
+    <!-- scripts -->
+    <script src="particles.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+      $(function() {
+          var $showmore = $("#more_ul");
+          var $toggleButton = $("#more_button");
           $showmore.hide();
 
-          $toggleButton.click(function () {
-              if ($showmore.is(":visible")) {
-                  $showmore.hide();
-                  $(this).css("background", "url(img/show_button.png) no-repeat top left");
-              } else {
-                  $showmore.show();
-                  $(this).css("background", "url(img/hide_button.png) no-repeat top left");
-              }
+          $toggleButton.click(function() {
+            if ($showmore.is(":visible")){
+              $showmore.hide();
+              $(this).css("background", "url(img/show_button.png) no-repeat top left");
+            } else {
+              $showmore.show();
+              $(this).css("background", "url(img/hide_button.png) no-repeat top left");
+            }
           })
       });
-
+      
       function onClick() {
           $.ajax({
-              url: 'validateUser.action',
-              type: 'post',
-              async: false,
-              dataType: 'json',
-              data: {
-                  username: $("#input-username").val(),
-                  password: $("#input-password").val()
-              },
-              success: function (data, status) {
-                  if (data.state == "ok") {
-                      alert("验证通过！");
-                  }
-                  if (data.state == "no")
-                      alert("验证失败！");
-              },
-              error: function () {
-                  alert("登录失败");
+            url: 'validateUser.action',
+            type: 'post',
+            async: false,
+            dataType: 'json',
+            data: {
+              username: $("#input-username").val(),
+              password: $("#input-password").val()
+            },
+            success: function(data, status) {
+              if(data.state=="ok"){
+                alert("验证通过！");
               }
+              if(data.state=="no")
+              alert("验证失败！");
+            },
+            error: function(){
+              alert("登录失败");
+            }
           });
-
+          
       }
-  </script>
-</div>
+    </script>
+  </div>
 </body>
 </html>
