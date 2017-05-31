@@ -25,7 +25,8 @@ table.GM({
     }, {
         key: 'pass_name',
         width: '80px',
-        text: '客户姓名'
+        text: '客户姓名',
+        sorting: ''
     }, {
         key: 'pass_age',
         width: "60px",
@@ -50,11 +51,13 @@ table.GM({
     }, {
         key: 'pass_count',
         width: "60px",
-        text: '购票数量'
+        text: '购票数量',
+        sorting: ''
     }, {
         key: 'pass_amount',
         width: "80px",
-        text: '购票金额'
+        text: '购票金额',
+        sorting: ''
     }, {
         key: 'action',
         width: "180px",

@@ -17,3 +17,5 @@ src/com/mywork/actions/OrderManageAction.java
 src/com/mywork/actions/OrderManageAction.java
 
 .idea/workspace.xml
+
+*.class
