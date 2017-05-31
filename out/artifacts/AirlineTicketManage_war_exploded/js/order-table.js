@@ -32,11 +32,11 @@ table.GM({
         text: '乘客姓名',
     }, {
         key: 'pass_idcard',
-        width: "140px",
+        width: "120px",
         text: '乘客身份证'
     }, {
         key: 'pass_passport',
-        width: "100px",
+        width: "120px",
         text: '乘客护照',
     }, {
         key: 'flight_id',
@@ -52,11 +52,10 @@ table.GM({
         text: '到达城市',
     }, {
         key: 'dep_time',
-        width:'140px',
+
         text: '出发时间',
     }, {
         key: 'arr_time',
-        width:'140px',
         text: '到达时间',
     }, {
         key: 'deli_id',
