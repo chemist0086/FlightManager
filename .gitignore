@@ -1,7 +1,5 @@
 workspace.xml
 .idea/
 *.iml
-
 .idea/workspace.xml
-
 *.class
